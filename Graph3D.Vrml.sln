@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40418.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph3D.Vrml", "Graph3D.Vrml\Graph3D.Vrml.csproj", "{7685A6ED-73A0-4CFD-A04D-C8CD3C29E83C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph3D.Vrml.Test", "Graph3D.Vrml.Test\Graph3D.Vrml.Test.csproj", "{61D29E31-A1F6-4B09-9423-A7D185B172A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{21F6B591-5A24-43B1-9C24-BCA5AFC1C9AB}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7685A6ED-73A0-4CFD-A04D-C8CD3C29E83C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7685A6ED-73A0-4CFD-A04D-C8CD3C29E83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7685A6ED-73A0-4CFD-A04D-C8CD3C29E83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7685A6ED-73A0-4CFD-A04D-C8CD3C29E83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D29E31-A1F6-4B09-9423-A7D185B172A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D29E31-A1F6-4B09-9423-A7D185B172A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D29E31-A1F6-4B09-9423-A7D185B172A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D29E31-A1F6-4B09-9423-A7D185B172A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

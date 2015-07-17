@@ -1,0 +1,36 @@
+﻿#VRML V2.0 utf8
+Transform {
+  children [
+    NavigationInfo { headlight FALSE } # We'll add our own light
+
+    DirectionalLight {        # First child
+        direction 0 0 -1      # Light illuminating the scene
+    }
+
+    Transform {               # Second child - a red sphere
+      translation 3 0 1
+      children [
+        Shape {
+          geometry Sphere { radius 2.3 }
+          appearance Appearance {
+            material Material { diffuseColor 1 0 0 }   # Red
+         }
+        }
+      ]
+    }
+
+    Transform {               # Third child - a blue box 
+      translation -2.4 .2 1
+      rotation     0 1 1  .9
+      children [
+        Shape {
+          geometry Box {}
+          appearance Appearance {
+            material Material { diffuseColor 0 0 1 }  # Blue
+         }
+        }
+      ]
+    }
+
+  ] # end of children for world
+}

@@ -1,0 +1,54 @@
+﻿#VRML V2.0 utf8
+PROTO TwoColorTable [ field SFColor legColor  .8 .4 .7
+                      field SFColor topColor .6 .6 .1 ]
+{
+  Transform {
+    children [
+      Transform {   # table top
+       translation 0 0.6 0
+        children
+          Shape {
+            appearance Appearance {
+              material Material { diffuseColor IS topColor }
+            }
+            geometry Box { size 1.2 0.2 1.2 }
+          }
+      }
+
+      Transform {   # first table leg
+       translation -.5 0 -.5
+        children
+          DEF Leg Shape {
+            appearance Appearance {
+              material Material { diffuseColor IS legColor }
+            }
+            geometry Cylinder { height 1 radius .1 }
+          }
+      }
+      Transform {   # another table leg
+       translation .5 0 -.5
+        children USE Leg
+      }
+      Transform {   # another table leg
+       translation -.5 0 .5
+        children USE Leg
+      }
+      Transform {   # another table leg
+       translation .5 0 .5
+        children USE Leg
+      }
+    ] # End of root Transform's children
+  } # End of root Transform
+} # End of prototype
+
+# The prototype is now defined. Although it contains a 
+# number of nodes, only the legColor and topColor fields 
+# are public. Instead of using the default legColor and 
+# topColor, this instance of the table has red legs and 
+# a green top:
+
+
+TwoColorTable {
+  legColor 1 0 0 topColor 0 1 0
+}
+NavigationInfo { type "EXAMINE" }      # Use the Examine viewer

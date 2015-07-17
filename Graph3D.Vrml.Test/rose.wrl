@@ -1,0 +1,117 @@
+#VRML V2.0 utf8
+PROTO petal [
+exposedField SFFloat tr 0
+eventIn SFFloat s_fr
+]
+{
+DEF m_TR Transform {children[
+Shape{ 
+geometry DEF m_EX Extrusion {
+convex FALSE
+creaseAngle 3.14
+scale [.1 .1, 1 2.5, 1 2.5, 1 2.2, .1 .5]
+crossSection [0 1, .7 .7, 1 0, .7 -.7, 0 -1, .3 -.7, .5 0, .3 .7, 0 1]
+spine [0 0 0, 1.2 2 0, 1.5 3 0, 1.3 4 0, 0 7 0]
+}
+appearance Appearance{material DEF m_MT Material{ 
+diffuseColor .5 0 0
+specularColor 1 0 0
+transparency IS	tr
+}
+}
+
+}
+]}
+DEF m_OI OrientationInterpolator{
+set_fraction IS	s_fr
+key [0 .2 .35 .5 1]
+keyValue [0 0 -1 0, 0 0 -1 0, 0 0 -1 .2, 0 0 -1 .5, 0 0 -1 .5]
+}
+DEF m_CI CoordinateInterpolator{
+set_fraction IS	s_fr
+key [0 .2 .35 .5 1]
+keyValue [
+0 0 0, 1.2 2 0, 1.5 3 0, 1.3 4 0, 0 7 0
+0 0 0, 1.2 2 0, 1.5 3 0, 1.3 4 0, 0 7 0
+0 0 0, 1.2 2 0, 1.5 3 0, 1.3 4 0, 0 7 0
+0 0 0, 1.2 1.5 0, 1 3.5 0, 1.8 4 0, 3 3.5 0
+0 0 0, 1.2 1.5 0, 1 3.5 0, 1.8 4 0, 3 3.5 0
+]
+}
+ROUTE	m_CI.value_changed TO m_EX.set_spine
+ROUTE	m_OI.value_changed TO m_TR.rotation
+}
+NavigationInfo {type "EXAMINE"}
+Viewpoint {position 0 .8 15 description "Main"}
+Transform {rotation .9 .1 -.1 1.2 scale .3 .5 .3 children[
+Shape{ 
+geometry DEF b_EX Extrusion {
+creaseAngle 3.14
+scale [.1 .1, 2 2, 3 3, 2 2, .5 .5]
+crossSection [0 1, .7 .7, 1 0, .7 -.7, 0 -1, -.7 -.7, -1 0, -.7 .7, 0 1]
+spine [0 -3 0, 0 -1 0, 0 2 0, 0 4 0, 0 6 0]
+endCap FALSE
+}
+appearance Appearance {material DEF b_MT Material{ 
+diffuseColor 0 .4 0
+}
+}
+}
+]}
+DEF m_TR Transform {rotation .9 .1 -.1 1.2 scale .2 .4 .2 children[
+DEF m1_TR Transform {children[
+DEF l1_GR Group {children[
+Transform {rotation 0 1 0 0     translation  .3  0    0   children DEF p1 petal{}}
+Transform {rotation 0 1 0 1.57  translation  0    .1 -.4 children USE p1}
+Transform {rotation 0 1 0 3.14  translation -.5  .2  0   children USE p1}
+Transform {rotation 0 1 0 4.71  translation  0    .3  .6 children USE p1}
+]}
+Transform {rotation 0 1 0 .5 translation  0 .95 0 scale 1 1   .9 children USE l1_GR}
+Transform {rotation 0 1 0 1   translation  0 1.7 0 scale .7 1 .7 children USE l1_GR}
+Transform {rotation 0 1 0 1.5 translation  0 2.3 0 scale .5 1 .5 children USE l1_GR}
+Transform {rotation 0 1 0 2   translation  0 2.3 0 scale .3 1 .3 children USE l1_GR}
+Transform {rotation 0 1 0 2.5 translation  0 2.3 0 scale .2 1 .2 children USE l1_GR}
+Transform {rotation 0 1 0 3 translation  0 2.3 0 scale .1 1 .1 children USE l1_GR}
+Transform {rotation 0 1 0 .5 translation  0 2.3 0 scale .05 1 .05 children USE l1_GR}
+]}
+]}
+DEF m_TIS TimeSensor {
+loop TRUE
+cycleInterval 10
+}
+DEF slow_TIS TimeSensor {
+loop TRUE
+cycleInterval 60
+}
+DEF m_PI PositionInterpolator{
+key [0 .2 .35 .5 1]
+keyValue [.2 .4 .2, .3 .6 .3, .5 .8 .5, 1 1 1, 1 1 1]
+}
+DEF m1_OI OrientationInterpolator{
+key [0 .5 1]
+keyValue [0 1 0 0, 0 1 0 3.14, 0 1 0 6.28]
+}
+DEF b_CI CoordinateInterpolator{
+key [0 .2 .35 .5 1]
+keyValue [
+0 -3 0, 0 -1 0, 0 2 0, 0 4 0, 0 6 0
+0 -3 0, 0 -1 0, 0 2 0, 0 3 0, 0 4 0
+0 -3 0, 0 -1 0, 0 2 0, 0 2 0, 0 3 0
+0 -3 0, 0 -1 0, 0 1 0, 0 1 0, 0 1 0
+0 -3 0, 0 -1 0, 0 1 0, 0 1 0, 0 1 0
+]
+}
+DEF	m_SI ScalarInterpolator {
+key	[0 .8 1]
+keyValue [0 0 1]
+}
+ROUTE m_TIS.fraction_changed TO m_PI.set_fraction
+ROUTE m_TIS.fraction_changed TO b_CI.set_fraction
+ROUTE slow_TIS.fraction_changed TO m1_OI.set_fraction
+ROUTE b_CI.value_changed TO b_EX.set_spine
+ROUTE m_PI.value_changed TO m_TR.scale
+ROUTE m1_OI.value_changed TO m1_TR.rotation
+ROUTE m_TIS.fraction_changed	TO m_SI.set_fraction
+ROUTE m_SI.value_changed	TO b_MT.transparency
+ROUTE m_SI.value_changed	TO p1.tr
+ROUTE m_TIS.fraction_changed	TO p1.s_fr

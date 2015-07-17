@@ -1,0 +1,15 @@
+﻿#VRML V2.0 utf8
+Transform {
+  children [
+    DEF Joe Shape { geometry Sphere {} }
+    Transform {
+      translation 2 0 0
+      children    DEF Joe Shape { geometry Sphere { radius .2 } }
+    }
+    Transform {
+      translation -2 0 0
+      children    USE Joe 
+    }
+
+  ]
+}
