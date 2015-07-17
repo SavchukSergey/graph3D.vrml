@@ -133,6 +133,9 @@
     <Compile Include="VrmlMath.cs" />
     <Compile Include="VRMLScene.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Graph3D.Vrml.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Graph3D.Vrml</id>
+    <version>1.0</version>
+    <authors>Sergey Savchuk</authors>
+    <owners>Sergey Savchuk</owners>
+    <projectUrl>https://github.com/SavchukSergey/graph3D.vrml</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Vrml parser</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>VRML</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
