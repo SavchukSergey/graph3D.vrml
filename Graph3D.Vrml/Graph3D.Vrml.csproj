@@ -113,6 +113,7 @@
     <Compile Include="Parser\InvalidExposedFieldException.cs" />
     <Compile Include="Parser\NodeFactory.cs" />
     <Compile Include="Parser\ParserContext.cs" />
+    <Compile Include="Parser\Statements\RouteStatement.cs" />
     <Compile Include="Parser\VrmlParseException.cs" />
     <Compile Include="Parser\VrmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

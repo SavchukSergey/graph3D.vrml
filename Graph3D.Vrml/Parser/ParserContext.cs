@@ -14,7 +14,7 @@ namespace Graph3D.Vrml.Parser {
 
         [DebuggerStepThrough]
         public ParserContext(Vrml97Tokenizer tokenizer) {
-            this._tokenizer = tokenizer;
+            _tokenizer = tokenizer;
             _nodeFactory = new NodeFactory();
             _childAcceptor = new ChildAcceptor();
         }
@@ -31,6 +31,23 @@ namespace Graph3D.Vrml.Parser {
             if (ReadNextToken().Type != VRML97TokenType.CloseBrace) {
                 throw new InvalidVRMLSyntaxException();
             }
+        }
+
+
+        public string ParseEventInId() {
+            return ParseId();
+        }
+
+        public virtual string ParseEventOutId() {
+            return ParseId();
+        }
+
+        public string ParseNodeNameId() {
+            return ParseId();
+        }
+
+        protected string ParseId() {
+            return ReadNextToken().Text;
         }
 
         [DebuggerStepThrough]

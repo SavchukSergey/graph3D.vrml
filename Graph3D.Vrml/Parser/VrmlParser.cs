@@ -1,6 +1,7 @@
 ﻿using System;
 using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Nodes;
+using Graph3D.Vrml.Parser.Statements;
 using Graph3D.Vrml.Tokenizer;
 
 namespace Graph3D.Vrml.Parser {
@@ -332,20 +333,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseRouteStatement(ParserContext context) {
-            VRML97Token keyword = context.ReadNextToken();
-            string nodeNameId1 = ParseNodeNameId(context);
-            if (context.ReadNextToken().Text != ".") {
-                throw new InvalidVRMLSyntaxException();
-            }
-            string eventOut1 = ParseEventOutId(context);
-            if (context.ReadNextToken().Text != "TO") {
-                throw new InvalidVRMLSyntaxException();
-            }
-            string nodeNameId2 = ParseNodeNameId(context);
-            if (context.ReadNextToken().Text != ".") {
-                throw new InvalidVRMLSyntaxException();
-            }
-            string eventIn2 = ParseEventInId(context);
+            var statement = RouteStatement.Parse(context);
             //TODO: Process route statement.
         }
 
@@ -500,8 +488,8 @@ namespace Graph3D.Vrml.Parser {
             }
         }
 
-        protected virtual string ParseNodeNameId(ParserContext context) {
-            return ParseId(context);
+        private static string ParseNodeNameId(ParserContext context) {
+            return context.ParseNodeNameId();
         }
 
         protected virtual string ParseNodeTypeId(ParserContext context) {
@@ -513,14 +501,14 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual string ParseEventInId(ParserContext context) {
-            return ParseId(context);
+            return context.ParseEventInId();
         }
 
         protected virtual string ParseEventOutId(ParserContext context) {
-            return ParseId(context);
+            return context.ParseEventOutId();
         }
 
-        protected virtual string ParseId(ParserContext context) {
+        private static string ParseId(ParserContext context) {
             return context.ReadNextToken().Text;
         }
 
