@@ -26,7 +26,7 @@
         public override FieldType getType() {
             return FieldType.SFBool;
         }
-        public override Field clone() {
+        public override Field Clone() {
             return new SFBool(_value);
         }
 

@@ -12,10 +12,10 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             var clone = new MFVec3f();
-            foreach (var child in this.values) {
-                clone.appendValue((SFVec3f)child.clone());
+            foreach (var child in this.Values) {
+                clone.AppendValue((SFVec3f)child.Clone());
             }
             return clone;
         }

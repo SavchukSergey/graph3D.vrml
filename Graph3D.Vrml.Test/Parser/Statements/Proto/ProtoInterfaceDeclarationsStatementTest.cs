@@ -1,13 +1,15 @@
 ﻿using System.IO;
 using System.Linq;
+using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Parser;
-using Graph3D.Vrml.Parser.Statements;
+using Graph3D.Vrml.Parser.Statements.Extern;
+using Graph3D.Vrml.Parser.Statements.Proto;
 using Graph3D.Vrml.Tokenizer;
 using NUnit.Framework;
 
-namespace Graph3D.Vrml.Test.Parser.Statements {
+namespace Graph3D.Vrml.Test.Parser.Statements.Proto {
     [TestFixture]
-    public class ExternInterfaceDeclarationsStatementTest {
+    public class ProtoInterfaceDeclarationsStatementTest {
 
         [Test]
         public void ParseTest() {
@@ -17,13 +19,13 @@ namespace Graph3D.Vrml.Test.Parser.Statements {
     eventOut SFInt32 eventOut1
     eventIn SFInt32 eventIn2
     eventOut SFInt32 eventOut2
-    field SFInt32 field1
-    exposedField SFInt32 exposedField1
-    field SFInt32 field2
-    exposedField SFInt32 exposedField2
+    field SFInt32 field1 1
+    exposedField SFInt32 exposedField1 2
+    field SFInt32 field2 3
+    exposedField SFInt32 exposedField2 4
 ]
 ")));
-            var statement = ExternInterfaceDeclarationsStatement.Parse(context);
+            var statement = ProtoInterfaceDeclarationsStatement.Parse(context, c => { });
             Assert.AreEqual(2, statement.EventsIn.Count);
             Assert.AreEqual(2, statement.EventsOut.Count);
             Assert.AreEqual(2, statement.Fields.Count);
@@ -48,18 +50,22 @@ namespace Graph3D.Vrml.Test.Parser.Statements {
             var firstField = statement.Fields.First();
             Assert.AreEqual("SFInt32", firstField.FieldType);
             Assert.AreEqual("field1", firstField.FieldId);
+            Assert.AreEqual(1, ((SFInt32)firstField.Value).value);
 
             var secondField = statement.Fields.Last();
             Assert.AreEqual("SFInt32", secondField.FieldType);
             Assert.AreEqual("field2", secondField.FieldId);
+            Assert.AreEqual(3, ((SFInt32)secondField.Value).value);
 
             var firstExposedField = statement.ExposedFields.First();
             Assert.AreEqual("SFInt32", firstExposedField.FieldType);
             Assert.AreEqual("exposedField1", firstExposedField.FieldId);
+            Assert.AreEqual(2, ((SFInt32)firstExposedField.Value).value);
 
             var secondExposedField = statement.ExposedFields.Last();
             Assert.AreEqual("SFInt32", secondExposedField.FieldType);
             Assert.AreEqual("exposedField2", secondExposedField.FieldId);
+            Assert.AreEqual(4, ((SFInt32)secondExposedField.Value).value);
         }
 
         [Test]

@@ -22,7 +22,7 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             return new SFTime(_value);
         }
     }

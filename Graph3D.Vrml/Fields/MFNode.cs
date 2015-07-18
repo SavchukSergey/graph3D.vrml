@@ -7,10 +7,10 @@ namespace Graph3D.Vrml.Fields {
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             var clone = new MFNode();
-            foreach (var child in this.values) {
-                clone.appendValue(child.clone());
+            foreach (var child in this.Values) {
+                clone.AppendValue(child.clone());
             }
             return clone;
         }

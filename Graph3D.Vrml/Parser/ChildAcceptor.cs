@@ -74,7 +74,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public void visit(MFNode field) {
-            field.appendValue(_child);
+            field.AppendValue(_child);
         }
 
         public void visit(SFRotation field) {

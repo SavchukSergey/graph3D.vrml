@@ -5,10 +5,10 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             MFColor clone = new MFColor();
-            foreach (var child in this.values) {
-                clone.appendValue((SFColor)child.clone());
+            foreach (var child in this.Values) {
+                clone.AppendValue((SFColor)child.Clone());
             }
             return clone;
         }

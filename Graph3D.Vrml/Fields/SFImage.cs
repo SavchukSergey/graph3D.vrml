@@ -23,7 +23,7 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             SFImage clone = new SFImage();
             clone._value = (byte[,,])_value.Clone();
             return clone;

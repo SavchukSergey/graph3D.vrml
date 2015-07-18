@@ -65,7 +65,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\Statements\ExternInterfaceDeclarationsStatementTest.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoEventInStatementTest.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoEventOutStatementTest.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoExposedFieldStatementTest.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoFieldStatementTest.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoInterfaceDeclarationsStatementTest.cs" />
+    <Compile Include="Parser\Statements\Extern\ExternInterfaceDeclarationsStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternEventOutStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternEventInStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternFieldStatementTest.cs" />

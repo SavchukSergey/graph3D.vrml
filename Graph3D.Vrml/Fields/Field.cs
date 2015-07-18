@@ -20,12 +20,12 @@ namespace Graph3D.Vrml.Fields {
 
         public abstract void AcceptVisitor(IFieldVisitor visitor);
 
-        public abstract Field clone();
+        public abstract Field Clone();
 
         #region ICloneable Members
 
         object ICloneable.Clone() {
-            return this.clone();
+            return this.Clone();
         }
 
         #endregion

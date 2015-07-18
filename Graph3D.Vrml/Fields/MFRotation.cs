@@ -12,10 +12,10 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             var clone = new MFRotation();
-            foreach (var child in this.values) {
-                clone.appendValue((SFRotation)child.clone());
+            foreach (var child in this.Values) {
+                clone.AppendValue((SFRotation)child.Clone());
             }
             return clone;
 

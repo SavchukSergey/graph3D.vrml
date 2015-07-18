@@ -20,7 +20,7 @@ namespace Graph3D.Vrml.Fields {
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             return new SFNode(_node != null ? _node.clone() : null);
         }
 

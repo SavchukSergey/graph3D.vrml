@@ -13,11 +13,7 @@ namespace Graph3D.Vrml.Nodes {
 
         public string name { get; set; }
 
-        private BaseNode _parent;
-        public BaseNode parent {
-            get { return _parent; }
-            set { _parent = value; }
-        }
+        public BaseNode Parent { get; set; }
 
         private readonly Dictionary<string, Field> exposedFields = new Dictionary<string, Field>();
         private readonly Dictionary<string, Field> eventIns = new Dictionary<string, Field>();
@@ -41,11 +37,11 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public Field GetExposedField(string exposedFieldName) {
-            if (exposedFields.ContainsKey(exposedFieldName)) {
-                return exposedFields[exposedFieldName];
-            } else {
-                throw new InvalidExposedFieldException(string.Format("'{0}' exposed field doesn't exist in node of {1} type", exposedFieldName, this.GetType().Name));
+            Field field;
+            if (exposedFields.TryGetValue(exposedFieldName, out field)) {
+                return field;
             }
+            throw new InvalidExposedFieldException(string.Format("'{0}' exposed field doesn't exist in node of {1} type", exposedFieldName, this.GetType().Name));
         }
 
         public Field getField(string fieldName) {
@@ -78,15 +74,15 @@ namespace Graph3D.Vrml.Nodes {
             var clone = createInstance();
             foreach (var key in exposedFields.Keys) {
                 Field field = exposedFields[key];
-                clone.exposedFields[key] = field.clone();
+                clone.exposedFields[key] = field.Clone();
             }
             foreach (var key in eventIns.Keys) {
                 Field field = eventIns[key];
-                clone.eventIns[key] = field.clone();
+                clone.eventIns[key] = field.Clone();
             }
             foreach (var key in eventOuts.Keys) {
                 Field field = eventOuts[key];
-                clone.eventOuts[key] = field.clone();
+                clone.eventOuts[key] = field.Clone();
             }
             clone.name = name;
             return clone;

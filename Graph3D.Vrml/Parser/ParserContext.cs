@@ -141,13 +141,7 @@ namespace Graph3D.Vrml.Parser {
             }
         }
 
-        private string nodeName;
-        public string NodeName {
-            [DebuggerStepThrough]
-            get { return nodeName; }
-            [DebuggerStepThrough]
-            set { nodeName = value; }
-        }
+        public string NodeName { get; set; }
 
         private readonly Stack<BaseNode> fieldContainers = new Stack<BaseNode>();
         public BaseNode FieldContainer {

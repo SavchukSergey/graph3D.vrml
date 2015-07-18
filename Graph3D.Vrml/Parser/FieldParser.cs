@@ -83,74 +83,74 @@ namespace Graph3D.Vrml.Parser {
         public void visit(MFNode field) {
             field.clearValues();
             context.PushNodeContainer(field);
-            parseMField(nodeStatementParser);
+            ParseMField(nodeStatementParser);
             context.PopNodeContainer();
         }
 
         public void visit(MFVec2f field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField((subcontext) => {
                 var child = new SFVec2f();
                 this.visit(child);
-                field.appendValue(child);
+                field.AppendValue(child);
             });
         }
 
         public void visit(MFVec3f field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField((subcontext) => {
                 var child = new SFVec3f();
                 this.visit(child);
-                field.appendValue(child);
+                field.AppendValue(child);
             });
         }
 
         public void visit(MFInt32 field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField((subcontext) => {
                 var child = new SFInt32();
                 this.visit(child);
-                field.appendValue(child);
+                field.AppendValue(child);
             });
         }
 
         public void visit(MFFloat field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField((subcontext) => {
                 var child = new SFFloat();
                 this.visit(child);
-                field.appendValue(child);
+                field.AppendValue(child);
             });
         }
 
         public void visit(MFColor field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField((subcontext) => {
                 var child = new SFColor();
                 this.visit(child);
-                field.appendValue(child);
+                field.AppendValue(child);
             });
         }
 
         public void visit(MFString field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField(subcontext => {
                 var child = new SFString();
-                this.visit(child);
-                field.appendValue(child);
+                visit(child);
+                field.AppendValue(child);
             });
         }
 
         public void visit(MFRotation field) {
             field.clearValues();
-            parseMField((subcontext) => {
+            ParseMField((subcontext) => {
                 var child = new SFRotation();
                 this.visit(child);
-                field.appendValue(child);
+                field.AppendValue(child);
             });
         }
 
-        protected virtual void parseMField(Action<ParserContext> itemParser) {
+        protected virtual void ParseMField(Action<ParserContext> itemParser) {
             VRML97Token next = context.PeekNextToken();
             if (next.Type == VRML97TokenType.OpenBracket) {
                 next = context.ReadNextToken();

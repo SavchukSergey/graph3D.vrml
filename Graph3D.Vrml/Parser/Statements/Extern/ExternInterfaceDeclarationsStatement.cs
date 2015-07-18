@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Graph3D.Vrml.Parser.Statements.Extern;
+﻿using System.Collections.Generic;
 
-namespace Graph3D.Vrml.Parser.Statements {
+namespace Graph3D.Vrml.Parser.Statements.Extern {
     public class ExternInterfaceDeclarationsStatement {
 
         private readonly IList<ExternEventInStatement> _eventIns = new List<ExternEventInStatement>();
@@ -26,6 +24,7 @@ namespace Graph3D.Vrml.Parser.Statements {
             do {
                 var token = context.PeekNextToken();
                 if (token.Type == VRML97TokenType.CloseBracket) {
+                    context.ReadCloseBracket();
                     break;
                 }
                 switch (token.Text) {

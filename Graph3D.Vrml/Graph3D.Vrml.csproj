@@ -113,7 +113,12 @@
     <Compile Include="Parser\InvalidExposedFieldException.cs" />
     <Compile Include="Parser\NodeFactory.cs" />
     <Compile Include="Parser\ParserContext.cs" />
-    <Compile Include="Parser\Statements\ExternInterfaceDeclarationsStatement.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoInterfaceDeclarationsStatement.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoEventInStatement.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoEventOutStatement.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoExposedFieldStatement.cs" />
+    <Compile Include="Parser\Statements\Proto\ProtoFieldStatement.cs" />
+    <Compile Include="Parser\Statements\Extern\ExternInterfaceDeclarationsStatement.cs" />
     <Compile Include="Parser\Statements\Extern\ExternEventOutStatement.cs" />
     <Compile Include="Parser\Statements\Extern\ExternEventInStatement.cs" />
     <Compile Include="Parser\Statements\Extern\ExternFieldStatement.cs" />

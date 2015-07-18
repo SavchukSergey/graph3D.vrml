@@ -5,10 +5,10 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             var clone = new MFFloat();
-            foreach (var child in this.values) {
-                clone.appendValue((SFFloat)child.clone());
+            foreach (var child in this.Values) {
+                clone.AppendValue((SFFloat)child.Clone());
             }
             return clone;
         }

@@ -15,8 +15,8 @@ namespace Graph3D.Vrml.Nodes.Grouping {
         }
 
         public void appendChild(BaseNode node) {
-            children.appendValue(node);
-            node.parent = this;
+            children.AppendValue(node);
+            node.Parent = this;
         }
 
         public SFVec3f bboxCenter {

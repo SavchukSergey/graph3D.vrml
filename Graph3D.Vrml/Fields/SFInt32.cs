@@ -26,7 +26,7 @@
             return FieldType.SFInt32;
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             return new SFInt32(_value);
         }
 

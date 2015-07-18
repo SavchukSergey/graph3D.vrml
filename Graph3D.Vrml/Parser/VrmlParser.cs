@@ -3,6 +3,7 @@ using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Nodes;
 using Graph3D.Vrml.Parser.Statements;
 using Graph3D.Vrml.Parser.Statements.Extern;
+using Graph3D.Vrml.Parser.Statements.Proto;
 using Graph3D.Vrml.Tokenizer;
 
 namespace Graph3D.Vrml.Parser {
@@ -164,13 +165,7 @@ namespace Graph3D.Vrml.Parser {
             };
             context.PushNodeContainer(proto.children);
             context.PushFieldContainer(proto);
-            if (context.ReadNextToken().Type != VRML97TokenType.OpenBracket) {
-                throw new InvalidVRMLSyntaxException();
-            }
             ParseInterfaceDeclarations(context);
-            if (context.ReadNextToken().Type != VRML97TokenType.CloseBracket) {
-                throw new InvalidVRMLSyntaxException();
-            }
             if (context.ReadNextToken().Type != VRML97TokenType.OpenBrace) {
                 throw new InvalidVRMLSyntaxException();
             }
@@ -189,25 +184,26 @@ namespace Graph3D.Vrml.Parser {
             ParseStatements(context);
         }
 
-        protected virtual void ParseInterfaceDeclarations(ParserContext context) {
-            var validToken = true;
-            do {
-                var token = context.PeekNextToken();
-                switch (token.Text) {
-                    case "exposedField":
-                    case "eventIn":
-                    case "eventOut":
-                    case "field":
-                        ParseInterfaceDeclaration(context);
-                        break;
-                    default:
-                        validToken = false;
-                        break;
-                }
-            } while (validToken);
+        private void ParseInterfaceDeclarations(ParserContext context) {
+            var statement = ProtoInterfaceDeclarationsStatement.Parse(context, ParseNodeStatement);
+            //todo: process interface declarations
+
+            var node = context.FieldContainer as ProtoNode;
+            if (node == null) throw new Exception("Unexpected context");
+
+            foreach (var expFld in statement.Fields) {
+                var field = expFld.Value;
+                node.AddField(expFld.FieldId, field);
+            }
+
+            foreach (var expFld in statement.ExposedFields) {
+                var field = expFld.Value;
+                node.AddExposedField(expFld.FieldId, field);
+            }
+
         }
 
-        protected virtual void ParseRestrictedInterfaceDeclaration(ParserContext context) {
+        private void ParseRestrictedInterfaceDeclaration(ParserContext context) {
             var node = context.FieldContainer as ProtoNode;
             if (node == null) throw new Exception("Unexpected context");
             var accessType = context.ReadNextToken().Text;
@@ -233,34 +229,6 @@ namespace Graph3D.Vrml.Parser {
                 default:
                     throw new Exception("Unexpected context");
             }
-        }
-
-        protected virtual void ParseInterfaceDeclaration(ParserContext context) {
-            var node = context.FieldContainer as ProtoNode;
-            if (node == null) throw new Exception("Unexpected context");
-            var keyword = context.PeekNextToken();
-            switch (keyword.Text) {
-                case "eventIn":
-                case "eventOut":
-                case "field":
-                    ParseRestrictedInterfaceDeclaration(context);
-                    break;
-                case "exposedField":
-                    ParseExposedField(context);
-                    break;
-            }
-        }
-
-        protected virtual void ParseExposedField(ParserContext context) {
-            var statement = ExposedFieldStatement.Parse(context, ParseNodeStatement);
-
-            var node = context.FieldContainer as ProtoNode;
-            if (node == null) throw new Exception("Unexpected context");
-
-            var field = statement.Value;
-            node.AddExposedField(statement.FieldId, field);
-
-            //TODO: process interface field declaration.
         }
 
         protected virtual void ParseExternProto(ParserContext context) {
@@ -440,11 +408,11 @@ namespace Graph3D.Vrml.Parser {
             return context.ParseNodeNameId();
         }
 
-        protected virtual string ParseNodeTypeId(ParserContext context) {
+        private string ParseNodeTypeId(ParserContext context) {
             return ParseId(context);
         }
 
-        protected virtual string ParseFieldId(ParserContext context) {
+        private string ParseFieldId(ParserContext context) {
             return context.ParseFieldId();
         }
 
@@ -452,7 +420,7 @@ namespace Graph3D.Vrml.Parser {
             return context.ParseEventInId();
         }
 
-        protected virtual string ParseEventOutId(ParserContext context) {
+        private static string ParseEventOutId(ParserContext context) {
             return context.ParseEventOutId();
         }
 
@@ -460,7 +428,7 @@ namespace Graph3D.Vrml.Parser {
             return context.ReadNextToken().Text;
         }
 
-        protected virtual string ParseFieldType(ParserContext context) {
+        private string ParseFieldType(ParserContext context) {
             return context.ParseFieldType();
         }
 

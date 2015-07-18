@@ -33,7 +33,7 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             return new SFVec3f(_x, _y, _z);
         }
 

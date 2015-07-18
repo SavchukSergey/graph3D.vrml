@@ -32,7 +32,7 @@
             visitor.visit(this);
         }
 
-        public override Field clone() {
+        public override Field Clone() {
             return new SFColor(_red, _green, _blue);
         }
 
