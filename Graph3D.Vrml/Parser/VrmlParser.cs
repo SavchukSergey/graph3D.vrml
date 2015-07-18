@@ -270,59 +270,14 @@ namespace Graph3D.Vrml.Parser {
             }
 
             var nodeTypeId = ParseNodeTypeId(context);
-            if (context.ReadNextToken().Type != VRML97TokenType.OpenBracket) {
-                throw new InvalidVRMLSyntaxException();
-            }
             ParseExternInterfaceDeclarations(context);
-            if (context.ReadNextToken().Type != VRML97TokenType.CloseBracket) {
-                throw new InvalidVRMLSyntaxException();
-            }
             ParseURLList(context);
             //TODO: Process extern proto.
         }
 
         protected virtual void ParseExternInterfaceDeclarations(ParserContext context) {
-            var validToken = true;
-            do {
-                var token = context.PeekNextToken();
-                switch (token.Text) {
-                    case "exposedField":
-                    case "eventIn":
-                    case "eventOut":
-                    case "field":
-                        ParseExternInterfaceDeclaration(context);
-                        break;
-                    default:
-                        validToken = false;
-                        break;
-                }
-            } while (validToken);
-        }
-
-        protected virtual void ParseExternInterfaceDeclaration(ParserContext context) {
-            string accessType = context.PeekNextToken().Text;
-            string fieldType;
-            switch (accessType) {
-                case "eventIn":
-                    var eventIn = ExternEventInStatement.Parse(context);
-                    //TODO: process extern interface eventIn declaration.
-                    break;
-                case "eventOut":
-                    var eventOut = ExternEventOutStatement.Parse(context);
-                    //TODO: process extern interface eventOut declaration.
-                    break;
-                case "field":
-                    fieldType = ParseFieldType(context);
-                    var fieldId = ParseFieldId(context);
-                    //TODO: process extern interface field declaration.
-                    break;
-                case "exposedField":
-                    var exposedField = ExternExposedFieldStatement.Parse(context);
-                    //TODO: process extern interface exposedField declaration.
-                    break;
-                default:
-                    throw new Exception("Unexpected context");
-            }
+            var statement = ExternInterfaceDeclarationsStatement.Parse(context);
+            //TODO: process extern interface declarations.
         }
 
         protected virtual void ParseRouteStatement(ParserContext context) {

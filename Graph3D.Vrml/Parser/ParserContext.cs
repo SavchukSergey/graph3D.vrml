@@ -21,6 +21,19 @@ namespace Graph3D.Vrml.Parser {
 
         private readonly Queue<VRML97Token> _queue = new Queue<VRML97Token>();
 
+        public void ReadOpenBracket() {
+            if (ReadNextToken().Type != VRML97TokenType.OpenBracket) {
+                throw new InvalidVRMLSyntaxException();
+            }
+        }
+
+        public void ReadCloseBracket() {
+            if (ReadNextToken().Type != VRML97TokenType.CloseBracket) {
+                throw new InvalidVRMLSyntaxException();
+            }
+        }
+
+
         public void ReadOpenBrace() {
             if (ReadNextToken().Type != VRML97TokenType.OpenBrace) {
                 throw new InvalidVRMLSyntaxException();

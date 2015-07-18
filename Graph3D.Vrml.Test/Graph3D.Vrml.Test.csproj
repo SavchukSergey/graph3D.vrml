@@ -65,8 +65,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parser\Statements\ExternInterfaceDeclarationsStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternEventOutStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternEventInStatementTest.cs" />
+    <Compile Include="Parser\Statements\Extern\ExternFieldStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternExposedFieldStatementTest.cs" />
     <Compile Include="Parser\Statements\ExposedFieldStatementTest.cs" />
     <Compile Include="Parser\Statements\RouteStatementTest.cs" />
