@@ -318,8 +318,7 @@ namespace Graph3D.Vrml.Parser {
                     //TODO: process extern interface field declaration.
                     break;
                 case "exposedField":
-                    fieldType = ParseFieldType(context);
-                    var exposedFieldId = ParseFieldId(context);
+                    var exposedField = ExternExposedFieldStatement.Parse(context);
                     //TODO: process extern interface exposedField declaration.
                     break;
                 default:
@@ -400,7 +399,7 @@ namespace Graph3D.Vrml.Parser {
 
 
         protected virtual void ParseScriptBodyElement(ParserContext context) {
-            VRML97Token token = context.PeekNextToken();
+            var token = context.PeekNextToken();
             VRML97Token tokenIs = null;
             string fieldType;
             switch (token.Text) {
