@@ -36,6 +36,8 @@ namespace Graph3D.Vrml.Fields {
                     return new SFColor();
                 case "SFFloat":
                     return new SFFloat();
+                case "SFInt32":
+                    return new SFInt32();
                 default:
                     throw new InvalidVRMLSyntaxException("Unknown fieldType: '" + fieldType + "'");
             }

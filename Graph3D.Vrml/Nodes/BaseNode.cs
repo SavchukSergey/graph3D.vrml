@@ -40,7 +40,7 @@ namespace Graph3D.Vrml.Nodes {
             eventOuts[eventOutName] = field;
         }
 
-        public Field getExposedField(string exposedFieldName) {
+        public Field GetExposedField(string exposedFieldName) {
             if (exposedFields.ContainsKey(exposedFieldName)) {
                 return exposedFields[exposedFieldName];
             } else {

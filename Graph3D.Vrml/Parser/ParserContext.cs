@@ -46,6 +46,16 @@ namespace Graph3D.Vrml.Parser {
             return ParseId();
         }
 
+        public string ParseFieldType() {
+            return ReadNextToken().Text;
+            //TODO: validate fieldtype
+        }
+
+        public string ParseFieldId() {
+            return ParseId();
+        }
+
+
         protected string ParseId() {
             return ReadNextToken().Text;
         }

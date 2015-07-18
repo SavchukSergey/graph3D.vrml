@@ -15,11 +15,11 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public SFNode appearance {
-            get { return getExposedField("appearance") as SFNode; }
+            get { return GetExposedField("appearance") as SFNode; }
         }
 
         public SFNode geometry {
-            get { return getExposedField("geometry") as SFNode; }
+            get { return GetExposedField("geometry") as SFNode; }
         }
 
         protected override BaseNode createInstance() {

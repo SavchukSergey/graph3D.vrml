@@ -23,27 +23,27 @@ namespace Graph3D.Vrml.Nodes.Appearance {
         }
 
         public SFFloat ambientIntensity {
-            get { return getExposedField("ambientIntensity") as SFFloat;}
+            get { return GetExposedField("ambientIntensity") as SFFloat;}
         }
 
         public SFColor diffuseColor {
-            get { return getExposedField("diffuseColor") as SFColor; }
+            get { return GetExposedField("diffuseColor") as SFColor; }
         }
 
         public SFColor emissiveColor {
-            get { return getExposedField("emissiveColor") as SFColor; }
+            get { return GetExposedField("emissiveColor") as SFColor; }
         }
 
         public SFFloat shininess {
-            get { return getExposedField("shininess") as SFFloat; }
+            get { return GetExposedField("shininess") as SFFloat; }
         }
 
         public SFColor specularColor {
-            get { return getExposedField("specularColor") as SFColor; }
+            get { return GetExposedField("specularColor") as SFColor; }
         }
 
         public SFFloat transparency {
-            get { return getExposedField("transparency") as SFFloat; }
+            get { return GetExposedField("transparency") as SFFloat; }
         }
 
         protected override BaseNode createInstance() {

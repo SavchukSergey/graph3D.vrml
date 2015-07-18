@@ -23,19 +23,19 @@ namespace Graph3D.Vrml.Nodes.Bindable {
         }
 
         public SFVec3f position {
-            get { return getExposedField("position") as SFVec3f; }
+            get { return GetExposedField("position") as SFVec3f; }
         }
 
         public SFFloat fieldOfView {
-            get { return getExposedField("fieldOfView") as SFFloat; }
+            get { return GetExposedField("fieldOfView") as SFFloat; }
         }
 
         public SFRotation orientation {
-            get { return getExposedField("orientation") as SFRotation; }
+            get { return GetExposedField("orientation") as SFRotation; }
         }
 
         public SFString description {
-            get { return getExposedField("description") as SFString; }
+            get { return GetExposedField("description") as SFString; }
         }
 
         protected override BaseNode createInstance() {

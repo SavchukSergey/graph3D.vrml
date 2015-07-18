@@ -11,7 +11,7 @@ namespace Graph3D.Vrml.Nodes.Grouping {
         }
 
         public MFNode children {
-            get { return getExposedField("children") as MFNode; }
+            get { return GetExposedField("children") as MFNode; }
         }
 
         public void appendChild(BaseNode node) {

@@ -12,19 +12,19 @@ namespace Graph3D.Vrml.Nodes.LightSources {
 
 
         public SFFloat ambientIntensity {
-            get { return getExposedField("ambientIntensity") as SFFloat; }
+            get { return GetExposedField("ambientIntensity") as SFFloat; }
         }
 
         public SFFloat intensity {
-            get { return getExposedField("intensity") as SFFloat; }
+            get { return GetExposedField("intensity") as SFFloat; }
         }
 
         public SFColor color {
-            get { return getExposedField("color") as SFColor; }
+            get { return GetExposedField("color") as SFColor; }
         }
 
         public SFBool on {
-            get { return getExposedField("on") as SFBool; }
+            get { return GetExposedField("on") as SFBool; }
         }
 
     }

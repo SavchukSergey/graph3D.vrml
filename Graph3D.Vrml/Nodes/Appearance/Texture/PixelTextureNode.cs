@@ -15,7 +15,7 @@ namespace Graph3D.Vrml.Nodes.Appearance.Texture {
         }
 
         public SFImage Image {
-            get { return getExposedField("image") as SFImage; }
+            get { return GetExposedField("image") as SFImage; }
         }
 
         protected override BaseNode createInstance() {

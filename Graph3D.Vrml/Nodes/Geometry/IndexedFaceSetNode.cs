@@ -44,19 +44,19 @@ namespace Graph3D.Vrml.Nodes.Geometry {
         }
 
         public SFNode color {
-            get { return getExposedField("color") as SFNode; }
+            get { return GetExposedField("color") as SFNode; }
         }
 
         public SFNode coord {
-            get { return getExposedField("coord") as SFNode; }
+            get { return GetExposedField("coord") as SFNode; }
         }
 
         public SFNode normal {
-            get { return getExposedField("normal") as SFNode; }
+            get { return GetExposedField("normal") as SFNode; }
         }
 
         public SFNode texCoord {
-            get { return getExposedField("texCoord") as SFNode; }
+            get { return GetExposedField("texCoord") as SFNode; }
         }
 
         public SFBool ccw {

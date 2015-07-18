@@ -26,23 +26,23 @@ namespace Graph3D.Vrml.Nodes.Grouping {
         }
 
         public SFVec3f center {
-            get { return getExposedField("center") as SFVec3f; }
+            get { return GetExposedField("center") as SFVec3f; }
         }
 
         public SFRotation rotation {
-            get { return getExposedField("rotation") as SFRotation; }
+            get { return GetExposedField("rotation") as SFRotation; }
         }
 
         public SFVec3f scale {
-            get { return getExposedField("scale") as SFVec3f; }
+            get { return GetExposedField("scale") as SFVec3f; }
         }
 
         public SFRotation scaleOrientation {
-            get { return getExposedField("scaleOrientation") as SFRotation; }
+            get { return GetExposedField("scaleOrientation") as SFRotation; }
         }
 
         public SFVec3f translation {
-            get { return getExposedField("translation") as SFVec3f; }
+            get { return GetExposedField("translation") as SFVec3f; }
         }
 
         /// <summary>

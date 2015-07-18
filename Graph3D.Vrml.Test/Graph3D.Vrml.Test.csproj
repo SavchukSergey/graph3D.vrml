@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parser\Statements\ExposedFieldStatementTest.cs" />
     <Compile Include="Parser\Statements\RouteStatementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRMLTokenizerTest.cs" />

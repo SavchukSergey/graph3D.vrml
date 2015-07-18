@@ -251,19 +251,14 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseExposedField(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "exposedField") {
-                throw new InvalidVRMLSyntaxException("exposedField expected");
-            }
+            var statement = ExposedFieldStatement.Parse(context, ParseNodeStatement);
 
             var node = context.FieldContainer as ProtoNode;
             if (node == null) throw new Exception("Unexpected context");
 
-            var fieldType = ParseFieldType(context);
-            var fieldId = ParseFieldId(context);
-            var field = context.CreateField(fieldType);
-            node.AddExposedField(fieldId, field);
-            field.AcceptVisitor(_fieldParser);
+            var field = statement.Value;
+            node.AddExposedField(statement.FieldId, field);
+
             //TODO: process interface field declaration.
         }
 
@@ -482,7 +477,7 @@ namespace Graph3D.Vrml.Parser {
                     //TODO: Process inteface field linking
                     break;
                 default:
-                    Field field = node.getExposedField(fieldId);
+                    var field = node.GetExposedField(fieldId);
                     field.AcceptVisitor(_fieldParser);
                     break;
             }
@@ -497,7 +492,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual string ParseFieldId(ParserContext context) {
-            return ParseId(context);
+            return context.ParseFieldId();
         }
 
         protected virtual string ParseEventInId(ParserContext context) {
@@ -513,8 +508,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual string ParseFieldType(ParserContext context) {
-            return context.ReadNextToken().Text;
-            //TODO: validate fieldtype
+            return context.ParseFieldType();
         }
 
     }

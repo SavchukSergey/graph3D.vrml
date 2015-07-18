@@ -13,7 +13,7 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public MFVec3f point {
-            get { return getExposedField("point") as MFVec3f; }
+            get { return GetExposedField("point") as MFVec3f; }
         }
 
         protected override BaseNode createInstance() {
