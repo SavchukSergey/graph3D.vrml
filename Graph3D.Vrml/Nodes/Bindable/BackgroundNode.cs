@@ -76,8 +76,8 @@ namespace Graph3D.Vrml.Nodes.Bindable {
             return new BackgroundNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

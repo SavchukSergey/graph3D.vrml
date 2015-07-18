@@ -2,9 +2,9 @@
 using Graph3D.Vrml.Nodes.Grouping;
 
 namespace Graph3D.Vrml.Nodes {
-    public class CustomNode : GroupingNode {
+    public class ProtoNode : GroupingNode {
         
-        public new void addField(string fieldName, Field field) {
+        public new void AddField(string fieldName, Field field) {
             base.addField(fieldName, field);
         }
 
@@ -16,16 +16,16 @@ namespace Graph3D.Vrml.Nodes {
             base.addEventOut(eventOutName, field);
         }
 
-        public new void addExposedField(string exposedFieldName, Field field) {
+        public new void AddExposedField(string exposedFieldName, Field field) {
             base.addExposedField(exposedFieldName, field);
         }
 
         protected override BaseNode createInstance() {
-            return new CustomNode();
+            return new ProtoNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

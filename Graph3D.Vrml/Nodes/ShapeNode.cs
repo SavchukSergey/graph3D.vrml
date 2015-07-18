@@ -26,8 +26,8 @@ namespace Graph3D.Vrml.Nodes {
             return new ShapeNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
     }
 }

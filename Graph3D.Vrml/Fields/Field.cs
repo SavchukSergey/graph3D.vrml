@@ -18,7 +18,7 @@ namespace Graph3D.Vrml.Fields {
             return accessType;
         }
 
-        public abstract void acceptVisitor(IFieldVisitor visitor);
+        public abstract void AcceptVisitor(IFieldVisitor visitor);
 
         public abstract Field clone();
 
@@ -29,5 +29,16 @@ namespace Graph3D.Vrml.Fields {
         }
 
         #endregion
+
+        public static Field CreateField(string fieldType) {
+            switch (fieldType) {
+                case "SFColor":
+                    return new SFColor();
+                case "SFFloat":
+                    return new SFFloat();
+                default:
+                    throw new InvalidVRMLSyntaxException("Unknown fieldType: '" + fieldType + "'");
+            }
+        }
     }
 }

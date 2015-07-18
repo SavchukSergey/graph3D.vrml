@@ -42,8 +42,8 @@ namespace Graph3D.Vrml.Nodes.Bindable {
             return new ViewpointNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

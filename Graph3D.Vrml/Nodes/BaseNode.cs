@@ -11,13 +11,7 @@ namespace Graph3D.Vrml.Nodes {
         protected BaseNode() {
         }
 
-        private string _name;
-        public string name {
-            [DebuggerStepThrough]
-            get { return _name; }
-            [DebuggerStepThrough]
-            set { _name = value; }
-        }
+        public string name { get; set; }
 
         private BaseNode _parent;
         public BaseNode parent {
@@ -55,32 +49,30 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public Field getField(string fieldName) {
-            if (exposedFields.ContainsKey(fieldName)) {
-                return exposedFields[fieldName];
-            } else {
-                throw new InvalidExposedFieldException(string.Format("'{0}' field doesn't exist in node of {1} type", fieldName, this.GetType().Name));
+            Field res;
+            if (exposedFields.TryGetValue(fieldName, out res)) {
+                return res;
             }
+            throw new InvalidExposedFieldException(string.Format("'{0}' field doesn't exist in node of {1} type", fieldName, GetType().Name));
         }
 
         public Field getEventIn(string eventInName) {
-            if (eventIns.ContainsKey(eventInName)) {
-                return eventIns[eventInName];
-            } else {
-                throw new InvalidEventInException(string.Format("'{0}' event in field doesn't exist in node of {1} type", eventInName, this.GetType().Name));
+            Field res;
+            if (eventIns.TryGetValue(eventInName, out res)) {
+                return res;
             }
+            throw new InvalidEventInException(string.Format("'{0}' event in field doesn't exist in node of {1} type", eventInName, GetType().Name));
         }
 
         public Field getEventOut(string eventOutName) {
-            if (eventOuts.ContainsKey(eventOutName)) {
-                return eventOuts[eventOutName];
-            } else {
-                throw new InvalidEventOutException(string.Format("'{0}' event out field doesn't exist in node of {1} type", eventOutName, this.GetType().Name));
-            }
+            Field res;
+            if (eventOuts.TryGetValue(eventOutName, out res)) return res;
+            throw new InvalidEventOutException(string.Format("'{0}' event out field doesn't exist in node of {1} type", eventOutName, GetType().Name));
         }
 
         protected abstract BaseNode createInstance();
 
-        public abstract void acceptVisitor(INodeVisitor visitor);
+        public abstract void AcceptVisitor(INodeVisitor visitor);
 
         public BaseNode clone() {
             var clone = createInstance();

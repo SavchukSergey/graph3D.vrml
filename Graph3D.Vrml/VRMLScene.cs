@@ -1,6 +1,9 @@
-﻿namespace Graph3D.Vrml.Nodes {
-    public class VRMLScene {
-        public VRMLScene() {
+﻿using Graph3D.Vrml.Nodes;
+
+namespace Graph3D.Vrml {
+    public class VrmlScene {
+        
+        public VrmlScene() {
             root.name = "SCENEGRAPH";
         }
 

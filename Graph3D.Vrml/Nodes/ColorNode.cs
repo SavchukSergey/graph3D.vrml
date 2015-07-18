@@ -20,8 +20,8 @@ namespace Graph3D.Vrml.Nodes {
             return new ColorNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

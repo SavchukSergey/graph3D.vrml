@@ -3,15 +3,12 @@
 namespace Graph3D.Vrml.Nodes {
     public class SceneGraphNode : GroupingNode {
 
-        public SceneGraphNode() {
-        }
-
         protected override BaseNode createInstance() {
             return new SceneGraphNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

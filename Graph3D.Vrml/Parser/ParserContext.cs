@@ -8,45 +8,56 @@ using Graph3D.Vrml.Tokenizer;
 namespace Graph3D.Vrml.Parser {
     public class ParserContext {
 
-        private readonly Vrml97Tokenizer tokenizer;
-        private readonly NodeFactory nodeFactory;
-        private readonly FieldFactory fieldFactory;
-        private readonly ChildAcceptor childAcceptor;
+        private readonly Vrml97Tokenizer _tokenizer;
+        private readonly NodeFactory _nodeFactory;
+        private readonly ChildAcceptor _childAcceptor;
 
         [DebuggerStepThrough]
         public ParserContext(Vrml97Tokenizer tokenizer) {
-            this.tokenizer = tokenizer;
-            nodeFactory = new NodeFactory();
-            fieldFactory = new FieldFactory();
-            childAcceptor = new ChildAcceptor();
+            this._tokenizer = tokenizer;
+            _nodeFactory = new NodeFactory();
+            _childAcceptor = new ChildAcceptor();
         }
 
-        private readonly Queue<VRML97Token> queue = new Queue<VRML97Token>();
+        private readonly Queue<VRML97Token> _queue = new Queue<VRML97Token>();
+
+        public void ReadOpenBrace() {
+            if (ReadNextToken().Type != VRML97TokenType.OpenBrace) {
+                throw new InvalidVRMLSyntaxException();
+            }
+        }
+
+        public void ReadCloseBrace() {
+            if (ReadNextToken().Type != VRML97TokenType.CloseBrace) {
+                throw new InvalidVRMLSyntaxException();
+            }
+        }
+
         [DebuggerStepThrough]
         public VRML97Token ReadNextToken() {
             VRML97Token token = null;
-            if (queue.Count > 0) {
-                token = queue.Dequeue();
+            if (_queue.Count > 0) {
+                token = _queue.Dequeue();
             } else {
-                token = tokenizer.ReadNextToken();
+                token = _tokenizer.ReadNextToken();
             }
             return token;
         }
 
         [DebuggerStepThrough]
         public virtual VRML97Token PeekNextToken() {
-            if (queue.Count == 0) {
-                queue.Enqueue(tokenizer.ReadNextToken());
+            if (_queue.Count == 0) {
+                _queue.Enqueue(_tokenizer.ReadNextToken());
             }
-            return queue.Peek();
+            return _queue.Peek();
         }
 
         [DebuggerStepThrough]
         public VRML97Token PeekNextToken(int index) {
-            while (queue.Count < (index + 1)) {
-                queue.Enqueue(tokenizer.ReadNextToken());
+            while (_queue.Count < (index + 1)) {
+                _queue.Enqueue(_tokenizer.ReadNextToken());
             }
-            foreach (var token in queue) {
+            foreach (var token in _queue) {
                 if (index == 0) return token;
                 index--;
             }
@@ -55,11 +66,11 @@ namespace Graph3D.Vrml.Parser {
 
 
         public int LineIndex {
-            get { return tokenizer.LineIndex; }
+            get { return _tokenizer.LineIndex; }
         }
 
         public int ColumnIndex {
-            get { return tokenizer.ColumnIndex; }
+            get { return _tokenizer.ColumnIndex; }
         }
 
         public float ReadFloat() {
@@ -139,7 +150,7 @@ namespace Graph3D.Vrml.Parser {
         private readonly Dictionary<string, BaseNode> namedNodes = new Dictionary<string, BaseNode>();
 
         public BaseNode CreateNode(string nodeTypeId, string nodeNameId) {
-            var node = nodeFactory.CreateNode(nodeTypeId, nodeNameId);
+            var node = _nodeFactory.CreateNode(nodeTypeId, nodeNameId);
             if (!string.IsNullOrEmpty(node.name)) {
                 namedNodes[node.name] = node;
             }
@@ -147,10 +158,11 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public Field CreateField(string fieldType) {
-            return fieldFactory.CreateField(fieldType);
+            return Field.CreateField(fieldType);
         }
 
 
+        //todo: name lookup from bottom to top
         public BaseNode FindNode(string nodeNameId) {
             if (namedNodes.ContainsKey(nodeNameId)) {
                 return namedNodes[nodeNameId];
@@ -160,12 +172,12 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public void AcceptChild(BaseNode node) {
-            childAcceptor.child = node;
-            NodeContainer.acceptVisitor(childAcceptor);
+            _childAcceptor.child = node;
+            NodeContainer.AcceptVisitor(_childAcceptor);
         }
 
-        public void RegisterPtototype(CustomNode proto) {
-            nodeFactory.AddPrototype(proto);
+        public void RegisterPtototype(ProtoNode proto) {
+            _nodeFactory.AddPrototype(proto);
         }
 
     }

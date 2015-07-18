@@ -22,8 +22,8 @@ namespace Graph3D.Vrml.Nodes.Appearance.Texture {
             return new PixelTextureNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

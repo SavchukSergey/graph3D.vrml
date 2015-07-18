@@ -3,7 +3,7 @@
 namespace Graph3D.Vrml.Fields {
     public class MFNode : MField<BaseNode> {
 
-        public override void acceptVisitor(IFieldVisitor visitor) {
+        public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 

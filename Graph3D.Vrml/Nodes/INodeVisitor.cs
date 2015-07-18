@@ -10,63 +10,63 @@ using Graph3D.Vrml.Nodes.Sensors;
 namespace Graph3D.Vrml.Nodes {
     public interface INodeVisitor {
 
-        void visit(AnchorNode node);
+        void Visit(AnchorNode node);
 
-        void visit(AppearanceNode node);
+        void Visit(AppearanceNode node);
 
-        void visit(BackgroundNode node);
+        void Visit(BackgroundNode node);
 
-        void visit(BoxNode node);
+        void Visit(BoxNode node);
 
-        void visit(ColorNode node);
+        void Visit(ColorNode node);
 
-        void visit(CoordinateInterpolatorNode node);
+        void Visit(CoordinateInterpolatorNode node);
 
-        void visit(CoordinateNode node);
+        void Visit(CoordinateNode node);
 
-        void visit(CylinderNode node);
+        void Visit(CylinderNode node);
 
-        void visit(CustomNode node);
+        void Visit(ProtoNode node);
 
-        void visit(DirectionalLightNode node);
+        void Visit(DirectionalLightNode node);
 
-        void visit(ExtrusionNode node);
+        void Visit(ExtrusionNode node);
 
-        void visit(GroupNode node);
+        void Visit(GroupNode node);
 
-        void visit(IndexedFaceSetNode node);
+        void Visit(IndexedFaceSetNode node);
 
-        void visit(MaterialNode node);
+        void Visit(MaterialNode node);
 
-        void visit(NavigationInfoNode node);
+        void Visit(NavigationInfoNode node);
 
-        void visit(NormalNode node);
+        void Visit(NormalNode node);
 
-        void visit(OrientationInterpolatorNode node);
+        void Visit(OrientationInterpolatorNode node);
 
-        void visit(PixelTextureNode node);
+        void Visit(PixelTextureNode node);
 
-        void visit(PointLightNode node);
+        void Visit(PointLightNode node);
 
-        void visit(PositionInterpolatorNode node);
+        void Visit(PositionInterpolatorNode node);
 
-        void visit(ScalarInterpolationNode node);
+        void Visit(ScalarInterpolationNode node);
 
-        void visit(SceneGraphNode node);
+        void Visit(SceneGraphNode node);
 
-        void visit(ScriptNode node);
+        void Visit(ScriptNode node);
 
-        void visit(ShapeNode node);
+        void Visit(ShapeNode node);
 
-        void visit(SphereNode node);
+        void Visit(SphereNode node);
 
-        void visit(TextureCoordinateNode node);
+        void Visit(TextureCoordinateNode node);
 
-        void visit(TimeSensorNode node);
+        void Visit(TimeSensorNode node);
 
-        void visit(TransformNode node);
+        void Visit(TransformNode node);
 
-        void visit(ViewpointNode node);
+        void Visit(ViewpointNode node);
 
     }
 }

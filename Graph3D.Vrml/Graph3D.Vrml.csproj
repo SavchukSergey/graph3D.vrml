@@ -77,7 +77,7 @@
     <Compile Include="Nodes\Bindable\ViewpointNode.cs" />
     <Compile Include="Nodes\ColorNode.cs" />
     <Compile Include="Nodes\CoordinateNode.cs" />
-    <Compile Include="Nodes\CustomNode.cs" />
+    <Compile Include="Nodes\ProtoNode.cs" />
     <Compile Include="Nodes\Geometry\BoxNode.cs" />
     <Compile Include="Nodes\Geometry\CylinderNode.cs" />
     <Compile Include="Nodes\Geometry\ExtrusionNode.cs" />
@@ -107,7 +107,6 @@
     <Compile Include="Nodes\ShapeNode.cs" />
     <Compile Include="Nodes\TextureCoordinateNode.cs" />
     <Compile Include="Parser\ChildAcceptor.cs" />
-    <Compile Include="Parser\FieldFactory.cs" />
     <Compile Include="Parser\FieldParser.cs" />
     <Compile Include="Parser\InvalidEventInException.cs" />
     <Compile Include="Parser\InvalidEventOutException.cs" />
@@ -131,7 +130,7 @@
     <Compile Include="Tokenizer\WordState.cs" />
     <Compile Include="VRML97TokenType.cs" />
     <Compile Include="VrmlMath.cs" />
-    <Compile Include="VRMLScene.cs" />
+    <Compile Include="VrmlScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graph3D.Vrml.nuspec" />

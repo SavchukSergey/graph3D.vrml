@@ -35,7 +35,7 @@ namespace Graph3D.Vrml {
             Vrml97Tokenizer tokenizer = new Vrml97Tokenizer(new StringReader(vrmlSyntax));
             VrmlParser parser = new VrmlParser(tokenizer);
             MFNode node = new MFNode();
-            parser.parse(node);
+            parser.Parse(node);
             return null;
         }
 

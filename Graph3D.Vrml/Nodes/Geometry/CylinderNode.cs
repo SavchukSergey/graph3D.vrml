@@ -46,8 +46,8 @@ namespace Graph3D.Vrml.Nodes.Geometry {
             return new CylinderNode();
         }
 
-        public override void acceptVisitor(INodeVisitor visitor) {
-            visitor.visit(this);
+        public override void AcceptVisitor(INodeVisitor visitor) {
+            visitor.Visit(this);
         }
 
     }

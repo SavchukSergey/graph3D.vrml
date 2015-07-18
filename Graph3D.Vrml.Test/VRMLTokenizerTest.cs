@@ -56,12 +56,12 @@ namespace Graph3D.Vrml.Test {
             var scene = LoadScene("rose.wrl");
         }
 
-        private VRMLScene LoadScene(string name) {
-            using (var stream = this.GetType().Assembly.GetManifestResourceStream(this.GetType(), name)) {
+        private VrmlScene LoadScene(string name) {
+            using (var stream = GetType().Assembly.GetManifestResourceStream(this.GetType(), name)) {
                 var tokenizer = new Vrml97Tokenizer(stream);
                 var parser = new VrmlParser(tokenizer);
-                var scene = new VRMLScene();
-                parser.parse(scene);
+                var scene = new VrmlScene();
+                parser.Parse(scene);
                 return scene;
             }
         }
