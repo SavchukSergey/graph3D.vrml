@@ -125,6 +125,7 @@
     <Compile Include="Parser\Statements\Extern\ExternExposedFieldStatement.cs" />
     <Compile Include="Parser\Statements\ExposedFieldStatement.cs" />
     <Compile Include="Parser\Statements\RouteStatement.cs" />
+    <Compile Include="Parser\Statements\UseStatement.cs" />
     <Compile Include="Parser\VrmlParseException.cs" />
     <Compile Include="Parser\VrmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

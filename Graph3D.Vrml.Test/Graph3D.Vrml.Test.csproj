@@ -76,6 +76,7 @@
     <Compile Include="Parser\Statements\Extern\ExternFieldStatementTest.cs" />
     <Compile Include="Parser\Statements\Extern\ExternExposedFieldStatementTest.cs" />
     <Compile Include="Parser\Statements\ExposedFieldStatementTest.cs" />
+    <Compile Include="Parser\Statements\UseStatementTest.cs" />
     <Compile Include="Parser\Statements\RouteStatementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRMLTokenizerTest.cs" />

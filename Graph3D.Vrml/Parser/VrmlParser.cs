@@ -100,9 +100,8 @@ namespace Graph3D.Vrml.Parser {
                     ParseDefNodeStatement(context);
                     break;
                 case "USE":
-                    context.ReadNextToken();
-                    var nodeNameId = ParseNodeNameId(context);
-                    var node = context.FindNode(nodeNameId);
+                    var useStatement = UseStatement.Parse(context);
+                    var node = context.FindNode(useStatement.NodeName);
                     context.AcceptChild(node);
                     break;
                 default:
