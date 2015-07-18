@@ -1,4 +1,4 @@
-﻿namespace Graph3D.Vrml.Parser.Statements {
+﻿namespace Graph3D.Vrml.Parser.Statements.Extern {
     public class ExternExposedFieldStatement {
 
         public string FieldType { get; set; }

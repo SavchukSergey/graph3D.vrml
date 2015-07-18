@@ -2,6 +2,7 @@
 using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Nodes;
 using Graph3D.Vrml.Parser.Statements;
+using Graph3D.Vrml.Parser.Statements.Extern;
 using Graph3D.Vrml.Tokenizer;
 
 namespace Graph3D.Vrml.Parser {
@@ -299,17 +300,15 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseExternInterfaceDeclaration(ParserContext context) {
-            string accessType = context.ReadNextToken().Text;
+            string accessType = context.PeekNextToken().Text;
             string fieldType;
             switch (accessType) {
                 case "eventIn":
-                    fieldType = ParseFieldType(context);
-                    var eventInId = ParseEventInId(context);
+                    var eventIn = ExternEventInStatement.Parse(context);
                     //TODO: process extern interface eventIn declaration.
                     break;
                 case "eventOut":
-                    fieldType = ParseFieldType(context);
-                    var eventOutId = ParseEventOutId(context);
+                    var eventOut = ExternEventOutStatement.Parse(context);
                     //TODO: process extern interface eventOut declaration.
                     break;
                 case "field":
