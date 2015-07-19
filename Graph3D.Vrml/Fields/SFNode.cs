@@ -7,31 +7,25 @@ namespace Graph3D.Vrml.Fields {
         }
 
         public SFNode(BaseNode value) {
-            this._node = value;
+            Node = value;
         }
 
-        private BaseNode _node ;
-        public BaseNode node {
-            get { return _node; }
-            set { _node = value; }
-        }
+        public BaseNode Node { get; set; }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 
         public override Field Clone() {
-            return new SFNode(_node != null ? _node.clone() : null);
+            return new SFNode(Node != null ? Node.clone() : null);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFNode;
+        public override FieldType Type {
+            get { return FieldType.SFNode; }
         }
 
         public override string ToString() {
-            return string.Format("[{0}]", _node);
+            return string.Format("[{0}]", Node);
         }
-
-
     }
 }

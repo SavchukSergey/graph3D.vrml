@@ -6,32 +6,29 @@
         }
 
         public SFBool(bool value) {
-            _value = value;
+            Value = value;
         }
 
-        private bool _value;
-        public bool value {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public bool Value { get; set; }
 
         public static implicit operator bool(SFBool field) {
-            return field.value;
+            return field.Value;
         }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFBool;
+        public override FieldType Type {
+            get { return FieldType.SFBool; }
         }
+
         public override Field Clone() {
-            return new SFBool(_value);
+            return new SFBool(Value);
         }
 
         public override string ToString() {
-            return _value ? "TRUE" : "FALSE";
+            return Value ? "TRUE" : "FALSE";
         }
 
     }

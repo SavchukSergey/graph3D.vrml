@@ -17,7 +17,7 @@ field SFInt32 test 2
             var statement = ProtoFieldStatement.Parse(context, c => { });
             Assert.AreEqual("SFInt32", statement.FieldType);
             Assert.AreEqual("test", statement.FieldId);
-            Assert.AreEqual(2, ((SFInt32)statement.Value).value);
+            Assert.AreEqual(2, ((SFInt32)statement.Value).Value);
         }
     }
 }

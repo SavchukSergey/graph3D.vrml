@@ -18,7 +18,7 @@ exposedField SFInt32 test 15
             Assert.AreEqual("SFInt32", statement.FieldType);
             Assert.AreEqual("test", statement.FieldId);
             Assert.IsAssignableFrom(typeof(SFInt32), statement.Value);
-            Assert.AreEqual(15, ((SFInt32)statement.Value).value);
+            Assert.AreEqual(15, ((SFInt32)statement.Value).Value);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public void visit(SFNode field) {
-            field.node = _child;
+            field.Node = _child;
         }
 
         public void visit(MFNode field) {

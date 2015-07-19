@@ -5,50 +5,34 @@
         }
 
         public SFRotation(float x, float y, float z, float angle) {
-            _x = x;
-            _y = y;
-            _z = z;
-            _angle = angle;
+            X = x;
+            Y = y;
+            Z = z;
+            Angle = angle;
         }
 
-        private float _x;
-        public float x {
-            get { return _x; }
-            set { _x = value; }
-        }
+        public float X { get; set; }
 
-        private float _y;
-        public float y {
-            get { return _y; }
-            set { _y = value; }
-        }
+        public float Y { get; set; }
 
-        private float _z;
-        public float z {
-            get { return _z; }
-            set { _z = value; }
-        }
-        
-        private float _angle;
-        public float angle {
-            get { return _angle; }
-            set { _angle = value; }
-        }
+        public float Z { get; set; }
+
+        public float Angle { get; set; }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 
         public override Field Clone() {
-            return new SFRotation(_x, _y, _z, _angle);
+            return new SFRotation(X, Y, Z, Angle);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFRotation;
+        public override FieldType Type {
+            get { return FieldType.SFRotation; }
         }
 
         public override string ToString() {
-            return string.Format("{{x={0}, y={1}, z={2}, angle={3}}}", _x, _y, _z, angle);
+            return string.Format("{{x={0}, y={1}, z={2}, angle={3}}}", X, Y, Z, Angle);
         }
 
     }

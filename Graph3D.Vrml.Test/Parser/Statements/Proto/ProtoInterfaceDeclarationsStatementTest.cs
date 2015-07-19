@@ -50,22 +50,22 @@ namespace Graph3D.Vrml.Test.Parser.Statements.Proto {
             var firstField = statement.Fields.First();
             Assert.AreEqual("SFInt32", firstField.FieldType);
             Assert.AreEqual("field1", firstField.FieldId);
-            Assert.AreEqual(1, ((SFInt32)firstField.Value).value);
+            Assert.AreEqual(1, ((SFInt32)firstField.Value).Value);
 
             var secondField = statement.Fields.Last();
             Assert.AreEqual("SFInt32", secondField.FieldType);
             Assert.AreEqual("field2", secondField.FieldId);
-            Assert.AreEqual(3, ((SFInt32)secondField.Value).value);
+            Assert.AreEqual(3, ((SFInt32)secondField.Value).Value);
 
             var firstExposedField = statement.ExposedFields.First();
             Assert.AreEqual("SFInt32", firstExposedField.FieldType);
             Assert.AreEqual("exposedField1", firstExposedField.FieldId);
-            Assert.AreEqual(2, ((SFInt32)firstExposedField.Value).value);
+            Assert.AreEqual(2, ((SFInt32)firstExposedField.Value).Value);
 
             var secondExposedField = statement.ExposedFields.Last();
             Assert.AreEqual("SFInt32", secondExposedField.FieldType);
             Assert.AreEqual("exposedField2", secondExposedField.FieldId);
-            Assert.AreEqual(4, ((SFInt32)secondExposedField.Value).value);
+            Assert.AreEqual(4, ((SFInt32)secondExposedField.Value).Value);
         }
 
         [Test]

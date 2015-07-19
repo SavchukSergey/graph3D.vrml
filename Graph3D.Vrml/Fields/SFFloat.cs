@@ -5,14 +5,10 @@
         }
 
         public SFFloat(float value) {
-            _value = value;
+            Value = value;
         }
 
-        private float _value;
-        public float value {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public float Value { get; set; }
 
         public static implicit operator SFFloat(float value) {
             return new SFFloat(value);
@@ -23,15 +19,15 @@
         }
 
         public override Field Clone() {
-            return new SFFloat(_value);
+            return new SFFloat(Value);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFFloat;
+        public override FieldType Type {
+            get { return FieldType.SFFloat; }
         }
 
         public override string ToString() {
-            return _value.ToString();
+            return Value.ToString();
         }
 
 

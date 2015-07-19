@@ -5,43 +5,31 @@
         }
 
         public SFColor(float red, float green, float blue) {
-            _red = red;
-            _green = green;
-            _blue = blue;
+            Red = red;
+            Green = green;
+            Blue = blue;
         }
 
-        private float _red;
-        public float red {
-            get { return _red; }
-            set { _red = value; }
-        }
+        public float Red { get; set; }
 
-        private float _green;
-        public float green {
-            get { return _green; }
-            set { _green = value; }
-        }
-        
-        private float _blue;
-        public float blue {
-            get { return _blue; }
-            set { _blue = value; }
-        }
+        public float Green { get; set; }
+
+        public float Blue { get; set; }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 
         public override Field Clone() {
-            return new SFColor(_red, _green, _blue);
+            return new SFColor(Red, Green, Blue);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFColor;
+        public override FieldType Type {
+            get { return FieldType.SFColor; }
         }
 
         public override string ToString() {
-            return string.Format("{{red={0}, green={1}, blue={2}}}", _red, _green, _blue);
+            return string.Format("{{red={0}, green={1}, blue={2}}}", Red, Green, Blue);
         }
 
     }

@@ -5,25 +5,21 @@
         }
 
         public SFTime(double value) {
-            this._value = value;
+            Value = value;
         }
 
-        private double _value;
-        public double value {
-            get { return this._value; }
-            set { this._value = value; }
+        public double Value { get; set; }
+
+        public override FieldType Type {
+            get { return FieldType.SFTime; }
         }
 
-        public override FieldType getType() {
-            return FieldType.SFTime;
-        }
-        
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 
         public override Field Clone() {
-            return new SFTime(_value);
+            return new SFTime(Value);
         }
     }
 }

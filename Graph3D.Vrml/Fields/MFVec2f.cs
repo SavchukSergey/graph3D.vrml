@@ -14,16 +14,15 @@
 
         public override Field Clone() {
             var clone = new MFVec2f();
-            foreach (var child in this.Values) {
+            foreach (var child in Values) {
                 clone.AppendValue((SFVec2f)child.Clone());
             }
             return clone;
         }
 
-        public override FieldType getType() {
-            return FieldType.MFVec2f;
+        public override FieldType Type {
+            get { return FieldType.MFVec2f; }
         }
-
 
     }
 }

@@ -37,9 +37,9 @@
             return new SFVec3f(_x, _y, _z);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFVec3f;
-        }
+       public override FieldType Type {
+           get { return FieldType.SFVec3f; }
+       }
 
         public override string ToString() {
             return string.Format("{{x={0}, y={1}, z={2}}}", _x, _y, _z);

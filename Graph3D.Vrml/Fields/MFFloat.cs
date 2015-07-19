@@ -7,14 +7,14 @@
 
         public override Field Clone() {
             var clone = new MFFloat();
-            foreach (var child in this.Values) {
+            foreach (var child in Values) {
                 clone.AppendValue((SFFloat)child.Clone());
             }
             return clone;
         }
 
-        public override FieldType getType() {
-            return FieldType.MFFloat;
+        public override FieldType Type {
+            get { return FieldType.MFFloat; }
         }
 
     }

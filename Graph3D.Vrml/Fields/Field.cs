@@ -11,7 +11,7 @@ namespace Graph3D.Vrml.Fields {
             this.accessType = accessType;
         }
 
-        public abstract FieldType getType();
+        public abstract FieldType Type { get; }
 
         private readonly FieldAccessType accessType;
         public FieldAccessType getAccessType() {

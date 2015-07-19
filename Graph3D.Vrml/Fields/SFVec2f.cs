@@ -6,36 +6,28 @@
         }
 
         public SFVec2f(float x, float y) {
-            _x = x;
-            _y = y;
+            X = x;
+            Y = y;
         }
 
-        private float _x;
-        public float x {
-            get { return _x; }
-            set { _x = value; }
-        }
+        public float X { get; set; }
 
-        private float _y;
-        public float y {
-            get { return _y; }
-            set { _y = value; }
-        }
+        public float Y { get; set; }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.visit(this);
         }
 
         public override Field Clone() {
-            return new SFVec2f(_x, _y);
+            return new SFVec2f(X, Y);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFVec2f;
+        public override FieldType Type {
+            get { return FieldType.SFVec2f; }
         }
 
         public override string ToString() {
-            return string.Format("SFVec2f: x={0}, y={1}", _x, _y);
+            return string.Format("SFVec2f: x={0}, y={1}", X, Y);
         }
 
     }

@@ -1,22 +1,22 @@
 ﻿namespace Graph3D.Vrml.Fields {
     public class SFImage : Field {
-
-        private byte[,,] _value = new byte[0, 0, 0];
-        public byte[,,] value {
-            get { return _value; }
-            set { _value = value; }
+        
+        public SFImage() {
+            Value = new byte[0, 0, 0];
         }
 
-        public int width {
-            get { return _value.GetLength(1); }
+        public byte[, ,] Value { get; set; }
+
+        public int Width {
+            get { return Value.GetLength(1); }
         }
 
-        public int height {
-            get { return _value.GetLength(0); }
+        public int Height {
+            get { return Value.GetLength(0); }
         }
 
-        public int componentsNumber {
-            get { return _value.GetLength(2); }
+        public int ComponentsNumber {
+            get { return Value.GetLength(2); }
         }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
@@ -24,15 +24,13 @@
         }
 
         public override Field Clone() {
-            SFImage clone = new SFImage();
-            clone._value = (byte[,,])_value.Clone();
+            var clone = new SFImage { Value = (byte[, ,])Value.Clone() };
             return clone;
         }
 
-        public override FieldType getType() {
-            return FieldType.SFImage;
+        public override FieldType Type {
+            get { return FieldType.SFImage; }
         }
-
 
     }
 }

@@ -61,7 +61,7 @@ namespace Graph3D.Vrml.Nodes.Grouping {
             temp[2, 3] = -center.z;
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
-            temp = VrmlMath.GenerateRotationMatrix(scaleOrientation.x, scaleOrientation.y, scaleOrientation.z, -scaleOrientation.angle);
+            temp = VrmlMath.GenerateRotationMatrix(scaleOrientation.X, scaleOrientation.Y, scaleOrientation.Z, -scaleOrientation.Angle);
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
             temp = VrmlMath.GetUnitMatrix();
@@ -70,10 +70,10 @@ namespace Graph3D.Vrml.Nodes.Grouping {
             temp[2, 2] = 1 / scale.z;
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
-            temp = VrmlMath.GenerateRotationMatrix(scaleOrientation.x, scaleOrientation.y, scaleOrientation.z, scaleOrientation.angle);
+            temp = VrmlMath.GenerateRotationMatrix(scaleOrientation.X, scaleOrientation.Y, scaleOrientation.Z, scaleOrientation.Angle);
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
-            temp = VrmlMath.GenerateRotationMatrix(rotation.x, rotation.y, rotation.z, rotation.angle);
+            temp = VrmlMath.GenerateRotationMatrix(rotation.X, rotation.Y, rotation.Z, rotation.Angle);
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
             temp = VrmlMath.GetUnitMatrix();

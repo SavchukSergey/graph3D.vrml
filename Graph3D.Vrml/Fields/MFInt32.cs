@@ -7,16 +7,15 @@
 
         public override Field Clone() {
             var clone = new MFInt32();
-            foreach (var child in this.Values) {
+            foreach (var child in Values) {
                 clone.AppendValue((SFInt32)child.Clone());
             }
             return clone;
         }
 
-        public override FieldType getType() {
-            return FieldType.MFInt32;
+        public override FieldType Type {
+            get { return FieldType.MFInt32; }
         }
-
 
     }
 }

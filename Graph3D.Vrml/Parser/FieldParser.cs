@@ -19,26 +19,26 @@ namespace Graph3D.Vrml.Parser {
             string value = context.ReadNextToken().Text;
             switch (value) {
                 case "TRUE":
-                    field.value = true;
+                    field.Value = true;
                     break;
                 case "FALSE":
-                    field.value = false;
+                    field.Value = false;
                     break;
             }
 
         }
 
         public void visit(SFInt32 field) {
-            field.value = context.ReadInt32();
+            field.Value = context.ReadInt32();
         }
 
         public void visit(SFFloat field) {
-            field.value = context.ReadFloat();
+            field.Value = context.ReadFloat();
         }
 
         public void visit(SFVec2f field) {
-            field.x = context.ReadFloat();
-            field.y = context.ReadFloat();
+            field.X = context.ReadFloat();
+            field.Y = context.ReadFloat();
         }
 
         public void visit(SFVec3f field) {
@@ -49,20 +49,20 @@ namespace Graph3D.Vrml.Parser {
 
 
         public void visit(SFRotation field) {
-            field.x = context.ReadFloat();
-            field.y = context.ReadFloat();
-            field.z = context.ReadFloat();
-            field.angle = context.ReadFloat();
+            field.X = context.ReadFloat();
+            field.Y = context.ReadFloat();
+            field.Z = context.ReadFloat();
+            field.Angle = context.ReadFloat();
         }
 
         public void visit(SFString field) {
-            field.value = context.ReadString();
+            field.Value = context.ReadString();
         }
 
         public void visit(SFColor field) {
-            field.red = context.ReadFloat();
-            field.green = context.ReadFloat();
-            field.blue = context.ReadFloat();
+            field.Red = context.ReadFloat();
+            field.Green = context.ReadFloat();
+            field.Blue = context.ReadFloat();
         }
 
 
@@ -70,7 +70,7 @@ namespace Graph3D.Vrml.Parser {
             VRML97Token token = context.PeekNextToken();
             switch (token.Text) {
                 case "NULL":
-                    field.node = null;
+                    field.Node = null;
                     break;
                 default:
                     context.PushNodeContainer(field);
@@ -197,11 +197,11 @@ namespace Graph3D.Vrml.Parser {
                     }
                 }
             }
-            field.value = value;
+            field.Value = value;
         }
 
         public void visit(SFTime field) {
-            field.value = context.ReadDouble();
+            field.Value = context.ReadDouble();
         }
 
     }

@@ -5,17 +5,13 @@
         }
 
         public SFString(string value) {
-            this._value = value;
+            Value = value;
         }
 
-        private string _value;
-        public string value {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public string Value { get; set; }
 
         public static implicit operator string(SFString field) {
-            return field._value;
+            return field.Value;
         }
 
         public static implicit operator SFString(string value) {
@@ -27,15 +23,15 @@
         }
 
         public override Field Clone() {
-            return new SFString(_value);
+            return new SFString(Value);
         }
 
-        public override FieldType getType() {
-            return FieldType.SFString;
+        public override FieldType Type {
+            get { return FieldType.SFString; }
         }
 
         public override string ToString() {
-            return string.Format("\"{0}\"", _value);
+            return string.Format("\"{0}\"", Value);
         }
 
     }

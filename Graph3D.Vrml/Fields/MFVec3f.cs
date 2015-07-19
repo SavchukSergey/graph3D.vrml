@@ -20,8 +20,8 @@
             return clone;
         }
 
-        public override FieldType getType() {
-            return FieldType.MFVec3f;
+        public override FieldType Type {
+            get { return FieldType.MFVec3f; }
         }
 
     }

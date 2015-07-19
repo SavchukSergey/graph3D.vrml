@@ -20,10 +20,9 @@
             return clone;
         }
 
-        public override FieldType getType() {
-            return FieldType.MFString;
+        public override FieldType Type {
+            get { return FieldType.MFString; }
         }
-
 
     }
 }
