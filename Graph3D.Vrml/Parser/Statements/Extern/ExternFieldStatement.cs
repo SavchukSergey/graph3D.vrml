@@ -6,10 +6,7 @@
         public string FieldId { get; set; }
 
         public static ExternFieldStatement Parse(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "field") {
-                throw new InvalidVRMLSyntaxException("field expected");
-            }
+           context.ReadKeyword("field");
 
             var fieldType = context.ParseFieldType();
             var fieldId = context.ParseFieldId();

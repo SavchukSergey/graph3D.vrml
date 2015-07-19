@@ -12,10 +12,7 @@ namespace Graph3D.Vrml.Parser.Statements.Proto {
 
         //todo: remove second argument
         public static ProtoExposedFieldStatement Parse(ParserContext context, Action<ParserContext> nodeStatementParser) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "exposedField") {
-                throw new InvalidVRMLSyntaxException("exposedField expected");
-            }
+            context.ReadKeyword("exposedField");
 
             var fieldType = context.ParseFieldType();
             var fieldId = context.ParseFieldId();

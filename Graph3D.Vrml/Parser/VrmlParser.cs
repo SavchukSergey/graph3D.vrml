@@ -154,10 +154,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseProto(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "PROTO") {
-                throw new InvalidVRMLSyntaxException("PROTO expected");
-            }
+            context.ReadKeyword("PROTO");
 
             var proto = new ProtoNode {
                 name = ParseNodeNameId(context)
@@ -231,10 +228,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseExternProto(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "EXTERNPROTO") {
-                throw new InvalidVRMLSyntaxException("EXTERNPROTO expected");
-            }
+            context.ReadKeyword("EXTERNPROTO");
 
             var nodeTypeId = ParseNodeTypeId(context);
             ParseExternInterfaceDeclarations(context);

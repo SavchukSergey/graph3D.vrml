@@ -6,10 +6,7 @@
         public string EventId { get; set; }
 
         public static ProtoEventOutStatement Parse(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "eventOut") {
-                throw new InvalidVRMLSyntaxException("eventOut expected");
-            } 
+            context.ReadKeyword("eventOut");
             
             var fieldType = context.ParseFieldType();
             var eventId = context.ParseEventInId();
