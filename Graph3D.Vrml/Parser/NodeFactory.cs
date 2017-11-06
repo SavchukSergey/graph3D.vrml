@@ -20,6 +20,7 @@ namespace Graph3D.Vrml.Parser {
             builtin["Background"] = new BackgroundNode();
             builtin["Box"] = new BoxNode();
             builtin["Color"] = new ColorNode();
+            builtin["Cone"] = new ConeNode();
             builtin["Coordinate"] = new CoordinateNode();
             builtin["CoordinateInterpolator"] = new CoordinateInterpolatorNode();
             builtin["Cylinder"] = new CylinderNode();
@@ -27,6 +28,7 @@ namespace Graph3D.Vrml.Parser {
             builtin["Extrusion"] = new ExtrusionNode();
             builtin["Group"] = new GroupNode();
             builtin["IndexedFaceSet"] = new IndexedFaceSetNode();
+            builtin["IndexedLineSet"] = new IndexedLineSetNode();
             builtin["Material"] = new MaterialNode();
             builtin["NavigationInfo"] = new NavigationInfoNode();
             builtin["OrientationInterpolator"] = new OrientationInterpolatorNode();

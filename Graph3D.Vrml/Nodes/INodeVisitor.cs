@@ -20,6 +20,8 @@ namespace Graph3D.Vrml.Nodes {
 
         void Visit(ColorNode node);
 
+        void Visit(ConeNode node);
+
         void Visit(CoordinateInterpolatorNode node);
 
         void Visit(CoordinateNode node);
@@ -35,6 +37,8 @@ namespace Graph3D.Vrml.Nodes {
         void Visit(GroupNode node);
 
         void Visit(IndexedFaceSetNode node);
+
+        void Visit(IndexedLineSetNode node);
 
         void Visit(MaterialNode node);
 

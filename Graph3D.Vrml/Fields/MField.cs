@@ -18,10 +18,10 @@ namespace Graph3D.Vrml.Fields {
         }
 
         protected MField(params T[] items) {
-            this._values = (T[])items.Clone();
+            _values = new List<T>(items);
         }
 
-        private T[] _values = new T[0];
+        private readonly List<T> _values = new List<T>();
         public virtual IEnumerable<T> Values {
             get { return _values; }
         }
@@ -31,28 +31,18 @@ namespace Graph3D.Vrml.Fields {
             set { _values[index] = value; }
         }
 
-        public virtual int length {
-            get { return _values.Length; }
-        }
+        public virtual int length => _values.Count;
 
         public virtual void AppendValue(T value) {
-            T[] newValues = new T[_values.Length + 1];
-            _values.CopyTo(newValues, 0);
-            newValues[_values.Length] = value;
-            _values = newValues;
+            _values.Add(value);
         }
 
         public virtual void clearValues() {
-            _values = new T[0];
+            _values.Clear();
         }
 
         public override string ToString() {
-            string childStr = "";
-            foreach (var item in this.Values) {
-                if (!string.IsNullOrEmpty(childStr)) childStr += ", \r\n";
-                childStr += item.ToString();
-            }
-            return string.Format("[{0}]", childStr);
+            return $"[{string.Join(", \n\r", Values)}]";
         }
 
         protected static void ParseMField(ParserContext context, Action<ParserContext> itemParser) {

@@ -12,9 +12,7 @@ namespace Graph3D.Vrml.Nodes.Geometry {
             addField("size", new SFVec3f(2, 2, 2));
         }
 
-        public SFVec3f size {
-            get { return getField("size") as SFVec3f; }
-        }
+        public SFVec3f size => getField("size") as SFVec3f;
 
         protected override BaseNode createInstance() {
             return new BoxNode();
