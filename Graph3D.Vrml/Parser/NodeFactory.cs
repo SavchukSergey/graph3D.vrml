@@ -41,6 +41,7 @@ namespace Graph3D.Vrml.Parser {
             builtin["TimeSensor"] = new TimeSensorNode();
             builtin["Transform"] = new TransformNode();
             builtin["Viewpoint"] = new ViewpointNode();
+            builtin["WorldInfo"] = new WorldInfoNode();
         }
 
         private readonly Dictionary<string, BaseNode> builtin = new Dictionary<string, BaseNode>();
