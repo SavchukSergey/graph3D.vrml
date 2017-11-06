@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Parser;
 
 namespace Graph3D.Vrml.Nodes {
-    public abstract class BaseNode : ICloneable {
+    public abstract class BaseNode {
 
         [DebuggerStepThrough]
         protected BaseNode() {
@@ -37,33 +36,29 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public Field GetExposedField(string exposedFieldName) {
-            Field field;
-            if (exposedFields.TryGetValue(exposedFieldName, out field)) {
+            if (exposedFields.TryGetValue(exposedFieldName, out Field field)) {
                 return field;
             }
-            throw new InvalidExposedFieldException(string.Format("'{0}' exposed field doesn't exist in node of {1} type", exposedFieldName, this.GetType().Name));
+            throw new InvalidExposedFieldException($"'{exposedFieldName}' exposed field doesn't exist in node of {GetType().Name} type");
         }
 
         public Field getField(string fieldName) {
-            Field res;
-            if (exposedFields.TryGetValue(fieldName, out res)) {
+            if (exposedFields.TryGetValue(fieldName, out Field res)) {
                 return res;
             }
-            throw new InvalidExposedFieldException(string.Format("'{0}' field doesn't exist in node of {1} type", fieldName, GetType().Name));
+            throw new InvalidExposedFieldException($"'{fieldName}' field doesn't exist in node of {GetType().Name} type");
         }
 
         public Field getEventIn(string eventInName) {
-            Field res;
-            if (eventIns.TryGetValue(eventInName, out res)) {
+            if (eventIns.TryGetValue(eventInName, out Field res)) {
                 return res;
             }
-            throw new InvalidEventInException(string.Format("'{0}' event in field doesn't exist in node of {1} type", eventInName, GetType().Name));
+            throw new InvalidEventInException($"'{eventInName}' event in field doesn't exist in node of {GetType().Name} type");
         }
 
         public Field getEventOut(string eventOutName) {
-            Field res;
-            if (eventOuts.TryGetValue(eventOutName, out res)) return res;
-            throw new InvalidEventOutException(string.Format("'{0}' event out field doesn't exist in node of {1} type", eventOutName, GetType().Name));
+            if (eventOuts.TryGetValue(eventOutName, out Field res)) return res;
+            throw new InvalidEventOutException($"'{eventOutName}' event out field doesn't exist in node of {GetType().Name} type");
         }
 
         protected abstract BaseNode createInstance();
@@ -88,14 +83,6 @@ namespace Graph3D.Vrml.Nodes {
             return clone;
         }
 
-        #region ICloneable Members
-
-        object ICloneable.Clone() {
-            return this.clone();
-        }
-
-        #endregion
-
         public override string ToString() {
             string fieldsStr = "";
             foreach (string key in eventIns.Keys) {
@@ -111,7 +98,7 @@ namespace Graph3D.Vrml.Nodes {
                 fieldsStr += key + ": " + exposedFields[key].ToString();
             }
             if (!string.IsNullOrEmpty(fieldsStr)) fieldsStr += "\r\n";
-            return string.Format("{0}: {{\r\n{1}}}", this.GetType().Name, fieldsStr);
+            return string.Format("{0}: {{\r\n{1}}}", GetType().Name, fieldsStr);
         }
     }
 }

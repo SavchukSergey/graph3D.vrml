@@ -2,16 +2,16 @@
 using Graph3D.Vrml.Parser;
 
 namespace Graph3D.Vrml {
+    public class InvalidVRMLSyntaxException : VrmlParseException {
 
-    [Serializable]
-    public class InvalidVRMLSyntaxException : VrmlParseException
-    {
-        public InvalidVRMLSyntaxException() { }
-        public InvalidVRMLSyntaxException(string message) : base(message) { }
-        public InvalidVRMLSyntaxException(string message, Exception inner) : base(message, inner) { }
-        protected InvalidVRMLSyntaxException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context) { }
+        public InvalidVRMLSyntaxException() {
+        }
+
+        public InvalidVRMLSyntaxException(string message) : base(message) {
+        }
+
+        public InvalidVRMLSyntaxException(string message, Exception inner) : base(message, inner) {
+        }
+
     }
 }

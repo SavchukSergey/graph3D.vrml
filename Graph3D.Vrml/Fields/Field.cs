@@ -1,7 +1,5 @@
-﻿using System;
-
-namespace Graph3D.Vrml.Fields {
-    public abstract class Field : ICloneable {
+﻿namespace Graph3D.Vrml.Fields {
+    public abstract class Field {
 
         protected Field()
             : this(FieldAccessType.ExposedField) {
@@ -14,6 +12,7 @@ namespace Graph3D.Vrml.Fields {
         public abstract FieldType Type { get; }
 
         private readonly FieldAccessType accessType;
+
         public FieldAccessType getAccessType() {
             return accessType;
         }
@@ -21,14 +20,6 @@ namespace Graph3D.Vrml.Fields {
         public abstract void AcceptVisitor(IFieldVisitor visitor);
 
         public abstract Field Clone();
-
-        #region ICloneable Members
-
-        object ICloneable.Clone() {
-            return this.Clone();
-        }
-
-        #endregion
 
         public static Field CreateField(string fieldType) {
             switch (fieldType) {
