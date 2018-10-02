@@ -34,7 +34,11 @@ namespace Graph3D.Vrml.Nodes {
 
         void Visit(ExtrusionNode node);
 
+        void Visit(Switch node);
+
         void Visit(GroupNode node);
+
+        void Visit(CollisionNode node);
 
         void Visit(IndexedFaceSetNode node);
 

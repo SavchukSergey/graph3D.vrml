@@ -27,6 +27,8 @@ namespace Graph3D.Vrml.Parser {
             builtin["DirectionalLight"] = new DirectionalLightNode();
             builtin["Extrusion"] = new ExtrusionNode();
             builtin["Group"] = new GroupNode();
+            builtin["Collision"] = new CollisionNode();
+            builtin["Switch"] = new Graph3D.Vrml.Nodes.Switch();            
             builtin["IndexedFaceSet"] = new IndexedFaceSetNode();
             builtin["IndexedLineSet"] = new IndexedLineSetNode();
             builtin["Material"] = new MaterialNode();
