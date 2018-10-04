@@ -67,20 +67,16 @@ namespace Graph3D.Vrml.Fields {
             return (IEnumerator<T>)Values.GetEnumerator();
         }
 
-        public TTarget GetFirstOfType<TTarget>() where TTarget : class
-        {
-            foreach (var value in Values)
-            {
+        public TTarget GetFirstOfType<TTarget>() where TTarget : class, T {
+            foreach (var value in Values) {
                 if (value.GetType() == typeof(TTarget)) return value as TTarget;
             }
             return null;
         }
 
 
-        public IEnumerator<TTarget> GetAllOfType<TTarget>() where TTarget : class
-        {
-            foreach (var value in Values)
-            {
+        public IEnumerator<TTarget> GetAllOfType<TTarget>() where TTarget : class, T {
+            foreach (var value in Values) {
                 if (value.GetType() == typeof(TTarget)) yield return value as TTarget;
             }
             yield break;

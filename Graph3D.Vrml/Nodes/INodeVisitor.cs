@@ -34,7 +34,7 @@ namespace Graph3D.Vrml.Nodes {
 
         void Visit(ExtrusionNode node);
 
-        void Visit(Switch node);
+        void Visit(SwitchNode node);
 
         void Visit(GroupNode node);
 
