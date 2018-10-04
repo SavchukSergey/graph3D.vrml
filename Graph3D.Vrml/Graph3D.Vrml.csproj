@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp1.0</TargetFrameworks>
-    <Copyright>Copyright © 2017</Copyright>
+    <Copyright>Copyright © 2018</Copyright>
     <RepositoryUrl>https://github.com/SavchukSergey/graph3D.vrml</RepositoryUrl>
     <Description>Vrml parser</Description>
     <PackageTags>VRML</PackageTags>
+    <Version>1.0.2</Version>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">
