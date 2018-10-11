@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;netcoreapp1.0</TargetFrameworks>
     <Copyright>Copyright © 2018</Copyright>
     <RepositoryUrl>https://github.com/SavchukSergey/graph3D.vrml</RepositoryUrl>
     <Description>Vrml parser</Description>
