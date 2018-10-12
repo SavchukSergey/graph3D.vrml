@@ -13,38 +13,118 @@ namespace Graph3D.Vrml.Nodes.Appearance {
     /// </summary>
     public class MaterialNode : Node {
 
+        private readonly SFFloat _ambientIntensityNode = new SFFloat(0.2f);
+        private SFColor _diffuseColorNode = new SFColor(0.8f, 0.8f, 0.8f);
+        private SFColor _emissiveColorNode = new SFColor(0f, 0f, 0f);
+        private readonly SFFloat _shininessNode = new SFFloat(0.2f);
+        private SFColor _specularColorNode = new SFColor(0f, 0f, 0f);
+        private readonly SFFloat _transparencyNode = new SFFloat(0f);
+
         public MaterialNode() {
-            AddExposedField("ambientIntensity", new SFFloat(0.2f));
-            AddExposedField("diffuseColor", new SFColor(0.8f, 0.8f, 0.8f));
-            AddExposedField("emissiveColor", new SFColor(0, 0, 0));
-            AddExposedField("shininess", new SFFloat(0.2f));
-            AddExposedField("specularColor", new SFColor(0, 0, 0));
-            AddExposedField("transparency", new SFFloat(0));
+            AddExposedField("ambientIntensity", _ambientIntensityNode);
+            AddExposedField("diffuseColor", _diffuseColorNode);
+            AddExposedField("emissiveColor", _emissiveColorNode);
+            AddExposedField("shininess", _shininessNode);
+            AddExposedField("specularColor", _specularColorNode);
+            AddExposedField("transparency", _transparencyNode);
         }
 
-        public SFFloat AmbientIntensity {
-            get { return GetExposedField("ambientIntensity") as SFFloat;}
+        public float AmbientIntensity {
+            get {
+                return _ambientIntensityNode.Value;
+            }
+            set {
+                if (_ambientIntensityNode.Value != value) {
+                    _ambientIntensityNode.Value = value;
+                    var handler = AmbientIntensityChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
 
         public SFColor DiffuseColor {
-            get { return GetExposedField("diffuseColor") as SFColor; }
+            get {
+                return _diffuseColorNode;
+            }
+            set {
+                if (_diffuseColorNode != value) {
+                    _diffuseColorNode = value;
+                    var handler = DiffuseColorChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
 
         public SFColor EmissiveColor {
-            get { return GetExposedField("emissiveColor") as SFColor; }
+            get {
+                return _emissiveColorNode;
+            }
+            set {
+                if (_emissiveColorNode != value) {
+                    _emissiveColorNode = value;
+                    var handler = EmissiveColorChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
 
-        public SFFloat Shininess {
-            get { return GetExposedField("shininess") as SFFloat; }
+        public float Shininess {
+            get {
+                return _shininessNode.Value;
+            }
+            set {
+                if (_shininessNode.Value != value) {
+                    _shininessNode.Value = value;
+                    var handler = ShininessChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
 
         public SFColor SpecularColor {
-            get { return GetExposedField("specularColor") as SFColor; }
+            get {
+                return _specularColorNode;
+            }
+            set {
+                if (_specularColorNode != value) {
+                    _specularColorNode = value;
+                    var handler = SpecularColorChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
 
-        public SFFloat Transparency {
-            get { return GetExposedField("transparency") as SFFloat; }
+        public float Transparency {
+            get {
+                return _transparencyNode.Value;
+            }
+            set {
+                if (_transparencyNode.Value != value) {
+                    _transparencyNode.Value = value;
+                    var handler = TransparencyChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
+
+        public event VrmlEventHandler AmbientIntensityChanged;
+        public event VrmlEventHandler DiffuseColorChanged;
+        public event VrmlEventHandler EmissiveColorChanged;
+        public event VrmlEventHandler ShininessChanged;
+        public event VrmlEventHandler SpecularColorChanged;
+        public event VrmlEventHandler TransparencyChanged;
 
         protected override BaseNode CreateInstance() {
             return new MaterialNode();
@@ -52,6 +132,17 @@ namespace Graph3D.Vrml.Nodes.Appearance {
 
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
+        }
+
+        public override BaseNode Clone() {
+            return new MaterialNode {
+                AmbientIntensity = AmbientIntensity,
+                DiffuseColor = DiffuseColor,
+                EmissiveColor = EmissiveColor,
+                Shininess = Shininess,
+                SpecularColor = SpecularColor,
+                Transparency = Transparency
+            };
         }
 
     }

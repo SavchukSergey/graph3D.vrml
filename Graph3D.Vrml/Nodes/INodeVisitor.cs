@@ -69,6 +69,8 @@ namespace Graph3D.Vrml.Nodes {
         void Visit(SphereNode node);
 
         void Visit(TextureCoordinateNode node);
+        
+        void Visit(TextureTransformNode node);
 
         void Visit(TimeSensorNode node);
 

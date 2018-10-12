@@ -42,6 +42,7 @@ namespace Graph3D.Vrml.Parser {
             builtin["Shape"] = new ShapeNode();
             builtin["Sphere"] = new SphereNode();
             builtin["TextureCoordinate"] = new TextureCoordinateNode();
+            builtin["TextureTransform"] = new TextureTransformNode();
             builtin["TimeSensor"] = new TimeSensorNode();
             builtin["Transform"] = new TransformNode();
             builtin["Viewpoint"] = new ViewpointNode();
