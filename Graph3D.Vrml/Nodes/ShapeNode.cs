@@ -1,4 +1,6 @@
 ﻿using Graph3D.Vrml.Fields;
+using Graph3D.Vrml.Nodes.Appearance;
+using Graph3D.Vrml.Nodes.Geometry;
 
 namespace Graph3D.Vrml.Nodes {
     /// <summary>
@@ -9,18 +11,46 @@ namespace Graph3D.Vrml.Nodes {
     /// </summary>
     public class ShapeNode : Node, IChildNode {
 
+        private readonly SFNode _appearanceNode = new SFNode();
+        private readonly SFNode _geometryNode = new SFNode();
+
         public ShapeNode() {
-            AddExposedField("appearance", new SFNode());
-            AddExposedField("geometry", new SFNode());
+            AddExposedField("appearance", _appearanceNode);
+            AddExposedField("geometry", _geometryNode);
         }
 
-        public SFNode Appearance {
-            get { return GetExposedField("appearance") as SFNode; }
+        public AppearanceNode Appearance {
+            get {
+                return _appearanceNode.Node as AppearanceNode;
+            }
+            set {
+                if (_appearanceNode.Node != value) {
+                    _appearanceNode.Node = value;
+                    var handler = AppearanceChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
 
-        public SFNode Geometry {
-            get { return GetExposedField("geometry") as SFNode; }
+        public GeometryNode Geometry {
+            get {
+                return _geometryNode.Node as GeometryNode;
+            }
+            set {
+                if (_geometryNode.Node != value) {
+                    _geometryNode.Node = value;
+                    var handler = GeometryChanged;
+                    if (handler != null) {
+                        handler(this);
+                    }
+                }
+            }
         }
+
+        public event VrmlEventHandler AppearanceChanged;
+        public event VrmlEventHandler GeometryChanged;
 
         protected override BaseNode CreateInstance() {
             return new ShapeNode();
@@ -28,6 +58,13 @@ namespace Graph3D.Vrml.Nodes {
 
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
+        }
+
+        public override BaseNode Clone() {
+            return new ShapeNode {
+                Appearance = Appearance?.Clone() as AppearanceNode,
+                Geometry = Geometry?.Clone() as GeometryNode
+            };
         }
 
     }

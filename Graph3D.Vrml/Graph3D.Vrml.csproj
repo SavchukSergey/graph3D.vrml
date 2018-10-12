@@ -5,7 +5,7 @@
     <RepositoryUrl>https://github.com/SavchukSergey/graph3D.vrml</RepositoryUrl>
     <Description>Vrml parser</Description>
     <PackageTags>VRML</PackageTags>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
   </PropertyGroup>
   
 </Project>

@@ -1,13 +1,12 @@
 using System.IO;
 using Graph3D.Vrml.Nodes;
-using Graph3D.Vrml.Nodes.Geometry;
 using Graph3D.Vrml.Parser;
 using Graph3D.Vrml.Tokenizer;
 using NUnit.Framework;
 
-namespace Graph3D.Vrml.Test.Parser.Nodes.Geometry {
+namespace Graph3D.Vrml.Test.Parser.Nodes {
     [TestFixture]
-    public class SphereNodeTest {
+    public class ShapeNodeTest {
 
         [Test]
         public void ParseTest() {
@@ -17,13 +16,18 @@ Shape {
     geometry Sphere {
         radius 2
     }
+    appearance Appearance {
+        material NULL
+        texture NULL
+        textureTransform NULL
+    }
 }")));
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var sphere = (scene.Root.Children[0] as ShapeNode).Geometry as SphereNode;
-            Assert.AreEqual(2f, sphere.Radius.Value);
-
+            var shape = scene.Root.Children[0] as ShapeNode;
+            Assert.IsNotNull(shape.Geometry);
+            Assert.IsNotNull(shape.Appearance);
         }
     }
 }

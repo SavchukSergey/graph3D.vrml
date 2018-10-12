@@ -70,6 +70,7 @@ namespace Graph3D.Vrml.Parser {
             VRML97Token token = _context.PeekNextToken();
             switch (token.Text) {
                 case "NULL":
+                    _context.ReadNextToken();
                     field.Node = null;
                     break;
                 default:
@@ -171,7 +172,7 @@ namespace Graph3D.Vrml.Parser {
             int width = _context.ReadInt32();
             int height = _context.ReadInt32();
             int components = _context.ReadInt32();
-            byte[, ,] value = new byte[height, width, components];
+            byte[,,] value = new byte[height, width, components];
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     uint pixel = _context.ReadHexaDecimal();
