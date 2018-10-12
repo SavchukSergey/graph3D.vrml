@@ -5,11 +5,7 @@
     <RepositoryUrl>https://github.com/SavchukSergey/graph3D.vrml</RepositoryUrl>
     <Description>Vrml parser</Description>
     <PackageTags>VRML</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
-    <Reference Include="System" />
-  </ItemGroup>
-
 </Project>
