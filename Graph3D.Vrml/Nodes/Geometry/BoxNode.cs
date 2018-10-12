@@ -9,10 +9,10 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class BoxNode : GeometryNode {
 
         public BoxNode() {
-            AddField("size", new SFVec3f(2, 2, 2));
+            AddField("size", Size);
         }
 
-        public SFVec3f Size => GetField("size") as SFVec3f;
+        public SFVec3f Size { get; } = new SFVec3f(2, 2, 2);
 
         protected override BaseNode CreateInstance() {
             return new BoxNode();
@@ -20,6 +20,16 @@ namespace Graph3D.Vrml.Nodes.Geometry {
 
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
+        }
+
+        public override BaseNode Clone() {
+            return new BoxNode {
+                Size = {
+                    X = Size.X,
+                    Y = Size.Y,
+                    Z = Size.Z
+                }
+            };
         }
 
     }

@@ -4,9 +4,9 @@ namespace Graph3D.Vrml {
     public class VrmlScene {
         
         public VrmlScene() {
-            root.name = "SCENEGRAPH";
+            Root.Name = "SCENEGRAPH";
         }
 
-        public SceneGraphNode root = new SceneGraphNode();
+        public SceneGraphNode Root = new SceneGraphNode();
     }
 }

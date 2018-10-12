@@ -5,18 +5,18 @@ using Graph3D.Vrml.Tokenizer;
 namespace Graph3D.Vrml.Parser {
     public class FieldParser : IFieldVisitor {
 
-        private readonly ParserContext context;
+        private readonly ParserContext _context;
 
-        private readonly Action<ParserContext> nodeStatementParser;
+        private readonly Action<ParserContext> _nodeStatementParser;
 
         public FieldParser(ParserContext context, Action<ParserContext> nodeStatementParser) {
-            this.context = context;
-            this.nodeStatementParser = nodeStatementParser;
+            _context = context;
+            _nodeStatementParser = nodeStatementParser;
         }
 
 
-        public void visit(SFBool field) {
-            string value = context.ReadNextToken().Text;
+        public void Visit(SFBool field) {
+            string value = _context.ReadNextToken().Text;
             switch (value) {
                 case "TRUE":
                     field.Value = true;
@@ -28,153 +28,153 @@ namespace Graph3D.Vrml.Parser {
 
         }
 
-        public void visit(SFInt32 field) {
-            field.Value = context.ReadInt32();
+        public void Visit(SFInt32 field) {
+            field.Value = _context.ReadInt32();
         }
 
-        public void visit(SFFloat field) {
-            field.Value = context.ReadFloat();
+        public void Visit(SFFloat field) {
+            field.Value = _context.ReadFloat();
         }
 
-        public void visit(SFVec2f field) {
-            field.X = context.ReadFloat();
-            field.Y = context.ReadFloat();
+        public void Visit(SFVec2f field) {
+            field.X = _context.ReadFloat();
+            field.Y = _context.ReadFloat();
         }
 
-        public void visit(SFVec3f field) {
-            field.x = context.ReadFloat();
-            field.y = context.ReadFloat();
-            field.z = context.ReadFloat();
-        }
-
-
-        public void visit(SFRotation field) {
-            field.X = context.ReadFloat();
-            field.Y = context.ReadFloat();
-            field.Z = context.ReadFloat();
-            field.Angle = context.ReadFloat();
-        }
-
-        public void visit(SFString field) {
-            field.Value = context.ReadString();
-        }
-
-        public void visit(SFColor field) {
-            field.Red = context.ReadFloat();
-            field.Green = context.ReadFloat();
-            field.Blue = context.ReadFloat();
+        public void Visit(SFVec3f field) {
+            field.X = _context.ReadFloat();
+            field.Y = _context.ReadFloat();
+            field.Z = _context.ReadFloat();
         }
 
 
-        public void visit(SFNode field) {
-            VRML97Token token = context.PeekNextToken();
+        public void Visit(SFRotation field) {
+            field.X = _context.ReadFloat();
+            field.Y = _context.ReadFloat();
+            field.Z = _context.ReadFloat();
+            field.Angle = _context.ReadFloat();
+        }
+
+        public void Visit(SFString field) {
+            field.Value = _context.ReadString();
+        }
+
+        public void Visit(SFColor field) {
+            field.Red = _context.ReadFloat();
+            field.Green = _context.ReadFloat();
+            field.Blue = _context.ReadFloat();
+        }
+
+
+        public void Visit(SFNode field) {
+            VRML97Token token = _context.PeekNextToken();
             switch (token.Text) {
                 case "NULL":
                     field.Node = null;
                     break;
                 default:
-                    context.PushNodeContainer(field);
-                    nodeStatementParser(context);
-                    context.PopNodeContainer();
+                    _context.PushNodeContainer(field);
+                    _nodeStatementParser(_context);
+                    _context.PopNodeContainer();
                     break;
             }
         }
 
-        public void visit(MFNode field) {
-            field.clearValues();
-            context.PushNodeContainer(field);
-            ParseMField(nodeStatementParser);
-            context.PopNodeContainer();
+        public void Visit(MFNode field) {
+            field.ClearValues();
+            _context.PushNodeContainer(field);
+            ParseMField(_nodeStatementParser);
+            _context.PopNodeContainer();
         }
 
-        public void visit(MFVec2f field) {
-            field.clearValues();
+        public void Visit(MFVec2f field) {
+            field.ClearValues();
             ParseMField((subcontext) => {
                 var child = new SFVec2f();
-                this.visit(child);
+                this.Visit(child);
                 field.AppendValue(child);
             });
         }
 
-        public void visit(MFVec3f field) {
-            field.clearValues();
+        public void Visit(MFVec3f field) {
+            field.ClearValues();
             ParseMField((subcontext) => {
                 var child = new SFVec3f();
-                this.visit(child);
+                this.Visit(child);
                 field.AppendValue(child);
             });
         }
 
-        public void visit(MFInt32 field) {
-            field.clearValues();
+        public void Visit(MFInt32 field) {
+            field.ClearValues();
             ParseMField((subcontext) => {
                 var child = new SFInt32();
-                this.visit(child);
+                this.Visit(child);
                 field.AppendValue(child);
             });
         }
 
-        public void visit(MFFloat field) {
-            field.clearValues();
+        public void Visit(MFFloat field) {
+            field.ClearValues();
             ParseMField((subcontext) => {
                 var child = new SFFloat();
-                this.visit(child);
+                this.Visit(child);
                 field.AppendValue(child);
             });
         }
 
-        public void visit(MFColor field) {
-            field.clearValues();
+        public void Visit(MFColor field) {
+            field.ClearValues();
             ParseMField((subcontext) => {
                 var child = new SFColor();
-                this.visit(child);
+                this.Visit(child);
                 field.AppendValue(child);
             });
         }
 
-        public void visit(MFString field) {
-            field.clearValues();
+        public void Visit(MFString field) {
+            field.ClearValues();
             ParseMField(subcontext => {
                 var child = new SFString();
-                visit(child);
+                Visit(child);
                 field.AppendValue(child);
             });
         }
 
-        public void visit(MFRotation field) {
-            field.clearValues();
+        public void Visit(MFRotation field) {
+            field.ClearValues();
             ParseMField((subcontext) => {
                 var child = new SFRotation();
-                this.visit(child);
+                this.Visit(child);
                 field.AppendValue(child);
             });
         }
 
         protected virtual void ParseMField(Action<ParserContext> itemParser) {
-            VRML97Token next = context.PeekNextToken();
+            VRML97Token next = _context.PeekNextToken();
             if (next.Type == VRML97TokenType.OpenBracket) {
-                next = context.ReadNextToken();
+                next = _context.ReadNextToken();
                 while (true) {
-                    next = context.PeekNextToken();
+                    next = _context.PeekNextToken();
                     if (next.Type == VRML97TokenType.CloseBracket) break;
-                    itemParser(context);
+                    itemParser(_context);
                 }
-                next = context.ReadNextToken();
+                next = _context.ReadNextToken();
             } else {
-                itemParser(context);
+                itemParser(_context);
             }
         }
 
 
 
-        public void visit(SFImage field) {
-            int width = context.ReadInt32();
-            int height = context.ReadInt32();
-            int components = context.ReadInt32();
+        public void Visit(SFImage field) {
+            int width = _context.ReadInt32();
+            int height = _context.ReadInt32();
+            int components = _context.ReadInt32();
             byte[, ,] value = new byte[height, width, components];
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    uint pixel = context.ReadHexaDecimal();
+                    uint pixel = _context.ReadHexaDecimal();
                     switch (components) {
                         case 1:
                             value[height - y - 1, x, 0] = (byte)(pixel & 0xff);
@@ -200,8 +200,8 @@ namespace Graph3D.Vrml.Parser {
             field.Value = value;
         }
 
-        public void visit(SFTime field) {
-            field.Value = context.ReadDouble();
+        public void Visit(SFTime field) {
+            field.Value = _context.ReadDouble();
         }
 
     }

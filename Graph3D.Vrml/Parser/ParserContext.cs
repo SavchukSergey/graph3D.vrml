@@ -192,8 +192,8 @@ namespace Graph3D.Vrml.Parser {
 
         public BaseNode CreateNode(string nodeTypeId, string nodeNameId) {
             var node = _nodeFactory.CreateNode(nodeTypeId, nodeNameId);
-            if (!string.IsNullOrEmpty(node.name)) {
-                namedNodes[node.name] = node;
+            if (!string.IsNullOrEmpty(node.Name)) {
+                namedNodes[node.Name] = node;
             }
             return node;
         }

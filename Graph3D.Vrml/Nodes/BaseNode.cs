@@ -10,7 +10,7 @@ namespace Graph3D.Vrml.Nodes {
         protected BaseNode() {
         }
 
-        public string name { get; set; }
+        public string Name { get; set; }
 
         public BaseNode Parent { get; set; }
 
@@ -65,7 +65,7 @@ namespace Graph3D.Vrml.Nodes {
 
         public abstract void AcceptVisitor(INodeVisitor visitor);
 
-        public BaseNode Clone() {
+        public virtual BaseNode Clone() {
             var clone = CreateInstance();
             foreach (var key in _exposedFields.Keys) {
                 Field field = _exposedFields[key];
@@ -79,7 +79,7 @@ namespace Graph3D.Vrml.Nodes {
                 Field field = _eventOuts[key];
                 clone._eventOuts[key] = field.Clone();
             }
-            clone.name = name;
+            clone.Name = Name;
             return clone;
         }
 

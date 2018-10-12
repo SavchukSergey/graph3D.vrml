@@ -54,19 +54,19 @@ namespace Graph3D.Vrml.Parser {
         public virtual BaseNode CreateNode(string nodeTypeName, string nodeName) {
             if (builtin.ContainsKey(nodeTypeName)) {
                 var node = builtin[nodeTypeName].Clone();
-                node.name = nodeName;
+                node.Name = nodeName;
                 return node;
             }
             if (userdefined.ContainsKey(nodeTypeName)) {
                 BaseNode node = userdefined[nodeTypeName].Clone();
-                node.name = nodeName;
+                node.Name = nodeName;
                 return node;
             }
             throw new InvalidVRMLSyntaxException("Couldn't create node: " + nodeTypeName);
         }
 
         public void AddPrototype(BaseNode proto) {
-            userdefined[proto.name] = proto;
+            userdefined[proto.Name] = proto;
         }
 
     }

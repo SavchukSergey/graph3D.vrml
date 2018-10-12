@@ -13,7 +13,7 @@ namespace Graph3D.Vrml.Fields {
         public BaseNode Node { get; set; }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
         public override Field Clone() {

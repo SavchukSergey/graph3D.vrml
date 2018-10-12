@@ -31,13 +31,13 @@ namespace Graph3D.Vrml.Fields {
             set { _values[index] = value; }
         }
 
-        public virtual int length => _values.Count;
+        public virtual int Length => _values.Count;
 
         public virtual void AppendValue(T value) {
             _values.Add(value);
         }
 
-        public virtual void clearValues() {
+        public virtual void ClearValues() {
             _values.Clear();
         }
 

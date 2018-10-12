@@ -12,25 +12,25 @@
         }
 
         private float _x;
-        public float x {
+        public float X {
             get { return _x; }
             set { _x = value; }
         }
 
         private float _y;
-        public float y {
+        public float Y {
             get { return _y; }
             set { _y = value; }
         }
 
         private float _z;
-        public float z {
+        public float Z {
             get { return _z; }
             set { _z = value; }
         }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
         public override Field Clone() {

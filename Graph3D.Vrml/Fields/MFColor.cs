@@ -2,7 +2,7 @@
     public class MFColor : MField<SFColor> {
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
         public override Field Clone() {

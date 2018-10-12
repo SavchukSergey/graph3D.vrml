@@ -13,7 +13,7 @@
 
         private readonly FieldAccessType accessType;
 
-        public FieldAccessType getAccessType() {
+        public FieldAccessType GetAccessType() {
             return accessType;
         }
 

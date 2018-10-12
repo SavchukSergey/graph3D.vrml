@@ -1,51 +1,51 @@
 ﻿namespace Graph3D.Vrml.Fields {
     public interface IFieldVisitor {
 
-        void visit(SFBool field);
+        void Visit(SFBool field);
 
-        void visit(SFImage field);
-
-
-        void visit(SFFloat field);
-
-        void visit(MFFloat field);
+        void Visit(SFImage field);
 
 
-        void visit(SFString field);
+        void Visit(SFFloat field);
 
-        void visit(MFString field);
+        void Visit(MFFloat field);
+
+
+        void Visit(SFString field);
+
+        void Visit(MFString field);
         
         
-        void visit(SFInt32 field);
+        void Visit(SFInt32 field);
 
-        void visit(MFInt32 field);
+        void Visit(MFInt32 field);
 
 
-        void visit(SFVec2f field);
+        void Visit(SFVec2f field);
 
-        void visit(MFVec2f field);
+        void Visit(MFVec2f field);
         
         
-        void visit(SFVec3f field);
+        void Visit(SFVec3f field);
 
-        void visit(MFVec3f field);
+        void Visit(MFVec3f field);
 
         
-        void visit(SFColor field);
+        void Visit(SFColor field);
 
-        void visit(MFColor field);
-
-
-        void visit(SFNode field);
-
-        void visit(MFNode field);
+        void Visit(MFColor field);
 
 
-        void visit(SFRotation field);
+        void Visit(SFNode field);
 
-        void visit(MFRotation field);
+        void Visit(MFNode field);
 
-        void visit(SFTime field);
+
+        void Visit(SFRotation field);
+
+        void Visit(MFRotation field);
+
+        void Visit(SFTime field);
 
     }
 }

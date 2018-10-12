@@ -3,18 +3,16 @@
 namespace Graph3D.Vrml.Nodes.Geometry {
     /// <summary>
     /// Sphere { 
-    ///   field SFFloat radius  1    # (0,)
+    ///   field SFFloat radius  1
     /// }
     /// </summary>
     public class SphereNode : GeometryNode {
 
         public SphereNode() {
-            AddField("radius", new SFFloat(1));
+            AddField("radius", Radius);
         }
 
-        public SFFloat Radius {
-            get { return GetField("radius") as SFFloat; }
-        }
+        public SFFloat Radius { get; } = new SFFloat(1);
 
         protected override BaseNode CreateInstance() {
             return new SphereNode();
@@ -22,6 +20,14 @@ namespace Graph3D.Vrml.Nodes.Geometry {
 
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
+        }
+
+        public override BaseNode Clone() {
+            return new SphereNode {
+                Radius = {
+                    Value = Radius.Value
+                }
+            };
         }
 
     }

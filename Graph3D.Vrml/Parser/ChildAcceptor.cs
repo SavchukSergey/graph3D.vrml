@@ -13,79 +13,79 @@ namespace Graph3D.Vrml.Parser {
         
         #region IFieldVisitor Members
 
-        public void visit(SFBool field) {
+        public void Visit(SFBool field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFImage field) {
+        public void Visit(SFImage field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFFloat field) {
+        public void Visit(SFFloat field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFFloat field) {
+        public void Visit(MFFloat field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFString field) {
+        public void Visit(SFString field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFString field) {
+        public void Visit(MFString field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFInt32 field) {
+        public void Visit(SFInt32 field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFInt32 field) {
+        public void Visit(MFInt32 field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFVec2f field) {
+        public void Visit(SFVec2f field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFVec2f field) {
+        public void Visit(MFVec2f field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFVec3f field) {
+        public void Visit(SFVec3f field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFVec3f field) {
+        public void Visit(MFVec3f field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFColor field) {
+        public void Visit(SFColor field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFColor field) {
+        public void Visit(MFColor field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFNode field) {
+        public void Visit(SFNode field) {
             field.Node = _child;
         }
 
-        public void visit(MFNode field) {
+        public void Visit(MFNode field) {
             field.AppendValue(_child);
         }
 
-        public void visit(SFRotation field) {
+        public void Visit(SFRotation field) {
             throw new NotImplementedException();
         }
 
-        public void visit(MFRotation field) {
+        public void Visit(MFRotation field) {
             throw new NotImplementedException();
         }
 
-        public void visit(SFTime field) {
+        public void Visit(SFTime field) {
             throw new NotImplementedException();
         }
 

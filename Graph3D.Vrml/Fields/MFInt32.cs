@@ -2,7 +2,7 @@
     public class MFInt32 : MField<SFInt32> {
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
-            visitor.visit(this);
+            visitor.Visit(this);
         }
 
         public override Field Clone() {

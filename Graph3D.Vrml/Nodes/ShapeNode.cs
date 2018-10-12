@@ -29,5 +29,6 @@ namespace Graph3D.Vrml.Nodes {
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
         }
+
     }
 }
