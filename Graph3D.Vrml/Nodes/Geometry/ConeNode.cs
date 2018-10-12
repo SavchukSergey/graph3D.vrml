@@ -13,30 +13,30 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class ConeNode : GeometryNode {
 
         public ConeNode() {
-            addField("bottomRadius", new SFFloat(1));
-            addField("height", new SFFloat(2));
-            addField("side", new SFBool(true));
-            addField("bottom", new SFBool(true));
+            AddField("bottomRadius", new SFFloat(1));
+            AddField("height", new SFFloat(2));
+            AddField("side", new SFBool(true));
+            AddField("bottom", new SFBool(true));
         }
 
 
-        public SFFloat bottomRadius {
-            get { return getField("bottomRadius") as SFFloat; }
+        public SFFloat BottomRadius {
+            get { return GetField("bottomRadius") as SFFloat; }
         }
 
-        public SFFloat height {
-            get { return getField("height") as SFFloat; }
+        public SFFloat Height {
+            get { return GetField("height") as SFFloat; }
         }
 
-        public SFBool side {
-            get { return getField("side") as SFBool; }
+        public SFBool Side {
+            get { return GetField("side") as SFBool; }
         }
 
-        public SFBool bottom {
-            get { return getField("bottom") as SFBool; }
+        public SFBool Bottom {
+            get { return GetField("bottom") as SFBool; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ConeNode();
         }
 

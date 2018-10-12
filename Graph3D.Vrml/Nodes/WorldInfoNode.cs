@@ -4,11 +4,11 @@ namespace Graph3D.Vrml.Nodes {
     public class WorldInfoNode : BaseNode, IChildNode {
 
         public WorldInfoNode() {
-            addExposedField("info", new MFString());
-            addExposedField("title", new SFString());
+            AddExposedField("info", new MFString());
+            AddExposedField("title", new SFString());
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new WorldInfoNode();
         }
 

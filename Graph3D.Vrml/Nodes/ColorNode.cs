@@ -9,14 +9,14 @@ namespace Graph3D.Vrml.Nodes {
     public class ColorNode : Node {
 
         public ColorNode() {
-            addExposedField("color", new MFColor());
+            AddExposedField("color", new MFColor());
         }
 
-        public MFColor color {
+        public MFColor Color {
             get { return GetExposedField("color") as MFColor; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ColorNode();
         }
 

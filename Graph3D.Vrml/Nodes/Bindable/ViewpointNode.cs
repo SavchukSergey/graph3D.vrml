@@ -16,29 +16,29 @@ namespace Graph3D.Vrml.Nodes.Bindable {
     public class ViewpointNode : BindableNode, IChildNode {
 
         public ViewpointNode() {
-            addExposedField("fieldOfView", new SFFloat(0.785398f));
-            addExposedField("orientation", new SFRotation(0, 0, 1, 0));
-            addExposedField("position", new SFVec3f(0, 0, 10));
-            addField("description", new SFString());
+            AddExposedField("fieldOfView", new SFFloat(0.785398f));
+            AddExposedField("orientation", new SFRotation(0, 0, 1, 0));
+            AddExposedField("position", new SFVec3f(0, 0, 10));
+            AddField("description", new SFString());
         }
 
-        public SFVec3f position {
+        public SFVec3f Position {
             get { return GetExposedField("position") as SFVec3f; }
         }
 
-        public SFFloat fieldOfView {
+        public SFFloat FieldOfView {
             get { return GetExposedField("fieldOfView") as SFFloat; }
         }
 
-        public SFRotation orientation {
+        public SFRotation Orientation {
             get { return GetExposedField("orientation") as SFRotation; }
         }
 
-        public SFString description {
+        public SFString Description {
             get { return GetExposedField("description") as SFString; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ViewpointNode();
         }
 

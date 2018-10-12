@@ -14,39 +14,39 @@ namespace Graph3D.Vrml.Nodes.Appearance {
     public class MaterialNode : Node {
 
         public MaterialNode() {
-            addExposedField("ambientIntensity", new SFFloat(0.2f));
-            addExposedField("diffuseColor", new SFColor(0.8f, 0.8f, 0.8f));
-            addExposedField("emissiveColor", new SFColor(0, 0, 0));
-            addExposedField("shininess", new SFFloat(0.2f));
-            addExposedField("specularColor", new SFColor(0, 0, 0));
-            addExposedField("transparency", new SFFloat(0));
+            AddExposedField("ambientIntensity", new SFFloat(0.2f));
+            AddExposedField("diffuseColor", new SFColor(0.8f, 0.8f, 0.8f));
+            AddExposedField("emissiveColor", new SFColor(0, 0, 0));
+            AddExposedField("shininess", new SFFloat(0.2f));
+            AddExposedField("specularColor", new SFColor(0, 0, 0));
+            AddExposedField("transparency", new SFFloat(0));
         }
 
-        public SFFloat ambientIntensity {
+        public SFFloat AmbientIntensity {
             get { return GetExposedField("ambientIntensity") as SFFloat;}
         }
 
-        public SFColor diffuseColor {
+        public SFColor DiffuseColor {
             get { return GetExposedField("diffuseColor") as SFColor; }
         }
 
-        public SFColor emissiveColor {
+        public SFColor EmissiveColor {
             get { return GetExposedField("emissiveColor") as SFColor; }
         }
 
-        public SFFloat shininess {
+        public SFFloat Shininess {
             get { return GetExposedField("shininess") as SFFloat; }
         }
 
-        public SFColor specularColor {
+        public SFColor SpecularColor {
             get { return GetExposedField("specularColor") as SFColor; }
         }
 
-        public SFFloat transparency {
+        public SFFloat Transparency {
             get { return GetExposedField("transparency") as SFFloat; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new MaterialNode();
         }
 

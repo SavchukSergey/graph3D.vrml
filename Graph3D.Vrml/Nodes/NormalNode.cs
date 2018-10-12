@@ -9,14 +9,14 @@ namespace Graph3D.Vrml.Nodes {
     public class NormalNode : Node {
 
         public NormalNode() {
-            addExposedField("vector", new MFVec3f());
+            AddExposedField("vector", new MFVec3f());
         }
 
-        public MFVec3f vector {
+        public MFVec3f Vector {
             get { return GetExposedField("vector") as MFVec3f; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new NormalNode();
         }
 

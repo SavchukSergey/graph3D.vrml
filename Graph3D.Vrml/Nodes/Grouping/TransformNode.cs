@@ -18,30 +18,30 @@ namespace Graph3D.Vrml.Nodes.Grouping {
     public class TransformNode : GroupingNode, IChildNode {
 
         public TransformNode() {
-            addExposedField("center", new SFVec3f(0, 0, 0));
-            addExposedField("rotation", new SFRotation(0, 0, 1, 0));
-            addExposedField("scale", new SFVec3f(1, 1, 1));
-            addExposedField("scaleOrientation", new SFRotation(0, 0, 1, 0));
-            addExposedField("translation", new SFVec3f(0, 0, 0));
+            AddExposedField("center", new SFVec3f(0, 0, 0));
+            AddExposedField("rotation", new SFRotation(0, 0, 1, 0));
+            AddExposedField("scale", new SFVec3f(1, 1, 1));
+            AddExposedField("scaleOrientation", new SFRotation(0, 0, 1, 0));
+            AddExposedField("translation", new SFVec3f(0, 0, 0));
         }
 
-        public SFVec3f center {
+        public SFVec3f Center {
             get { return GetExposedField("center") as SFVec3f; }
         }
 
-        public SFRotation rotation {
+        public SFRotation Rotation {
             get { return GetExposedField("rotation") as SFRotation; }
         }
 
-        public SFVec3f scale {
+        public SFVec3f Scale {
             get { return GetExposedField("scale") as SFVec3f; }
         }
 
-        public SFRotation scaleOrientation {
+        public SFRotation ScaleOrientation {
             get { return GetExposedField("scaleOrientation") as SFRotation; }
         }
 
-        public SFVec3f translation {
+        public SFVec3f Translation {
             get { return GetExposedField("translation") as SFVec3f; }
         }
 
@@ -56,42 +56,42 @@ namespace Graph3D.Vrml.Nodes.Grouping {
             float[,] temp = null;
 
             temp = VrmlMath.GetUnitMatrix();
-            temp[0, 3] = -center.x;
-            temp[1, 3] = -center.y;
-            temp[2, 3] = -center.z;
+            temp[0, 3] = -Center.x;
+            temp[1, 3] = -Center.y;
+            temp[2, 3] = -Center.z;
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
-            temp = VrmlMath.GenerateRotationMatrix(scaleOrientation.X, scaleOrientation.Y, scaleOrientation.Z, -scaleOrientation.Angle);
-            VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
-
-            temp = VrmlMath.GetUnitMatrix();
-            temp[0, 0] = 1 / scale.x;
-            temp[1, 1] = 1 / scale.y;
-            temp[2, 2] = 1 / scale.z;
-            VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
-
-            temp = VrmlMath.GenerateRotationMatrix(scaleOrientation.X, scaleOrientation.Y, scaleOrientation.Z, scaleOrientation.Angle);
-            VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
-
-            temp = VrmlMath.GenerateRotationMatrix(rotation.X, rotation.Y, rotation.Z, rotation.Angle);
+            temp = VrmlMath.GenerateRotationMatrix(ScaleOrientation.X, ScaleOrientation.Y, ScaleOrientation.Z, -ScaleOrientation.Angle);
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
             temp = VrmlMath.GetUnitMatrix();
-            temp[0, 3] = center.x;
-            temp[1, 3] = center.y;
-            temp[2, 3] = center.z;
+            temp[0, 0] = 1 / Scale.x;
+            temp[1, 1] = 1 / Scale.y;
+            temp[2, 2] = 1 / Scale.z;
+            VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
+
+            temp = VrmlMath.GenerateRotationMatrix(ScaleOrientation.X, ScaleOrientation.Y, ScaleOrientation.Z, ScaleOrientation.Angle);
+            VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
+
+            temp = VrmlMath.GenerateRotationMatrix(Rotation.X, Rotation.Y, Rotation.Z, Rotation.Angle);
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
             temp = VrmlMath.GetUnitMatrix();
-            temp[0, 3] = translation.x;
-            temp[1, 3] = translation.y;
-            temp[2, 3] = translation.z;
+            temp[0, 3] = Center.x;
+            temp[1, 3] = Center.y;
+            temp[2, 3] = Center.z;
+            VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
+
+            temp = VrmlMath.GetUnitMatrix();
+            temp[0, 3] = Translation.x;
+            temp[1, 3] = Translation.y;
+            temp[2, 3] = Translation.z;
             VrmlMath.ConcatenateMatrixes(temp, matrix, matrix);
 
             return matrix;
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new TransformNode();
         }
 

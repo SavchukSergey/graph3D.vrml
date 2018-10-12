@@ -4,19 +4,19 @@ namespace Graph3D.Vrml.Nodes.Sensors {
     public class TimeSensorNode : SensorNode {
 
         public TimeSensorNode() {
-            addExposedField("cycleInterval", new SFTime(1));
-            addExposedField("loop", new SFBool(false));
+            AddExposedField("cycleInterval", new SFTime(1));
+            AddExposedField("loop", new SFBool(false));
         }
 
-        public SFTime cycleInterval {
+        public SFTime CycleInterval {
             get { return GetExposedField("cycleInterval") as SFTime; }
         }
 
-        public SFBool loop {
+        public SFBool Loop {
             get { return GetExposedField("loop") as SFBool; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new TimeSensorNode();
         }
 

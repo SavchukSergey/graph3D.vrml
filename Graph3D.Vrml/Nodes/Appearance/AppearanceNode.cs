@@ -11,24 +11,24 @@ namespace Graph3D.Vrml.Nodes.Appearance {
     public class AppearanceNode : Node {
 
         public AppearanceNode() {
-            addExposedField("material", new SFNode());
-            addExposedField("texture", new SFNode());
-            addExposedField("textureTransform", new SFNode());
+            AddExposedField("material", new SFNode());
+            AddExposedField("texture", new SFNode());
+            AddExposedField("textureTransform", new SFNode());
         }
 
-        public SFNode material {
+        public SFNode Material {
             get { return GetExposedField("material") as SFNode; }
         }
 
-        public SFNode texture {
+        public SFNode Texture {
             get { return GetExposedField("texture") as SFNode; }
         }
 
-        public SFNode textureTransform {
+        public SFNode TextureTransform {
             get { return GetExposedField("textureTransform") as SFNode; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new AppearanceNode();
         }
 

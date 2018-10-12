@@ -11,14 +11,14 @@ namespace Graph3D.Vrml.Nodes.Appearance.Texture {
     public class PixelTextureNode : TextureNode {
 
         public PixelTextureNode() {
-            addExposedField("image",  new SFImage());
+            AddExposedField("image",  new SFImage());
         }
 
         public SFImage Image {
             get { return GetExposedField("image") as SFImage; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new PixelTextureNode();
         }
 

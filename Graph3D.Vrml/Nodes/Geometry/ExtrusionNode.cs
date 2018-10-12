@@ -23,39 +23,39 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class ExtrusionNode : GeometryNode {
 
         public ExtrusionNode() {
-            addField("convex", new SFBool(true));
-            addField("creaseAngle", new SFFloat(0));
-            addField("crossSection", new MFVec2f(new SFVec2f(1, 1), new SFVec2f(1, -1) , new SFVec2f(-1, -1), new SFVec2f(-1, 1), new SFVec2f(1, 1)));
-            addField("endCap", new SFBool(true));
-            addField("scale", new MFVec2f(new SFVec2f(1, 1)));
-            addField("spine", new MFVec3f(new SFVec3f(0, 0, 0), new SFVec3f(0, 1, 0)));
+            AddField("convex", new SFBool(true));
+            AddField("creaseAngle", new SFFloat(0));
+            AddField("crossSection", new MFVec2f(new SFVec2f(1, 1), new SFVec2f(1, -1) , new SFVec2f(-1, -1), new SFVec2f(-1, 1), new SFVec2f(1, 1)));
+            AddField("endCap", new SFBool(true));
+            AddField("scale", new MFVec2f(new SFVec2f(1, 1)));
+            AddField("spine", new MFVec3f(new SFVec3f(0, 0, 0), new SFVec3f(0, 1, 0)));
         }
 
-        public SFBool convex {
-            get { return getField("convex") as SFBool; }
+        public SFBool Convex {
+            get { return GetField("convex") as SFBool; }
         }
 
-        public SFFloat creaseAngle {
-            get { return getField("creaseAngle") as SFFloat; }
+        public SFFloat CreaseAngle {
+            get { return GetField("creaseAngle") as SFFloat; }
         }
 
-        public MFVec2f crossSection {
-            get { return getField("crossSection") as MFVec2f; }
+        public MFVec2f CrossSection {
+            get { return GetField("crossSection") as MFVec2f; }
         }
 
-        public SFBool endCap {
-            get { return getField("endCap") as SFBool; }
+        public SFBool EndCap {
+            get { return GetField("endCap") as SFBool; }
         }
 
-        public MFVec2f scale {
-            get { return getField("scale") as MFVec2f; }
+        public MFVec2f Scale {
+            get { return GetField("scale") as MFVec2f; }
         }
 
-        public MFVec3f spine {
-            get { return getField("spine") as MFVec3f; }
+        public MFVec3f Spine {
+            get { return GetField("spine") as MFVec3f; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ExtrusionNode();
         }
 

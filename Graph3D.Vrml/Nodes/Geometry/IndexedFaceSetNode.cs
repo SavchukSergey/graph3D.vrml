@@ -26,80 +26,80 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class IndexedFaceSetNode : GeometryNode {
 
         public IndexedFaceSetNode() {
-            addExposedField("color", new SFNode());
-            addExposedField("coord", new SFNode());
-            addExposedField("normal", new SFNode());
-            addExposedField("texCoord", new SFNode());
+            AddExposedField("color", new SFNode());
+            AddExposedField("coord", new SFNode());
+            AddExposedField("normal", new SFNode());
+            AddExposedField("texCoord", new SFNode());
             
-            addField("ccw", new SFBool(true));
-            addField("colorIndex", new MFInt32());
-            addField("colorPerVertex", new SFBool(true));
-            addField("convex", new SFBool(true));
-            addField("coordIndex", new MFInt32());
-            addField("creaseAngle", new SFFloat(0));
-            addField("normalIndex", new MFInt32());
-            addField("normalPerVertex", new SFBool(true));
-            addField("solid", new SFBool(true));
-            addField("texCoordIndex", new MFInt32());
+            AddField("ccw", new SFBool(true));
+            AddField("colorIndex", new MFInt32());
+            AddField("colorPerVertex", new SFBool(true));
+            AddField("convex", new SFBool(true));
+            AddField("coordIndex", new MFInt32());
+            AddField("creaseAngle", new SFFloat(0));
+            AddField("normalIndex", new MFInt32());
+            AddField("normalPerVertex", new SFBool(true));
+            AddField("solid", new SFBool(true));
+            AddField("texCoordIndex", new MFInt32());
         }
 
-        public SFNode color {
+        public SFNode Color {
             get { return GetExposedField("color") as SFNode; }
         }
 
-        public SFNode coord {
+        public SFNode Coord {
             get { return GetExposedField("coord") as SFNode; }
         }
 
-        public SFNode normal {
+        public SFNode Normal {
             get { return GetExposedField("normal") as SFNode; }
         }
 
-        public SFNode texCoord {
+        public SFNode TexCoord {
             get { return GetExposedField("texCoord") as SFNode; }
         }
 
-        public SFBool ccw {
-            get { return getField("ccw") as SFBool; }
+        public SFBool Ccw {
+            get { return GetField("ccw") as SFBool; }
         }
 
-        public MFInt32 colorIndex {
-            get { return getField("colorIndex") as MFInt32; }
+        public MFInt32 ColorIndex {
+            get { return GetField("colorIndex") as MFInt32; }
         }
 
-        public SFBool colorPerVertex {
-            get { return getField("colorPerVertex") as SFBool; }
+        public SFBool ColorPerVertex {
+            get { return GetField("colorPerVertex") as SFBool; }
         }
 
-        public SFBool convex {
-            get { return getField("convex") as SFBool; }
+        public SFBool Convex {
+            get { return GetField("convex") as SFBool; }
         }
 
-        public MFInt32 coordIndex {
-            get { return getField("coordIndex") as MFInt32; }
+        public MFInt32 CoordIndex {
+            get { return GetField("coordIndex") as MFInt32; }
         }
 
-        public SFFloat creaseAngle {
-            get { return getField("creaseAngle") as SFFloat; }
+        public SFFloat CreaseAngle {
+            get { return GetField("creaseAngle") as SFFloat; }
         }
 
-        public MFInt32 normalIndex {
-            get { return getField("normalIndex") as MFInt32; }
+        public MFInt32 NormalIndex {
+            get { return GetField("normalIndex") as MFInt32; }
         }
 
-        public SFBool normalPerVertex {
-            get { return getField("normalPerVertex") as SFBool; }
+        public SFBool NormalPerVertex {
+            get { return GetField("normalPerVertex") as SFBool; }
         }
 
-        public SFBool solid {
-            get { return getField("solid") as SFBool; }
+        public SFBool Solid {
+            get { return GetField("solid") as SFBool; }
         }
 
-        public MFInt32 texCordIndex {
-            get { return getField("texCordIndex") as MFInt32; }
+        public MFInt32 TexCordIndex {
+            get { return GetField("texCordIndex") as MFInt32; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new IndexedFaceSetNode();
         }
 

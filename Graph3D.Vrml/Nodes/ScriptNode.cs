@@ -4,7 +4,7 @@
         public ScriptNode() {
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ScriptNode();
         }
 

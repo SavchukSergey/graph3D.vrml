@@ -15,19 +15,19 @@ namespace Graph3D.Vrml.Nodes.Bindable {
     public class NavigationInfoNode : BindableNode, IChildNode {
 
         public NavigationInfoNode() {
-            addExposedField("headlight", new SFBool(true));
-            addExposedField("type", new MFString("WALK", "ANY"));
+            AddExposedField("headlight", new SFBool(true));
+            AddExposedField("type", new MFString("WALK", "ANY"));
         }
 
-        public SFBool headlight {
+        public SFBool Headlight {
             get { return GetExposedField("headlight") as SFBool; }
         }
 
-        public MFString type {
+        public MFString Type {
             get { return GetExposedField("type") as MFString; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new NavigationInfoNode();
         }
 

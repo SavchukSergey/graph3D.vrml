@@ -9,14 +9,14 @@ namespace Graph3D.Vrml.Nodes {
     public class CoordinateNode : Node {
 
         public CoordinateNode() {
-            addExposedField("point", new MFVec3f());
+            AddExposedField("point", new MFVec3f());
         }
 
-        public MFVec3f point {
+        public MFVec3f Point {
             get { return GetExposedField("point") as MFVec3f; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new CoordinateNode();
         }
 

@@ -9,14 +9,14 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class SphereNode : GeometryNode {
 
         public SphereNode() {
-            addField("radius", new SFFloat(1));
+            AddField("radius", new SFFloat(1));
         }
 
-        public SFFloat radius {
-            get { return getField("radius") as SFFloat; }
+        public SFFloat Radius {
+            get { return GetField("radius") as SFFloat; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new SphereNode();
         }
 

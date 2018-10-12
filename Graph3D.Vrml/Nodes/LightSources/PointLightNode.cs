@@ -15,24 +15,24 @@ namespace Graph3D.Vrml.Nodes.LightSources {
     public class PointLightNode : LightSourceNode {
 
         public PointLightNode() {
-            addExposedField("attenuation", new SFVec3f(1, 0, 0));
-            addExposedField("location", new SFVec3f(0, 0, 0));
-            addExposedField("radius", new SFFloat(1));
+            AddExposedField("attenuation", new SFVec3f(1, 0, 0));
+            AddExposedField("location", new SFVec3f(0, 0, 0));
+            AddExposedField("radius", new SFFloat(1));
         }
         
-        public SFVec3f attenuation {
+        public SFVec3f Attenuation {
             get { return GetExposedField("attenuation") as SFVec3f; }
         }
 
-        public SFVec3f location {
+        public SFVec3f Location {
             get { return GetExposedField("location") as SFVec3f; }
         }
 
-        public SFFloat radius {
+        public SFFloat Radius {
             get { return GetExposedField("radius") as SFFloat; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new PointLightNode();
         }
 

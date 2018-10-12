@@ -5,22 +5,22 @@ namespace Graph3D.Vrml.Nodes {
     public class ProtoNode : GroupingNode {
         
         public new void AddField(string fieldName, Field field) {
-            base.addField(fieldName, field);
+            base.AddField(fieldName, field);
         }
 
-        public new void addEventIn(string eventInName, Field field) {
-            base.addEventIn(eventInName, field);
+        public new void AddEventIn(string eventInName, Field field) {
+            base.AddEventIn(eventInName, field);
         }
         
-        public new void addEventOut(string eventOutName, Field field) {
-            base.addEventOut(eventOutName, field);
+        public new void AddEventOut(string eventOutName, Field field) {
+            base.AddEventOut(eventOutName, field);
         }
 
         public new void AddExposedField(string exposedFieldName, Field field) {
-            base.addExposedField(exposedFieldName, field);
+            base.AddExposedField(exposedFieldName, field);
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ProtoNode();
         }
 

@@ -19,7 +19,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public void Parse(VrmlScene scene) {
-            Parse(scene.root.children);
+            Parse(scene.root.Children);
         }
 
         public void Parse(MFNode container) {
@@ -159,7 +159,7 @@ namespace Graph3D.Vrml.Parser {
             var proto = new ProtoNode {
                 name = ParseNodeNameId(context)
             };
-            context.PushNodeContainer(proto.children);
+            context.PushNodeContainer(proto.Children);
             context.PushFieldContainer(proto);
             ParseInterfaceDeclarations(context);
             if (context.ReadNextToken().Type != VRML97TokenType.OpenBrace) {

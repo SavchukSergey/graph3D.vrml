@@ -20,59 +20,59 @@ namespace Graph3D.Vrml.Nodes.Bindable {
     public class BackgroundNode : BindableNode {
 
         public BackgroundNode() {
-            addExposedField("groundColor", new MFColor());
-            addExposedField("groundAngle", new MFFloat());
-            addExposedField("backUrl", new MFString());
-            addExposedField("bottomUrl", new MFString());
-            addExposedField("frontUrl", new MFString());
-            addExposedField("leftUrl", new MFString());
-            addExposedField("rightUrl", new MFString());
-            addExposedField("topUrl", new MFString());
-            addExposedField("skyAngle", new MFFloat());
-            addExposedField("skyColor", new MFColor());
+            AddExposedField("groundColor", new MFColor());
+            AddExposedField("groundAngle", new MFFloat());
+            AddExposedField("backUrl", new MFString());
+            AddExposedField("bottomUrl", new MFString());
+            AddExposedField("frontUrl", new MFString());
+            AddExposedField("leftUrl", new MFString());
+            AddExposedField("rightUrl", new MFString());
+            AddExposedField("topUrl", new MFString());
+            AddExposedField("skyAngle", new MFFloat());
+            AddExposedField("skyColor", new MFColor());
         }
 
-        public MFColor groundColor {
+        public MFColor GroundColor {
             get { return GetExposedField("groundColor") as MFColor; }
         }
 
-        public MFFloat groundAngle {
+        public MFFloat GroundAngle {
             get { return GetExposedField("groundAngle") as MFFloat; }
         }
 
-        public MFString backUrl {
+        public MFString BackUrl {
             get { return GetExposedField("backUrl") as MFString; }
         }
 
-        public MFString bottomUrl {
+        public MFString BottomUrl {
             get { return GetExposedField("bottomUrl") as MFString; }
         }
 
-        public MFString frontUrl {
+        public MFString FrontUrl {
             get { return GetExposedField("frontUrl") as MFString; }
         }
 
-        public MFString leftUrl {
+        public MFString LeftUrl {
             get { return GetExposedField("leftUrl") as MFString; }
         }
 
-        public MFString rightUrl {
+        public MFString RightUrl {
             get { return GetExposedField("rightUrl") as MFString; }
         }
 
-        public MFString topUrl {
+        public MFString TopUrl {
             get { return GetExposedField("topUrl") as MFString; }
         }
 
-        public MFColor skyColor {
+        public MFColor SkyColor {
             get { return GetExposedField("skyColor") as MFColor; }
         }
 
-        public MFFloat skyAngle {
+        public MFFloat SkyAngle {
             get { return GetExposedField("skyAngle") as MFFloat; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new BackgroundNode();
         }
 

@@ -4,7 +4,6 @@ using System.IO;
 namespace Graph3D.Vrml.Tokenizer {
     public class Vrml97Tokenizer : IDisposable {
 
-        private string header;
         private readonly TokenizerContext context;
         private VrmlTokenizerState currentState;
 

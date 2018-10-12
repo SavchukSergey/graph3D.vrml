@@ -6,7 +6,7 @@ namespace Graph3D.Vrml.Nodes.Interpolation {
         public CoordinateInterpolatorNode() {
         }
         
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new CoordinateInterpolatorNode();
         }
 

@@ -6,7 +6,7 @@ namespace Graph3D.Vrml.Nodes.Interpolation {
         public OrientationInterpolatorNode() {
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new OrientationInterpolatorNode();
         }
 

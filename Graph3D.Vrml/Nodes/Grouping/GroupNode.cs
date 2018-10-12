@@ -13,7 +13,7 @@
         public GroupNode() {
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new GroupNode();
         }
 

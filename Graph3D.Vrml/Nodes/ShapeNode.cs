@@ -10,19 +10,19 @@ namespace Graph3D.Vrml.Nodes {
     public class ShapeNode : Node, IChildNode {
 
         public ShapeNode() {
-            addExposedField("appearance", new SFNode());
-            addExposedField("geometry", new SFNode());
+            AddExposedField("appearance", new SFNode());
+            AddExposedField("geometry", new SFNode());
         }
 
-        public SFNode appearance {
+        public SFNode Appearance {
             get { return GetExposedField("appearance") as SFNode; }
         }
 
-        public SFNode geometry {
+        public SFNode Geometry {
             get { return GetExposedField("geometry") as SFNode; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ShapeNode();
         }
 

@@ -15,35 +15,35 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class IndexedLineSetNode : GeometryNode {
 
         public IndexedLineSetNode() {
-            addExposedField("color", new SFNode());
-            addExposedField("coord", new SFNode());
+            AddExposedField("color", new SFNode());
+            AddExposedField("coord", new SFNode());
 
-            addField("colorIndex", new MFInt32());
-            addField("colorPerVertex", new SFBool(true));
-            addField("coordIndex", new MFInt32());
+            AddField("colorIndex", new MFInt32());
+            AddField("colorPerVertex", new SFBool(true));
+            AddField("coordIndex", new MFInt32());
         }
 
-        public SFNode color {
+        public SFNode Color {
             get { return GetExposedField("color") as SFNode; }
         }
 
-        public SFNode coord {
+        public SFNode Coord {
             get { return GetExposedField("coord") as SFNode; }
         }
 
-        public MFInt32 colorIndex {
-            get { return getField("colorIndex") as MFInt32; }
+        public MFInt32 ColorIndex {
+            get { return GetField("colorIndex") as MFInt32; }
         }
 
-        public SFBool colorPerVertex {
-            get { return getField("colorPerVertex") as SFBool; }
+        public SFBool ColorPerVertex {
+            get { return GetField("colorPerVertex") as SFBool; }
         }
 
-        public MFInt32 coordIndex {
-            get { return getField("coordIndex") as MFInt32; }
+        public MFInt32 CoordIndex {
+            get { return GetField("coordIndex") as MFInt32; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new IndexedLineSetNode();
         }
 

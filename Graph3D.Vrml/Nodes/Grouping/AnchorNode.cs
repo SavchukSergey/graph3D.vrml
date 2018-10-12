@@ -5,7 +5,7 @@
         public AnchorNode() {
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new AnchorNode();
         }
 

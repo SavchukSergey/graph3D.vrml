@@ -17,12 +17,12 @@ namespace Graph3D.Vrml.Nodes {
     public class CollisionNode : GroupingNode, IChildNode {
 
         public CollisionNode() {
-            addExposedField("collide", new SFBool(true));
-            addField("proxy", new SFNode());
-            addEventOut("collideTime", new SFTime());
+            AddExposedField("collide", new SFBool(true));
+            AddField("proxy", new SFNode());
+            AddEventOut("collideTime", new SFTime());
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new CollisionNode();
         }
 
@@ -30,16 +30,16 @@ namespace Graph3D.Vrml.Nodes {
             visitor.Visit(this);
         }
 
-        public SFBool collide {
+        public SFBool Collide {
             get { return GetExposedField("collide") as SFBool; }
         }
 
-        public SFNode proxy {
-            get { return getField("proxy") as SFNode; }
+        public SFNode Proxy {
+            get { return GetField("proxy") as SFNode; }
         }
 
-        public SFTime collideTime {
-            get { return getEventOut("collideTime") as SFTime; }
+        public SFTime CollideTime {
+            get { return GetEventOut("collideTime") as SFTime; }
         }
 
     }

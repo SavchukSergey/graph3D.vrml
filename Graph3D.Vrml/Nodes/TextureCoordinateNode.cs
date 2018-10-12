@@ -9,14 +9,14 @@ namespace Graph3D.Vrml.Nodes {
     public class TextureCoordinateNode : Node {
 
         public TextureCoordinateNode() {
-            addExposedField("point", new MFVec2f());
+            AddExposedField("point", new MFVec2f());
         }
 
-        public MFVec2f point {
+        public MFVec2f Point {
             get { return GetExposedField("point") as MFVec2f; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new TextureCoordinateNode();
         }
 

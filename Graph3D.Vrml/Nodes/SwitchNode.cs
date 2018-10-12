@@ -10,19 +10,19 @@ namespace Graph3D.Vrml.Nodes {
     public class SwitchNode : Node {
 
         public SwitchNode() {
-            addExposedField("choice", new MFNode());
-            addExposedField("whichChoice", new SFInt32(-1));
+            AddExposedField("choice", new MFNode());
+            AddExposedField("whichChoice", new SFInt32(-1));
         }
 
-        public MFNode choice {
+        public MFNode Choice {
             get { return GetExposedField("choice") as MFNode; }
         }
 
-        public SFInt32 whichChoice {
+        public SFInt32 WhichChoice {
             get { return GetExposedField("whichChoice") as SFInt32; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new CoordinateNode();
         }
 

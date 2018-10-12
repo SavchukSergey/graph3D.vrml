@@ -4,26 +4,26 @@ namespace Graph3D.Vrml.Nodes.LightSources {
     public abstract class LightSourceNode : Node {
 
         public LightSourceNode() {
-            addExposedField("ambientIntensity", new SFFloat(0));
-            addExposedField("intensity", new SFFloat(1));
-            addExposedField("color", new SFColor(1, 1, 1));
-            addExposedField("on", new SFBool(true));
+            AddExposedField("ambientIntensity", new SFFloat(0));
+            AddExposedField("intensity", new SFFloat(1));
+            AddExposedField("color", new SFColor(1, 1, 1));
+            AddExposedField("on", new SFBool(true));
         }
 
 
-        public SFFloat ambientIntensity {
+        public SFFloat AmbientIntensity {
             get { return GetExposedField("ambientIntensity") as SFFloat; }
         }
 
-        public SFFloat intensity {
+        public SFFloat Intensity {
             get { return GetExposedField("intensity") as SFFloat; }
         }
 
-        public SFColor color {
+        public SFColor Color {
             get { return GetExposedField("color") as SFColor; }
         }
 
-        public SFBool on {
+        public SFBool On {
             get { return GetExposedField("on") as SFBool; }
         }
 

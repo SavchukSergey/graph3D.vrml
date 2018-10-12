@@ -5,26 +5,26 @@ namespace Graph3D.Vrml.Nodes.Grouping {
     public abstract class GroupingNode : Node {
 
         protected GroupingNode() {
-            addExposedField("children", new MFNode());
-            addField("bboxSize", new SFVec3f(-1, -1, -1));
-            addField("bboxCenter", new SFVec3f(0, 0, 0));
+            AddExposedField("children", new MFNode());
+            AddField("bboxSize", new SFVec3f(-1, -1, -1));
+            AddField("bboxCenter", new SFVec3f(0, 0, 0));
         }
 
-        public MFNode children {
+        public MFNode Children {
             get { return GetExposedField("children") as MFNode; }
         }
 
-        public void appendChild(BaseNode node) {
-            children.AppendValue(node);
+        public void AppendChild(BaseNode node) {
+            Children.AppendValue(node);
             node.Parent = this;
         }
 
-        public SFVec3f bboxCenter {
-            get { return getField("bboxCenter") as SFVec3f; }
+        public SFVec3f BboxCenter {
+            get { return GetField("bboxCenter") as SFVec3f; }
         }
 
-        public SFVec3f bboxSize {
-            get { return getField("bboxSize") as SFVec3f; }
+        public SFVec3f BboxSize {
+            get { return GetField("bboxSize") as SFVec3f; }
         }
 
     }

@@ -3,7 +3,7 @@
 namespace Graph3D.Vrml.Nodes {
     public class SceneGraphNode : GroupingNode {
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new SceneGraphNode();
         }
 

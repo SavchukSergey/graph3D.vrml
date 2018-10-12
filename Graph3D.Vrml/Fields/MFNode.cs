@@ -10,7 +10,7 @@ namespace Graph3D.Vrml.Fields {
         public override Field Clone() {
             var clone = new MFNode();
             foreach (var child in Values) {
-                clone.AppendValue(child.clone());
+                clone.AppendValue(child.Clone());
             }
             return clone;
         }

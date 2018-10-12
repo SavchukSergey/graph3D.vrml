@@ -17,7 +17,7 @@ namespace Graph3D.Vrml.Fields {
         }
 
         public override Field Clone() {
-            return new SFNode(Node != null ? Node.clone() : null);
+            return new SFNode(Node?.Clone());
         }
 
         public override FieldType Type {

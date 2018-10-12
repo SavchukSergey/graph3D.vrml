@@ -14,35 +14,35 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class CylinderNode : GeometryNode {
 
         public CylinderNode() {
-            addField("bottom", new SFBool(true));
-            addField("height", new SFFloat(2));
-            addField("radius", new SFFloat(1));
-            addField("side", new SFBool(true));
-            addField("top", new SFBool(true));
+            AddField("bottom", new SFBool(true));
+            AddField("height", new SFFloat(2));
+            AddField("radius", new SFFloat(1));
+            AddField("side", new SFBool(true));
+            AddField("top", new SFBool(true));
         }
 
 
-        public SFBool bottom {
-            get { return getField("bottom") as SFBool; }
+        public SFBool Bottom {
+            get { return GetField("bottom") as SFBool; }
         }
         
-        public SFFloat height {
-            get { return getField("height") as SFFloat; }
+        public SFFloat Height {
+            get { return GetField("height") as SFFloat; }
         }
 
-        public SFFloat radius {
-            get { return getField("radius") as SFFloat; }
+        public SFFloat Radius {
+            get { return GetField("radius") as SFFloat; }
         }
 
-        public SFBool side {
-            get { return getField("side") as SFBool; }
+        public SFBool Side {
+            get { return GetField("side") as SFBool; }
         }
 
-        public SFBool top {
-            get { return getField("top") as SFBool; }
+        public SFBool Top {
+            get { return GetField("top") as SFBool; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new CylinderNode();
         }
 

@@ -9,12 +9,12 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class BoxNode : GeometryNode {
 
         public BoxNode() {
-            addField("size", new SFVec3f(2, 2, 2));
+            AddField("size", new SFVec3f(2, 2, 2));
         }
 
-        public SFVec3f size => getField("size") as SFVec3f;
+        public SFVec3f Size => GetField("size") as SFVec3f;
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new BoxNode();
         }
 

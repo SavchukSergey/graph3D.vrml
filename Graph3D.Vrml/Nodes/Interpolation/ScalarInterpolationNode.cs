@@ -3,7 +3,7 @@
 namespace Graph3D.Vrml.Nodes.Interpolation {
     public class ScalarInterpolationNode : InterpolatorNode<MFFloat> {
         
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new ScalarInterpolationNode();
         }
 

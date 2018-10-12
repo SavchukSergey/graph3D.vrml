@@ -3,7 +3,7 @@
 namespace Graph3D.Vrml.Nodes.Interpolation {
     public class PositionInterpolatorNode : InterpolatorNode<MFVec3f> {
         
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new PositionInterpolatorNode();
         }
 

@@ -25,10 +25,10 @@ namespace Graph3D.Vrml.Test {
         [Test]
         public void SimpleExampleTest() {
             var scene = LoadScene("D2.wrl");
-            var children = scene.root.children;
+            var children = scene.root.Children;
             Assert.AreEqual(1, children.length, "Check root children count");
             Assert.IsTrue(children[0] is TransformNode, "Check first child");
-            children = ((children[0]) as TransformNode).children;
+            children = ((children[0]) as TransformNode).Children;
             Assert.AreEqual(4, children.length, "Check children count");
         }
 

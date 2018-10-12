@@ -5,10 +5,10 @@ namespace Graph3D.Vrml.Nodes.Interpolation {
     public abstract class InterpolatorNode<T> : InterpolatorNode where T : MField, new() {
 
         public InterpolatorNode() {
-            addExposedField("keyValue", new T());
+            AddExposedField("keyValue", new T());
         }
 
-        public MFRotation keyValue {
+        public MFRotation KeyValue {
             get { return GetExposedField("keyValue") as MFRotation; }
         }
 
@@ -17,10 +17,10 @@ namespace Graph3D.Vrml.Nodes.Interpolation {
     public abstract class InterpolatorNode : Node {
 
         protected InterpolatorNode() {
-            addExposedField("key", new MFFloat());
+            AddExposedField("key", new MFFloat());
         }
 
-        public MFFloat key {
+        public MFFloat Key {
             get { return GetExposedField("key") as MFFloat; }
         }
 

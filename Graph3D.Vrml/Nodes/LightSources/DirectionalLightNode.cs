@@ -13,14 +13,14 @@ namespace Graph3D.Vrml.Nodes.LightSources {
     public class DirectionalLightNode : LightSourceNode {
 
         public DirectionalLightNode() {
-            addExposedField("direction", new SFVec3f(0, 0, -1));
+            AddExposedField("direction", new SFVec3f(0, 0, -1));
         }
 
-        public SFVec3f direction {
+        public SFVec3f Direction {
             get { return GetExposedField("direction") as SFVec3f ; }
         }
 
-        protected override BaseNode createInstance() {
+        protected override BaseNode CreateInstance() {
             return new DirectionalLightNode();
         }
 
