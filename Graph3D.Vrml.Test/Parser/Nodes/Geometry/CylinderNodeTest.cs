@@ -9,25 +9,30 @@ using NUnit.Framework;
 
 namespace Graph3D.Vrml.Test.Parser.Statements {
     [TestFixture]
-    public class BoxTest {
+    public class CylinderNodeTest {
 
         [Test]
         public void ParseTest() {
             var parser = new VrmlParser(new Vrml97Tokenizer(new StringReader(@"
 #VRML V2.0 utf8
 Shape {
-    geometry Box {
-        size 4 5 6
+    geometry Cylinder {
+        bottom TRUE
+        height 20.0
+        radius 45.2
+        side TRUE
+        top FALSE
     }
 }")));
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var box = (scene.Root.Children[0] as ShapeNode).Geometry.Node as BoxNode;
-            Assert.AreEqual(4f, box.Size.X);
-            Assert.AreEqual(5f, box.Size.Y);
-            Assert.AreEqual(6f, box.Size.Z);
-
+            var cylinder = (scene.Root.Children[0] as ShapeNode).Geometry.Node as CylinderNode;
+            Assert.AreEqual(true, cylinder.Bottom.Value);
+            Assert.AreEqual(20f, cylinder.Height.Value);
+            Assert.AreEqual(45.2f, cylinder.Radius.Value);
+            Assert.AreEqual(true, cylinder.Side.Value);
+            Assert.AreEqual(false, cylinder.Top.Value);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Graph3D.Vrml.Fields;
 
 namespace Graph3D.Vrml.Nodes.Geometry {
-    
     /// <summary>
     /// Cylinder { 
     ///   field    SFBool    bottom  TRUE
@@ -14,33 +13,22 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class CylinderNode : GeometryNode {
 
         public CylinderNode() {
-            AddField("bottom", new SFBool(true));
-            AddField("height", new SFFloat(2));
-            AddField("radius", new SFFloat(1));
-            AddField("side", new SFBool(true));
-            AddField("top", new SFBool(true));
+            AddField("bottom", Bottom);
+            AddField("height", Height);
+            AddField("radius", Radius);
+            AddField("side", Side);
+            AddField("top", Top);
         }
 
+        public SFBool Bottom { get; } = new SFBool(true);
 
-        public SFBool Bottom {
-            get { return GetField("bottom") as SFBool; }
-        }
-        
-        public SFFloat Height {
-            get { return GetField("height") as SFFloat; }
-        }
+        public SFFloat Height { get; } = new SFFloat(2);
 
-        public SFFloat Radius {
-            get { return GetField("radius") as SFFloat; }
-        }
+        public SFFloat Radius { get; } = new SFFloat(1);
 
-        public SFBool Side {
-            get { return GetField("side") as SFBool; }
-        }
+        public SFBool Side { get; } = new SFBool(true);
 
-        public SFBool Top {
-            get { return GetField("top") as SFBool; }
-        }
+        public SFBool Top { get; } = new SFBool(true);
 
         protected override BaseNode CreateInstance() {
             return new CylinderNode();
@@ -48,6 +36,26 @@ namespace Graph3D.Vrml.Nodes.Geometry {
 
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
+        }
+
+        public override BaseNode Clone() {
+            return new CylinderNode {
+                Bottom = {
+                    Value = Bottom.Value
+                },
+                Height = {
+                    Value = Height.Value
+                },
+                Radius = {
+                    Value = Radius.Value
+                },
+                Side = {
+                    Value = Side.Value
+                },
+                Top = {
+                    Value = Top.Value
+                }
+            };
         }
 
     }

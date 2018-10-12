@@ -13,28 +13,20 @@ namespace Graph3D.Vrml.Nodes.Geometry {
     public class ConeNode : GeometryNode {
 
         public ConeNode() {
-            AddField("bottomRadius", new SFFloat(1));
-            AddField("height", new SFFloat(2));
-            AddField("side", new SFBool(true));
-            AddField("bottom", new SFBool(true));
+            AddField("bottomRadius", BottomRadius);
+            AddField("height", Height);
+            AddField("side", Side);
+            AddField("bottom", Bottom);
         }
 
 
-        public SFFloat BottomRadius {
-            get { return GetField("bottomRadius") as SFFloat; }
-        }
+        public SFFloat BottomRadius { get; } = new SFFloat(1);
 
-        public SFFloat Height {
-            get { return GetField("height") as SFFloat; }
-        }
+        public SFFloat Height { get; } = new SFFloat(2);
 
-        public SFBool Side {
-            get { return GetField("side") as SFBool; }
-        }
+        public SFBool Side { get; } = new SFBool(true);
 
-        public SFBool Bottom {
-            get { return GetField("bottom") as SFBool; }
-        }
+        public SFBool Bottom { get; } = new SFBool(true);
 
         protected override BaseNode CreateInstance() {
             return new ConeNode();
@@ -42,6 +34,23 @@ namespace Graph3D.Vrml.Nodes.Geometry {
 
         public override void AcceptVisitor(INodeVisitor visitor) {
             visitor.Visit(this);
+        }
+
+        public override BaseNode Clone() {
+            return new ConeNode {
+                BottomRadius = {
+                    Value = BottomRadius.Value
+                },
+                Height = {
+                    Value = Height.Value
+                },
+                Side = {
+                    Value = Side.Value
+                },
+                Bottom = {
+                    Value = Bottom.Value
+                }
+            };
         }
 
     }
