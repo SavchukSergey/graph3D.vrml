@@ -14,7 +14,8 @@ namespace Graph3D.Vrml.Parser {
     public class NodeFactory {
 
         [DebuggerStepThrough]
-        public NodeFactory() {
+        public NodeFactory()
+        {
             builtin["Anchor"] = new AnchorNode();
             builtin["Appearance"] = new AppearanceNode();
             builtin["Background"] = new BackgroundNode();
@@ -28,7 +29,8 @@ namespace Graph3D.Vrml.Parser {
             builtin["Extrusion"] = new ExtrusionNode();
             builtin["Group"] = new GroupNode();
             builtin["Collision"] = new CollisionNode();
-            builtin["Switch"] = new SwitchNode();            
+            builtin["Switch"] = new SwitchNode();
+            builtin["ImageTexture"] = new ImageTextureNode();
             builtin["IndexedFaceSet"] = new IndexedFaceSetNode();
             builtin["IndexedLineSet"] = new IndexedLineSetNode();
             builtin["Material"] = new MaterialNode();

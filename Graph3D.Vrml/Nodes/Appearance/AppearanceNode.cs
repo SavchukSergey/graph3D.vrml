@@ -27,10 +27,7 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             set {
                 if (_materialNode.Node != value) {
                     _materialNode.Node = value;
-                    var handler = MaterialChanged;
-                    if (handler != null) {
-                        handler(this);
-                    }
+                    MaterialChanged?.Invoke(this);
                 }
             }
         }
@@ -42,10 +39,7 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             set {
                 if (_textureNode.Node != value) {
                     _textureNode.Node = value;
-                    var handler = TextureChanged;
-                    if (handler != null) {
-                        handler(this);
-                    }
+                    TextureChanged?.Invoke(this);
                 }
             }
         }
@@ -57,10 +51,7 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             set {
                 if (_textureTransformNode.Node != value) {
                     _textureTransformNode.Node = value;
-                    var handler = TextureTransformChanged;
-                    if (handler != null) {
-                        handler(this);
-                    }
+                    TextureTransformChanged?.Invoke(this);
                 }
             }
         }

@@ -95,8 +95,8 @@ namespace Graph3D.Vrml.Nodes.Geometry {
             get { return GetField("solid") as SFBool; }
         }
 
-        public MFInt32 TexCordIndex {
-            get { return GetField("texCordIndex") as MFInt32; }
+        public MFInt32 TexCoordIndex {
+            get { return GetField("texCoordIndex") as MFInt32; }
         }
 
         protected override BaseNode CreateInstance() {
