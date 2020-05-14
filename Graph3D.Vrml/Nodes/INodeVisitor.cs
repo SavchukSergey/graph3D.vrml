@@ -10,7 +10,77 @@ using Graph3D.Vrml.Nodes.Sensors;
 namespace Graph3D.Vrml.Nodes {
     public interface INodeVisitor {
 
-        void Visit(BaseNode node);
+        void Visit(AnchorNode node);
+
+        void Visit(AppearanceNode node);
+
+        void Visit(BackgroundNode node);
+
+        void Visit(BoxNode node);
+
+        void Visit(ColorNode node);
+
+        void Visit(ConeNode node);
+
+        void Visit(CoordinateInterpolatorNode node);
+
+        void Visit(CoordinateNode node);
+
+        void Visit(CylinderNode node);
+
+        void Visit(ProtoNode node);
+
+        void Visit(DirectionalLightNode node);
+
+        void Visit(ExtrusionNode node);
+
+        void Visit(SwitchNode node);
+
+        void Visit(GroupNode node);
+
+        void Visit(CollisionNode node);
+
+        void Visit(ImageTextureNode node);
+        
+        void Visit(IndexedFaceSetNode node);
+
+        void Visit(IndexedLineSetNode node);
+
+        void Visit(MaterialNode node);
+
+        void Visit(NavigationInfoNode node);
+
+        void Visit(NormalNode node);
+
+        void Visit(OrientationInterpolatorNode node);
+
+        void Visit(PixelTextureNode node);
+
+        void Visit(PointLightNode node);
+
+        void Visit(PositionInterpolatorNode node);
+
+        void Visit(ScalarInterpolationNode node);
+
+        void Visit(SceneGraphNode node);
+
+        void Visit(ScriptNode node);
+
+        void Visit(ShapeNode node);
+
+        void Visit(SphereNode node);
+
+        void Visit(TextureCoordinateNode node);
+        
+        void Visit(TextureTransformNode node);
+
+        void Visit(TimeSensorNode node);
+
+        void Visit(TransformNode node);
+
+        void Visit(ViewpointNode node);
+
+        void Visit(WorldInfoNode node);
 
     }
 }

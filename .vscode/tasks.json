@@ -4,14 +4,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
-            "command": "dotnet build",
+            "label": "build",
             "type": "shell",
-            "group": "build",
-            "presentation": {
-                "reveal": "silent"
-            },
-            "problemMatcher": "$msCompile"
+            "command": "dotnet",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true",
+                "${workspaceRoot}/Graph3D.Vrml.sln"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
