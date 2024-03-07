@@ -60,6 +60,9 @@ namespace Graph3D.Vrml.Tokenizer {
                     } else if (tokenizer.IsWhiteSpace(ch) || tokenizer.IsPunctuation(ch)) {
                         context.Enqueue(new VRML97Token(text, VRML97TokenType.Word));
                         return new InitialState(context);
+                    } else if (ch == 'e' || ch == 'E') {
+                        text += context.ReadChar();
+                        state = "sndne";
                     } else {
                         throw new TokenizerException("Invalid Number");
                     }
