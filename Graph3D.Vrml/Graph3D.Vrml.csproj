@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;netcoreapp1.0;net8.0</TargetFrameworks>
     <Copyright>Copyright © 2018</Copyright>
     <RepositoryUrl>https://github.com/SavchukSergey/graph3D.vrml</RepositoryUrl>
     <Description>Vrml parser</Description>
     <PackageTags>VRML</PackageTags>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
   </PropertyGroup>
   
 </Project>
