@@ -6,6 +6,7 @@
     <Description>Vrml parser</Description>
     <PackageTags>VRML</PackageTags>
     <Version>3.0.0</Version>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   
 </Project>

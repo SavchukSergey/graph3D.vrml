@@ -25,10 +25,10 @@ Shape {
             parser.Parse(scene);
 
             var cone = (scene.Root.Children[0] as ShapeNode).Geometry as ConeNode;
-            Assert.AreEqual(10f, cone.BottomRadius.Value);
-            Assert.AreEqual(20f, cone.Height.Value);
-            Assert.AreEqual(true, cone.Side.Value);
-            Assert.AreEqual(false, cone.Bottom.Value);
+            Assert.That(cone.BottomRadius.Value, Is.EqualTo(10f));
+            Assert.That(cone.Height.Value, Is.EqualTo(20f));
+            Assert.That(cone.Side.Value, Is.EqualTo(true));
+            Assert.That(cone.Bottom.Value, Is.EqualTo(false));
 
         }
     }

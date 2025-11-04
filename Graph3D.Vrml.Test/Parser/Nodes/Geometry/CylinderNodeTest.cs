@@ -26,11 +26,11 @@ Shape {
             parser.Parse(scene);
 
             var cylinder = (scene.Root.Children[0] as ShapeNode).Geometry as CylinderNode;
-            Assert.AreEqual(true, cylinder.Bottom.Value);
-            Assert.AreEqual(20f, cylinder.Height.Value);
-            Assert.AreEqual(45.2f, cylinder.Radius.Value);
-            Assert.AreEqual(true, cylinder.Side.Value);
-            Assert.AreEqual(false, cylinder.Top.Value);
+            Assert.That(cylinder.Bottom.Value, Is.EqualTo(true));
+            Assert.That(cylinder.Height.Value, Is.EqualTo(20f));
+            Assert.That(cylinder.Radius.Value, Is.EqualTo(45.2f));
+            Assert.That(cylinder.Side.Value, Is.EqualTo(true));
+            Assert.That(cylinder.Top.Value, Is.EqualTo(false));
         }
     }
 }

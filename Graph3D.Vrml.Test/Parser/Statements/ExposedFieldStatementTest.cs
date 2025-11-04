@@ -15,10 +15,10 @@ namespace Graph3D.Vrml.Test.Parser.Statements {
 exposedField SFInt32 test 15
 ")));
             var statement = ExposedFieldStatement.Parse(context, c => { });
-            Assert.AreEqual("SFInt32", statement.FieldType);
-            Assert.AreEqual("test", statement.FieldId);
-            Assert.IsAssignableFrom(typeof(SFInt32), statement.Value);
-            Assert.AreEqual(15, ((SFInt32)statement.Value).Value);
+            Assert.That(statement.FieldType, Is.EqualTo("SFInt32"));
+            Assert.That(statement.FieldId, Is.EqualTo("test"));
+            Assert.That(statement.Value, Is.InstanceOf(typeof(SFInt32)));
+            Assert.That(((SFInt32)statement.Value).Value, Is.EqualTo(15));
         }
     }
 }

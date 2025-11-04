@@ -22,23 +22,15 @@ namespace Graph3D.Vrml.Tokenizer {
         }
 
         public override string ToString() {
-            switch (type) {
-                case VRML97TokenType.Word:
-                    return "VRML97 Token: " + text;
-                case VRML97TokenType.EOF:
-                    return "VRML97 EOF Token";
-                case VRML97TokenType.OpenBrace:
-                    return "VRML97 OpenBrace ('{') Token";
-                case VRML97TokenType.CloseBrace:
-                    return "VRML97 CloseBrace ('}') Token";
-                case VRML97TokenType.OpenBracket:
-                    return "VRML97 OpenBracket ('[') Token";
-                case VRML97TokenType.CloseBracket:
-                    return "VRML97 CloseBracket (']') Token";
-
-                default:
-                    throw new NotSupportedException();
-            }
+            return type switch {
+                VRML97TokenType.Word => "VRML97 Token: " + text,
+                VRML97TokenType.EOF => "VRML97 EOF Token",
+                VRML97TokenType.OpenBrace => "VRML97 OpenBrace ('{') Token",
+                VRML97TokenType.CloseBrace => "VRML97 CloseBrace ('}') Token",
+                VRML97TokenType.OpenBracket => "VRML97 OpenBracket ('[') Token",
+                VRML97TokenType.CloseBracket => "VRML97 CloseBracket (']') Token",
+                _ => throw new NotSupportedException(),
+            };
         }
 
     }

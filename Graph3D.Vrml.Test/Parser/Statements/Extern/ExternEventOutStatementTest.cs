@@ -14,8 +14,8 @@ namespace Graph3D.Vrml.Test.Parser.Statements.Extern {
 eventOut SFInt32 click
 ")));
             var statement = ExternEventOutStatement.Parse(context);
-            Assert.AreEqual("SFInt32", statement.FieldType);
-            Assert.AreEqual("click", statement.EventId);
+            Assert.That(statement.FieldType, Is.EqualTo("SFInt32"));
+            Assert.That(statement.EventId, Is.EqualTo("click"));
         }
     }
 }

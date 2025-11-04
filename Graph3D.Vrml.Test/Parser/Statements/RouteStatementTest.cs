@@ -14,10 +14,10 @@ namespace Graph3D.Vrml.Test.Parser.Statements {
 ROUTE nodeOut.eventOut TO nodeIn.eventIn
 ")));
             var statement = RouteStatement.Parse(context);
-            Assert.AreEqual("nodeOut", statement.NodeOut);
-            Assert.AreEqual("eventOut", statement.EventOut);
-            Assert.AreEqual("nodeIn", statement.NodeIn);
-            Assert.AreEqual("eventIn", statement.EventIn);
+            Assert.That(statement.NodeOut, Is.EqualTo("nodeOut"));
+            Assert.That(statement.EventOut, Is.EqualTo("eventOut"));
+            Assert.That(statement.NodeIn, Is.EqualTo("nodeIn"));
+            Assert.That(statement.EventIn, Is.EqualTo("eventIn"));
         }
     }
 }

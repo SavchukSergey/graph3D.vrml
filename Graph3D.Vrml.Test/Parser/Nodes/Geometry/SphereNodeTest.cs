@@ -22,7 +22,7 @@ Shape {
             parser.Parse(scene);
 
             var sphere = (scene.Root.Children[0] as ShapeNode).Geometry as SphereNode;
-            Assert.AreEqual(2f, sphere.Radius.Value);
+            Assert.That(sphere.Radius.Value, Is.EqualTo(2f));
 
         }
     }

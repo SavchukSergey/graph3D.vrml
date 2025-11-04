@@ -14,8 +14,8 @@ namespace Graph3D.Vrml.Test.Parser.Statements.Extern {
 field SFInt32 test
 ")));
             var statement = ExternFieldStatement.Parse(context);
-            Assert.AreEqual("SFInt32", statement.FieldType);
-            Assert.AreEqual("test", statement.FieldId);
+            Assert.That(statement.FieldType, Is.EqualTo("SFInt32"));
+            Assert.That(statement.FieldId, Is.EqualTo("test"));
         }
     }
 }

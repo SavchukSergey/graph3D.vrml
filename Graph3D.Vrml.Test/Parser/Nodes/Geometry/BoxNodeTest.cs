@@ -22,9 +22,9 @@ Shape {
             parser.Parse(scene);
 
             var box = (scene.Root.Children[0] as ShapeNode).Geometry as BoxNode;
-            Assert.AreEqual(4f, box.Size.X);
-            Assert.AreEqual(5f, box.Size.Y);
-            Assert.AreEqual(6f, box.Size.Z);
+            Assert.That(box.Size.X, Is.EqualTo(4f));
+            Assert.That(box.Size.Y, Is.EqualTo(5f));
+            Assert.That(box.Size.Z, Is.EqualTo(6f));
 
         }
     }

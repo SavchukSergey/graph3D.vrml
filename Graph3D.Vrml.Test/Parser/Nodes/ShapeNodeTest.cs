@@ -26,8 +26,8 @@ Shape {
             parser.Parse(scene);
 
             var shape = scene.Root.Children[0] as ShapeNode;
-            Assert.IsNotNull(shape.Geometry);
-            Assert.IsNotNull(shape.Appearance);
+            Assert.That(shape.Geometry, Is.Not.Null);
+            Assert.That(shape.Appearance, Is.Not.Null);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Graph3D.Vrml.Test {
                 while (tokenizer.ReadNextToken().Type != VRML97TokenType.EOF) {
                     count++;
                 }
-                Assert.AreEqual(39343, count, "Check node count");
+                Assert.That(count, Is.EqualTo(39343), "Check node count");
             }
         }
 
@@ -26,10 +26,10 @@ namespace Graph3D.Vrml.Test {
         public void SimpleExampleTest() {
             var scene = LoadScene("D2.wrl");
             var children = scene.Root.Children;
-            Assert.AreEqual(1, children.Length, "Check root children count");
-            Assert.IsTrue(children[0] is TransformNode, "Check first child");
+            Assert.That(children.Length, Is.EqualTo(1), "Check root children count");
+            Assert.That(children[0] is TransformNode, Is.True, "Check first child");
             children = ((children[0]) as TransformNode).Children;
-            Assert.AreEqual(4, children.Length, "Check children count");
+            Assert.That(children.Length, Is.EqualTo(4), "Check children count");
         }
 
         /// <summary>

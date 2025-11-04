@@ -14,7 +14,7 @@ namespace Graph3D.Vrml.Test.Parser.Statements {
 USE qwe123
 ")));
             var statement = UseStatement.Parse(context);
-            Assert.AreEqual("qwe123", statement.NodeName);
+            Assert.That(statement.NodeName, Is.EqualTo("qwe123"));
         }
     }
 }

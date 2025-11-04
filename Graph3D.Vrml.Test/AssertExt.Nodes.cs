@@ -13,10 +13,10 @@ namespace Graph3D.Vrml.Test {
 
         public static void AreEqual(BaseNode expected, BaseNode actual, string path = null) {
             path = path ?? "$";
-            Assert.AreEqual(expected == null ? "NULL" : "NOT_NULL", actual == null ? "NULL" : "NOT_NULL", path);
+            Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             if (expected != null && actual != null) {
 
-                Assert.AreEqual(expected.GetType(), actual.GetType(), $"{path}/GetType() must be the same");
+                Assert.That(actual.GetType(), Is.EqualTo(expected.GetType()), $"{path}/GetType() must be the same");
                 switch (expected) {
                     case AppearanceNode _:
                         AreEqual((AppearanceNode)expected, (AppearanceNode)actual, path);
@@ -40,7 +40,7 @@ namespace Graph3D.Vrml.Test {
         }
 
         private static void AreEqual(AppearanceNode expected, AppearanceNode actual, string path) {
-            Assert.AreEqual(expected == null ? "NULL" : "NOT_NULL", actual == null ? "NULL" : "NOT_NULL", path);
+            Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             if (expected != null && actual != null) {
                 AreEqual(expected.Material, actual.Material, $"{path}/Material");
                 AreEqual(expected.Texture, actual.Texture, $"{path}/Texture");
@@ -49,7 +49,7 @@ namespace Graph3D.Vrml.Test {
         }
 
         private static void AreEqual(MaterialNode expected, MaterialNode actual, string path) {
-            Assert.AreEqual(expected == null ? "NULL" : "NOT_NULL", actual == null ? "NULL" : "NOT_NULL", path);
+            Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             if (expected != null && actual != null) {
                 AreEqual(expected.AmbientIntensity, actual.AmbientIntensity, $"{path}/AmbientIntensity");
                 AreEqual(expected.DiffuseColor, actual.DiffuseColor, $"{path}/DiffuseColor");
@@ -61,7 +61,7 @@ namespace Graph3D.Vrml.Test {
         }
 
         private static void AreEqual(ShapeNode expected, ShapeNode actual, string path) {
-            Assert.AreEqual(expected == null ? "NULL" : "NOT_NULL", actual == null ? "NULL" : "NOT_NULL", path);
+            Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             if (expected != null && actual != null) {
                 AreEqual(expected.Appearance, actual.Appearance, $"{path}/Appearance");
                 AreEqual(expected.Geometry, actual.Geometry, $"{path}/Geometry");
@@ -69,23 +69,23 @@ namespace Graph3D.Vrml.Test {
         }
 
         private static void AreEqual(TextureNode expected, TextureNode actual, string path) {
-            Assert.AreEqual(expected == null ? "NULL" : "NOT_NULL", actual == null ? "NULL" : "NOT_NULL", path);
+            Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             //todo:
         }
 
         private static void AreEqual(TextureTransformNode expected, TextureTransformNode actual, string path) {
-            Assert.AreEqual(expected == null ? "NULL" : "NOT_NULL", actual == null ? "NULL" : "NOT_NULL", path);
+            Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             //todo:
         }
 
         private static void AreEqual(float expected, float actual, string path) {
-            Assert.AreEqual(expected, actual, path);
+            Assert.That(actual, Is.EqualTo(expected), path);
         }
 
         private static void AreEqual(SFColor expected, SFColor actual, string path) {
-            Assert.AreEqual(expected.Red, actual.Red, $"{path}/Red");
-            Assert.AreEqual(expected.Green, actual.Green, $"{path}/Green");
-            Assert.AreEqual(expected.Blue, actual.Blue, $"{path}/Blue");
+            Assert.That(actual.Red, Is.EqualTo(expected.Red), $"{path}/Red");
+            Assert.That(actual.Green, Is.EqualTo(expected.Green), $"{path}/Green");
+            Assert.That(actual.Blue, Is.EqualTo(expected.Blue), $"{path}/Blue");
         }
 
     }
