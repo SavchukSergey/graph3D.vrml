@@ -26,23 +26,23 @@ namespace Graph3D.Vrml.Nodes.Grouping {
         }
 
         public SFVec3f Center {
-            get { return GetExposedField("center") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("center"); }
         }
 
         public SFRotation Rotation {
-            get { return GetExposedField("rotation") as SFRotation; }
+            get { return GetExposedField<SFRotation>("rotation"); }
         }
 
         public SFVec3f Scale {
-            get { return GetExposedField("scale") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("scale"); }
         }
 
         public SFRotation ScaleOrientation {
-            get { return GetExposedField("scaleOrientation") as SFRotation; }
+            get { return GetExposedField<SFRotation>("scaleOrientation"); }
         }
 
         public SFVec3f Translation {
-            get { return GetExposedField("translation") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("translation"); }
         }
 
         /// <summary>
@@ -53,9 +53,7 @@ namespace Graph3D.Vrml.Nodes.Grouping {
             //P' = T × C × R × SR × S × -SR × -C × P
             float[,] matrix = VrmlMath.GetUnitMatrix();
 
-            float[,] temp = null;
-
-            temp = VrmlMath.GetUnitMatrix();
+            float[,] temp = VrmlMath.GetUnitMatrix();
             temp[0, 3] = -Center.X;
             temp[1, 3] = -Center.Y;
             temp[2, 3] = -Center.Z;

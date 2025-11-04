@@ -16,7 +16,7 @@ namespace Graph3D.Vrml.Parser {
 
 
         public void Visit(SFBool field) {
-            string value = _context.ReadNextToken().Text;
+            string value = _context.RequireNextToken().Text;
             switch (value) {
                 case "TRUE":
                     field.Value = true;
@@ -67,8 +67,8 @@ namespace Graph3D.Vrml.Parser {
 
 
         public void Visit(SFNode field) {
-            VRML97Token token = _context.PeekNextToken();
-            switch (token.Text) {
+            var token = _context.PeekNextToken();
+            switch (token.Value.Text) {
                 case "NULL":
                     _context.ReadNextToken();
                     field.Node = null;
@@ -152,12 +152,12 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseMField(Action<ParserContext> itemParser) {
-            VRML97Token next = _context.PeekNextToken();
-            if (next.Type == VRML97TokenType.OpenBracket) {
+            var next = _context.PeekNextToken();
+            if (next.Value.Type == VRML97TokenType.OpenBracket) {
                 next = _context.ReadNextToken();
                 while (true) {
                     next = _context.PeekNextToken();
-                    if (next.Type == VRML97TokenType.CloseBracket) break;
+                    if (next.Value.Type == VRML97TokenType.CloseBracket) break;
                     itemParser(_context);
                 }
                 next = _context.ReadNextToken();

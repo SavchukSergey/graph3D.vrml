@@ -21,15 +21,15 @@ namespace Graph3D.Vrml.Nodes.LightSources {
         }
         
         public SFVec3f Attenuation {
-            get { return GetExposedField("attenuation") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("attenuation"); }
         }
 
         public SFVec3f Location {
-            get { return GetExposedField("location") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("location"); }
         }
 
         public SFFloat Radius {
-            get { return GetExposedField("radius") as SFFloat; }
+            get { return GetExposedField<SFFloat>("radius"); }
         }
 
         protected override BaseNode CreateInstance() {

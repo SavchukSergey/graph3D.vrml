@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <Copyright>Copyright © 2018</Copyright>
     <RepositoryUrl>https://github.com/SavchukSergey/graph3D.vrml</RepositoryUrl>
     <Description>Vrml parser</Description>

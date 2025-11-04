@@ -11,9 +11,9 @@ namespace Graph3D.Vrml.Nodes.Appearance {
     /// </summary>
     public class AppearanceNode : Node {
 
-        private readonly SFNode _materialNode = new SFNode();
-        private readonly SFNode _textureNode = new SFNode();
-        private readonly SFNode _textureTransformNode = new SFNode();
+        private readonly SFNode _materialNode = new();
+        private readonly SFNode _textureNode = new();
+        private readonly SFNode _textureTransformNode = new();
 
         public AppearanceNode() {
             AddExposedField("material", _materialNode);

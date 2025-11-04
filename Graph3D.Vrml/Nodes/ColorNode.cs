@@ -13,7 +13,7 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public MFColor Color {
-            get { return GetExposedField("color") as MFColor; }
+            get { return GetExposedField<MFColor>("color"); }
         }
 
         protected override BaseNode CreateInstance() {

@@ -3,10 +3,10 @@
 namespace Graph3D.Vrml.Parser.Statements.Extern {
     public class ExternInterfaceDeclarationsStatement {
 
-        private readonly IList<ExternEventInStatement> _eventIns = new List<ExternEventInStatement>();
-        private readonly IList<ExternEventOutStatement> _eventOuts = new List<ExternEventOutStatement>();
-        private readonly IList<ExternFieldStatement> _fields = new List<ExternFieldStatement>();
-        private readonly IList<ExternExposedFieldStatement> _exposedFields = new List<ExternExposedFieldStatement>();
+        private readonly IList<ExternEventInStatement> _eventIns = [];
+        private readonly IList<ExternEventOutStatement> _eventOuts = [];
+        private readonly IList<ExternFieldStatement> _fields = [];
+        private readonly IList<ExternExposedFieldStatement> _exposedFields = [];
 
         public IList<ExternEventInStatement> EventsIn { get { return _eventIns; } }
 
@@ -23,11 +23,11 @@ namespace Graph3D.Vrml.Parser.Statements.Extern {
 
             do {
                 var token = context.PeekNextToken();
-                if (token.Type == VRML97TokenType.CloseBracket) {
+                if (token.Value.Type == VRML97TokenType.CloseBracket) {
                     context.ReadCloseBracket();
                     break;
                 }
-                switch (token.Text) {
+                switch (token.Value.Text) {
                     case "eventIn":
                         var eventIn = ExternEventInStatement.Parse(context);
                         res.EventsIn.Add(eventIn);

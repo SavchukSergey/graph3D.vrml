@@ -4,10 +4,7 @@
         public string NodeName { get; set; }
 
         public static UseStatement Parse(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "USE") {
-                throw new InvalidVRMLSyntaxException("USE expected");
-            }
+            context.RequireNextToken("USE");
 
             var nodeName = context.ParseNodeNameId();
 

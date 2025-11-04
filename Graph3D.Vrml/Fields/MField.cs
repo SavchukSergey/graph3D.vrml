@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Graph3D.Vrml.Parser;
-using Graph3D.Vrml.Tokenizer;
 
 namespace Graph3D.Vrml.Fields {
 
@@ -47,11 +46,11 @@ namespace Graph3D.Vrml.Fields {
 
         protected static void ParseMField(ParserContext context, Action<ParserContext> itemParser) {
             var next = context.PeekNextToken();
-            if (next.Type == VRML97TokenType.OpenBracket) {
+            if (next.Value.Type == VRML97TokenType.OpenBracket) {
                 context.ReadOpenBracket();
                 while (true) {
                     next = context.PeekNextToken();
-                    if (next.Type == VRML97TokenType.CloseBracket) break;
+                    if (next.Value.Type == VRML97TokenType.CloseBracket) break;
                     itemParser(context);
                 }
                 context.ReadCloseBracket();

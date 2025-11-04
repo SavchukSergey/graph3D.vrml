@@ -22,35 +22,27 @@ namespace Graph3D.Vrml.Parser {
         private readonly Queue<VRML97Token> _queue = new Queue<VRML97Token>();
 
         public void ReadKeyword(string keyword) {
-            var token = ReadNextToken();
+            var token = RequireNextToken();
             if (token.Type != VRML97TokenType.Word || token.Text != keyword) {
                 throw new InvalidVRMLSyntaxException(keyword + " expected");
             }
         }
 
         public void ReadOpenBracket() {
-            if (ReadNextToken().Type != VRML97TokenType.OpenBracket) {
-                throw new InvalidVRMLSyntaxException();
-            }
+            RequireNextToken(VRML97TokenType.OpenBracket);
         }
 
         public void ReadCloseBracket() {
-            if (ReadNextToken().Type != VRML97TokenType.CloseBracket) {
-                throw new InvalidVRMLSyntaxException();
-            }
+            RequireNextToken(VRML97TokenType.CloseBracket);
         }
 
 
         public void ReadOpenBrace() {
-            if (ReadNextToken().Type != VRML97TokenType.OpenBrace) {
-                throw new InvalidVRMLSyntaxException();
-            }
+            RequireNextToken(VRML97TokenType.OpenBrace);
         }
 
         public void ReadCloseBrace() {
-            if (ReadNextToken().Type != VRML97TokenType.CloseBrace) {
-                throw new InvalidVRMLSyntaxException();
-            }
+            RequireNextToken(VRML97TokenType.CloseBrace);
         }
 
 
@@ -67,7 +59,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public string ParseFieldType() {
-            return ReadNextToken().Text;
+            return RequireNextToken().Text;
             //TODO: validate fieldtype
         }
 
@@ -77,12 +69,12 @@ namespace Graph3D.Vrml.Parser {
 
 
         protected string ParseId() {
-            return ReadNextToken().Text;
+            return RequireNextToken().Text;
         }
 
         [DebuggerStepThrough]
-        public VRML97Token ReadNextToken() {
-            VRML97Token token = null;
+        public VRML97Token? ReadNextToken() {
+            VRML97Token? token;
             if (_queue.Count > 0) {
                 token = _queue.Dequeue();
             } else {
@@ -91,8 +83,26 @@ namespace Graph3D.Vrml.Parser {
             return token;
         }
 
+        public VRML97Token RequireNextToken() {
+            var token = ReadNextToken();
+            return token == null ? throw new InvalidVRMLSyntaxException() : token.Value;
+        }
+
+        public void RequireNextToken(VRML97TokenType type) {
+            var token = RequireNextToken();
+            if (token.Type != type) {
+                throw new InvalidVRMLSyntaxException($"{type} expected");
+            }
+        }
+
+        public void RequireNextToken(string value) {
+            if (RequireNextToken().Text != value) {
+                throw new InvalidVRMLSyntaxException($"{value} is expected");
+            }
+        }
+
         [DebuggerStepThrough]
-        public virtual VRML97Token PeekNextToken() {
+        public virtual VRML97Token? PeekNextToken() {
             if (_queue.Count == 0) {
                 _queue.Enqueue(_tokenizer.ReadNextToken());
             }
@@ -100,7 +110,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         [DebuggerStepThrough]
-        public VRML97Token PeekNextToken(int index) {
+        public VRML97Token? PeekNextToken(int index) {
             while (_queue.Count < (index + 1)) {
                 _queue.Enqueue(_tokenizer.ReadNextToken());
             }
@@ -121,26 +131,26 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public float ReadFloat() {
-            string value = ReadNextToken().Text;
+            var value = RequireNextToken().Text;
             return float.Parse(value, CultureInfo.InvariantCulture);
         }
 
         public double ReadDouble() {
-            string value = ReadNextToken().Text;
+            var value = RequireNextToken().Text;
             return double.Parse(value, CultureInfo.InvariantCulture);
         }
 
         public virtual int ReadInt32() {
-            string value = ReadNextToken().Text;
+            var value = RequireNextToken().Text;
             return int.Parse(value);
         }
 
         public virtual string ReadString() {
-            return ReadNextToken().Text;
+            return RequireNextToken().Text;
         }
 
         public uint ReadHexaDecimal() {
-            string text = ReadNextToken().Text;
+            var text = RequireNextToken().Text;
             if (text.StartsWith("0x")) {
                 return uint.Parse(text.Substring(2), NumberStyles.HexNumber);
             } else {

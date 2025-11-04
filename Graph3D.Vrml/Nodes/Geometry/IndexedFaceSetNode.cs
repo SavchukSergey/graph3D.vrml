@@ -44,59 +44,59 @@ namespace Graph3D.Vrml.Nodes.Geometry {
         }
 
         public SFNode Color {
-            get { return GetExposedField("color") as SFNode; }
+            get { return GetExposedField<SFNode>("color"); }
         }
 
         public SFNode Coord {
-            get { return GetExposedField("coord") as SFNode; }
+            get { return GetExposedField<SFNode>("coord"); }
         }
 
         public SFNode Normal {
-            get { return GetExposedField("normal") as SFNode; }
+            get { return GetExposedField<SFNode>("normal"); }
         }
 
         public SFNode TexCoord {
-            get { return GetExposedField("texCoord") as SFNode; }
+            get { return GetExposedField<SFNode>("texCoord"); }
         }
 
         public SFBool Ccw {
-            get { return GetField("ccw") as SFBool; }
+            get { return GetExposedField<SFBool>("ccw"); }
         }
 
         public MFInt32 ColorIndex {
-            get { return GetField("colorIndex") as MFInt32; }
+            get { return GetExposedField<MFInt32>("colorIndex"); }
         }
 
         public SFBool ColorPerVertex {
-            get { return GetField("colorPerVertex") as SFBool; }
+            get { return GetExposedField<SFBool>("colorPerVertex"); }
         }
 
         public SFBool Convex {
-            get { return GetField("convex") as SFBool; }
+            get { return GetExposedField<SFBool>("convex"); }
         }
 
         public MFInt32 CoordIndex {
-            get { return GetField("coordIndex") as MFInt32; }
+            get { return GetExposedField<MFInt32>("coordIndex"); }
         }
 
         public SFFloat CreaseAngle {
-            get { return GetField("creaseAngle") as SFFloat; }
+            get { return GetExposedField<SFFloat>("creaseAngle"); }
         }
 
         public MFInt32 NormalIndex {
-            get { return GetField("normalIndex") as MFInt32; }
+            get { return GetExposedField<MFInt32>("normalIndex"); }
         }
 
         public SFBool NormalPerVertex {
-            get { return GetField("normalPerVertex") as SFBool; }
+            get { return GetExposedField<SFBool>("normalPerVertex"); }
         }
 
         public SFBool Solid {
-            get { return GetField("solid") as SFBool; }
+            get { return GetExposedField<SFBool>("solid"); }
         }
 
         public MFInt32 TexCoordIndex {
-            get { return GetField("texCoordIndex") as MFInt32; }
+            get { return GetExposedField<MFInt32>("texCoordIndex"); }
         }
 
         protected override BaseNode CreateInstance() {

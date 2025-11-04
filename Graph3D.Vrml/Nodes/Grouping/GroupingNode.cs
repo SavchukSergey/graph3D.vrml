@@ -11,7 +11,7 @@ namespace Graph3D.Vrml.Nodes.Grouping {
         }
 
         public MFNode Children {
-            get { return GetExposedField("children") as MFNode; }
+            get { return GetExposedField<MFNode>("children"); }
         }
 
         public void AppendChild(BaseNode node) {
@@ -20,11 +20,11 @@ namespace Graph3D.Vrml.Nodes.Grouping {
         }
 
         public SFVec3f BboxCenter {
-            get { return GetField("bboxCenter") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("bboxCenter"); }
         }
 
         public SFVec3f BboxSize {
-            get { return GetField("bboxSize") as SFVec3f; }
+            get { return GetExposedField<SFVec3f>("bboxSize"); }
         }
 
     }

@@ -9,7 +9,7 @@ namespace Graph3D.Vrml.Nodes.Interpolation {
         }
 
         public MFRotation KeyValue {
-            get { return GetExposedField("keyValue") as MFRotation; }
+            get { return GetExposedField<MFRotation>("keyValue"); }
         }
 
     }
@@ -21,7 +21,7 @@ namespace Graph3D.Vrml.Nodes.Interpolation {
         }
 
         public MFFloat Key {
-            get { return GetExposedField("key") as MFFloat; }
+            get { return GetExposedField<MFFloat>("key"); }
         }
 
     }

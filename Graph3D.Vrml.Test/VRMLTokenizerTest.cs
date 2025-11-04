@@ -1,5 +1,4 @@
-﻿using Graph3D.Vrml.Nodes;
-using Graph3D.Vrml.Nodes.Grouping;
+﻿using Graph3D.Vrml.Nodes.Grouping;
 using Graph3D.Vrml.Parser;
 using Graph3D.Vrml.Tokenizer;
 using NUnit.Framework;

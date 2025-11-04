@@ -42,7 +42,7 @@ namespace Graph3D.Vrml.Parser {
             bool validToken;
             do {
                 var token = context.PeekNextToken();
-                switch (token.Text) {
+                switch (token.Value.Text) {
                     case "DEF":
                     case "USE":
                     case "PROTO":
@@ -52,7 +52,7 @@ namespace Graph3D.Vrml.Parser {
                         ParseStatement(context);
                         break;
                     default:
-                        if (token.Type == VRML97TokenType.Word) {
+                        if (token.Value.Type == VRML97TokenType.Word) {
                             ParseStatement(context);
                             validToken = true;
                         } else {
@@ -65,7 +65,7 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseStatement(ParserContext context) {
             var token = context.PeekNextToken();
-            switch (token.Text) {
+            switch (token.Value.Text) {
                 case "DEF":
                 case "USE":
                     ParseNodeStatement(context);
@@ -78,7 +78,7 @@ namespace Graph3D.Vrml.Parser {
                     ParseRouteStatement(context);
                     break;
                 default:
-                    if (token.Type == VRML97TokenType.Word) {
+                    if (token.Value.Type == VRML97TokenType.Word) {
                         ParseNodeStatement(context);
                     } else {
                         throw new Exception("Unexpected context");
@@ -95,7 +95,7 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseNodeStatement(ParserContext context) {
             var token = context.PeekNextToken();
-            switch (token.Text) {
+            switch (token.Value.Text) {
                 case "DEF":
                     ParseDefNodeStatement(context);
                     break;
@@ -112,7 +112,7 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseRootNodeStatement(ParserContext context) {
             var token = context.PeekNextToken();
-            switch (token.Text) {
+            switch (token.Value.Text) {
                 case "DEF":
                     ParseDefNodeStatement(context);
                     break;
@@ -124,7 +124,7 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseProtoStatement(ParserContext context) {
             var keyword = context.PeekNextToken();
-            switch (keyword.Text) {
+            switch (keyword.Value.Text) {
                 case "PROTO":
                     ParseProto(context);
                     break;
@@ -141,7 +141,7 @@ namespace Graph3D.Vrml.Parser {
             var validToken = true;
             do {
                 var token = context.PeekNextToken();
-                switch (token.Text) {
+                switch (token.Value.Text) {
                     case "PROTO":
                     case "EXTERNPROTO":
                         ParseProtoStatement(context);
@@ -162,13 +162,10 @@ namespace Graph3D.Vrml.Parser {
             context.PushNodeContainer(proto.Children);
             context.PushFieldContainer(proto);
             ParseInterfaceDeclarations(context);
-            if (context.ReadNextToken().Type != VRML97TokenType.OpenBrace) {
-                throw new InvalidVRMLSyntaxException();
-            }
+
+            context.RequireNextToken(VRML97TokenType.OpenBrace);
             ParseProtoBody(context);
-            if (context.ReadNextToken().Type != VRML97TokenType.CloseBrace) {
-                throw new InvalidVRMLSyntaxException();
-            }
+            context.RequireNextToken(VRML97TokenType.CloseBrace);
             context.PopFieldContainer();
             context.PopNodeContainer();
             context.RegisterPtototype(proto);
@@ -202,7 +199,7 @@ namespace Graph3D.Vrml.Parser {
         private void ParseRestrictedInterfaceDeclaration(ParserContext context) {
             var node = context.FieldContainer as ProtoNode;
             if (node == null) throw new Exception("Unexpected context");
-            var accessType = context.ReadNextToken().Text;
+            var accessType = context.RequireNextToken().Text;
             switch (accessType) {
                 case "eventIn":
                     var fieldInType = ParseFieldType(context);
@@ -247,13 +244,13 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected virtual void ParseURLList(ParserContext context) {
-            MFString urls = new MFString();
+            var urls = new MFString();
             urls.AcceptVisitor(_fieldParser);
             //TODO: Process Urls.
         }
 
         protected virtual void ParseScriptNode(ParserContext context) {
-            var keyword = context.ReadNextToken();
+            var keyword = context.RequireNextToken();
             if (keyword.Text != "Script") {
                 throw new InvalidVRMLSyntaxException("Script expected");
             }
@@ -266,7 +263,7 @@ namespace Graph3D.Vrml.Parser {
             var validToken = true;
             do {
                 var token = context.PeekNextToken();
-                if (token.Type == VRML97TokenType.Word) {
+                if (token.Value.Type == VRML97TokenType.Word) {
                     ParseScriptBodyElement(context);
                 } else {
                     validToken = false;
@@ -277,8 +274,8 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseNode(ParserContext context) {
             var token = context.PeekNextToken();
-            if (token.Type == VRML97TokenType.EOF) return;
-            switch (token.Text) {
+            if (token.Value.Type == VRML97TokenType.EOF) return;
+            switch (token.Value.Text) {
                 case "Script":
                     ParseScriptNode(context);
                     break;
@@ -287,13 +284,9 @@ namespace Graph3D.Vrml.Parser {
                     var node = context.CreateNode(nodeTypeId, context.NodeName);
                     context.NodeName = null;
                     context.PushFieldContainer(node);
-                    if (context.ReadNextToken().Type != VRML97TokenType.OpenBrace) {
-                        throw new InvalidVRMLSyntaxException("Open brace expected");
-                    }
+                    context.RequireNextToken(VRML97TokenType.OpenBrace);
                     ParseNodeBody(context);
-                    if (context.ReadNextToken().Type != VRML97TokenType.CloseBrace) {
-                        throw new InvalidVRMLSyntaxException();
-                    }
+                    context.RequireNextToken(VRML97TokenType.CloseBrace);
                     context.PopFieldContainer();
                     context.AcceptChild(node);
                     break;
@@ -304,7 +297,7 @@ namespace Graph3D.Vrml.Parser {
             var validToken = true;
             do {
                 var token = context.PeekNextToken();
-                if (token.Type == VRML97TokenType.Word) {
+                if (token.Value.Type == VRML97TokenType.Word) {
                     ParseNodeBodyElement(context);
                 } else {
                     validToken = false;
@@ -315,12 +308,12 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseScriptBodyElement(ParserContext context) {
             var token = context.PeekNextToken();
-            VRML97Token tokenIs = null;
+            VRML97Token? tokenIs = null;
             string fieldType;
-            switch (token.Text) {
+            switch (token.Value.Text) {
                 case "eventIn":
                     tokenIs = context.PeekNextToken(3);
-                    if (tokenIs.Text == "IS") {
+                    if (tokenIs.Value.Text == "IS") {
                         token = context.ReadNextToken();
                         fieldType = ParseFieldType(context);
                         string eventInId1 = ParseEventInId(context);
@@ -333,7 +326,7 @@ namespace Graph3D.Vrml.Parser {
                     break;
                 case "eventOut":
                     tokenIs = context.PeekNextToken(3);
-                    if (tokenIs.Text == "IS") {
+                    if (tokenIs.Value.Text == "IS") {
                         token = context.ReadNextToken();
                         fieldType = ParseFieldType(context);
                         string eventOutId1 = ParseEventOutId(context);
@@ -346,7 +339,7 @@ namespace Graph3D.Vrml.Parser {
                     break;
                 case "field":
                     tokenIs = context.PeekNextToken(3);
-                    if (tokenIs.Text == "IS") {
+                    if (tokenIs.Value.Text == "IS") {
                         token = context.ReadNextToken();
                         fieldType = ParseFieldType(context);
                         string fieldId1 = ParseFieldId(context);
@@ -358,7 +351,7 @@ namespace Graph3D.Vrml.Parser {
                     }
                     break;
                 default:
-                    if (token.Type == VRML97TokenType.Word) {
+                    if (token.Value.Type == VRML97TokenType.Word) {
                         ParseNodeBodyElement(context);
                     } else {
                         throw new Exception("Unexpected context");
@@ -373,7 +366,7 @@ namespace Graph3D.Vrml.Parser {
                 throw new Exception("Invalid context");
             }
             var token = context.PeekNextToken();
-            switch (token.Text) {
+            switch (token.Value.Text) {
                 case "ROUTE":
                     ParseRouteStatement(context);
                     break;
@@ -384,14 +377,14 @@ namespace Graph3D.Vrml.Parser {
             string fieldId = ParseFieldId(context);
             token = context.PeekNextToken();
             //TODO: get field type and parse depending on it.
-            switch (token.Text) {
+            switch (token.Value.Text) {
                 case "IS":
                     token = context.ReadNextToken();
                     string interfaceFieldId = ParseFieldId(context);
                     //TODO: Process inteface field linking
                     break;
                 default:
-                    var field = node.GetExposedField(fieldId);
+                    var field = node.GetExposedField<Field>(fieldId);
                     field.AcceptVisitor(_fieldParser);
                     break;
             }
@@ -401,11 +394,11 @@ namespace Graph3D.Vrml.Parser {
             return context.ParseNodeNameId();
         }
 
-        private string ParseNodeTypeId(ParserContext context) {
+        private static string ParseNodeTypeId(ParserContext context) {
             return ParseId(context);
         }
 
-        private string ParseFieldId(ParserContext context) {
+        private static string ParseFieldId(ParserContext context) {
             return context.ParseFieldId();
         }
 
@@ -418,7 +411,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         private static string ParseId(ParserContext context) {
-            return context.ReadNextToken().Text;
+            return context.RequireNextToken().Text;
         }
 
         private string ParseFieldType(ParserContext context) {

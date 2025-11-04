@@ -33,43 +33,43 @@ namespace Graph3D.Vrml.Nodes.Bindable {
         }
 
         public MFColor GroundColor {
-            get { return GetExposedField("groundColor") as MFColor; }
+            get { return GetExposedField<MFColor>("groundColor"); }
         }
 
         public MFFloat GroundAngle {
-            get { return GetExposedField("groundAngle") as MFFloat; }
+            get { return GetExposedField<MFFloat>("groundAngle"); }
         }
 
         public MFString BackUrl {
-            get { return GetExposedField("backUrl") as MFString; }
+            get { return GetExposedField<MFString>("backUrl"); }
         }
 
         public MFString BottomUrl {
-            get { return GetExposedField("bottomUrl") as MFString; }
+            get { return GetExposedField<MFString>("bottomUrl"); }
         }
 
         public MFString FrontUrl {
-            get { return GetExposedField("frontUrl") as MFString; }
+            get { return GetExposedField<MFString>("frontUrl"); }
         }
 
         public MFString LeftUrl {
-            get { return GetExposedField("leftUrl") as MFString; }
+            get { return GetExposedField<MFString>("leftUrl"); }
         }
 
         public MFString RightUrl {
-            get { return GetExposedField("rightUrl") as MFString; }
+            get { return GetExposedField<MFString>("rightUrl"); }
         }
 
         public MFString TopUrl {
-            get { return GetExposedField("topUrl") as MFString; }
+            get { return GetExposedField<MFString>("topUrl"); }
         }
 
         public MFColor SkyColor {
-            get { return GetExposedField("skyColor") as MFColor; }
+            get { return GetExposedField<MFColor>("skyColor"); }
         }
 
         public MFFloat SkyAngle {
-            get { return GetExposedField("skyAngle") as MFFloat; }
+            get { return GetExposedField<MFFloat>("skyAngle"); }
         }
 
         protected override BaseNode CreateInstance() {

@@ -98,10 +98,12 @@ namespace Graph3D.Vrml {
         /// <param name="transformation">Transformation 3x4 matrix.</param>
         /// <returns></returns>
         public static float[] TransformVector(float x, float y, float z, float[,] transformation) {
-            float[] result = new float[3];
-            result[0] = transformation[0, 0] * x + transformation[0, 1] * y + transformation[0, 2] * z + transformation[0, 3];
-            result[1] = transformation[1, 0] * x + transformation[1, 1] * y + transformation[1, 2] * z + transformation[1, 3];
-            result[2] = transformation[2, 0] * x + transformation[2, 1] * y + transformation[2, 2] * z + transformation[2, 3];
+            float[] result =
+            [
+                transformation[0, 0] * x + transformation[0, 1] * y + transformation[0, 2] * z + transformation[0, 3],
+                transformation[1, 0] * x + transformation[1, 1] * y + transformation[1, 2] * z + transformation[1, 3],
+                transformation[2, 0] * x + transformation[2, 1] * y + transformation[2, 2] * z + transformation[2, 3],
+            ];
             return result;
         }
 

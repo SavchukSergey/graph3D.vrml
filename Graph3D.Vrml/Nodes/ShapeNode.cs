@@ -11,8 +11,8 @@ namespace Graph3D.Vrml.Nodes {
     /// </summary>
     public class ShapeNode : Node, IChildNode {
 
-        private readonly SFNode _appearanceNode = new SFNode();
-        private readonly SFNode _geometryNode = new SFNode();
+        private readonly SFNode _appearanceNode = new();
+        private readonly SFNode _geometryNode = new();
 
         public ShapeNode() {
             AddExposedField("appearance", _appearanceNode);

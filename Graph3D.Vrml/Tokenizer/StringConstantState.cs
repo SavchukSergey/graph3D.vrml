@@ -12,7 +12,7 @@ namespace Graph3D.Vrml.Tokenizer {
         private char quote;
 
         public override VrmlTokenizerState Tick() {
-            char ch = context.ReadChar();
+            var ch = context.ReadChar();
             switch (state) {
                 case "":
                     if (tokenizer.IsQuote(ch)) {

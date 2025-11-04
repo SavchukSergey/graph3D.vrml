@@ -1,29 +1,20 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Graph3D.Vrml.Tokenizer {
-    public class VRML97Token {
+    public readonly struct VRML97Token {
 
         public VRML97Token(string text, VRML97TokenType type) {
-            this.text = text;
-            this.type = type;
+            Text = text;
+            Type = type;
         }
 
-        private readonly string text;
-        public string Text {
-            [DebuggerStepThrough]
-            get { return text; }
-        }
+        public readonly string Text;
 
-        private readonly VRML97TokenType type;
-        public VRML97TokenType Type {
-            [DebuggerStepThrough]
-            get { return type; }
-        }
+        public readonly VRML97TokenType Type;
 
         public override string ToString() {
-            return type switch {
-                VRML97TokenType.Word => "VRML97 Token: " + text,
+            return Type switch {
+                VRML97TokenType.Word => "VRML97 Token: " + Text,
                 VRML97TokenType.EOF => "VRML97 EOF Token",
                 VRML97TokenType.OpenBrace => "VRML97 OpenBrace ('{') Token",
                 VRML97TokenType.CloseBrace => "VRML97 CloseBrace ('}') Token",

@@ -13,12 +13,12 @@ namespace Graph3D.Vrml.Nodes.Appearance {
     /// </summary>
     public class MaterialNode : Node {
 
-        private readonly SFFloat _ambientIntensityNode = new SFFloat(0.2f);
-        private SFColor _diffuseColorNode = new SFColor(0.8f, 0.8f, 0.8f);
-        private SFColor _emissiveColorNode = new SFColor(0f, 0f, 0f);
-        private readonly SFFloat _shininessNode = new SFFloat(0.2f);
-        private SFColor _specularColorNode = new SFColor(0f, 0f, 0f);
-        private readonly SFFloat _transparencyNode = new SFFloat(0f);
+        private readonly SFFloat _ambientIntensityNode = new(0.2f);
+        private SFColor _diffuseColorNode = new(0.8f, 0.8f, 0.8f);
+        private SFColor _emissiveColorNode = new(0f, 0f, 0f);
+        private readonly SFFloat _shininessNode = new(0.2f);
+        private SFColor _specularColorNode = new(0f, 0f, 0f);
+        private readonly SFFloat _transparencyNode = new(0f);
 
         public MaterialNode() {
             AddExposedField("ambientIntensity", _ambientIntensityNode);

@@ -24,23 +24,23 @@ namespace Graph3D.Vrml.Nodes.Geometry {
         }
 
         public SFNode Color {
-            get { return GetExposedField("color") as SFNode; }
+            get { return GetExposedField<SFNode>("color"); }
         }
 
         public SFNode Coord {
-            get { return GetExposedField("coord") as SFNode; }
+            get { return GetExposedField<SFNode>("coord"); }
         }
 
         public MFInt32 ColorIndex {
-            get { return GetField("colorIndex") as MFInt32; }
+            get { return GetExposedField<MFInt32>("colorIndex"); }
         }
 
         public SFBool ColorPerVertex {
-            get { return GetField("colorPerVertex") as SFBool; }
+            get { return GetExposedField<SFBool>("colorPerVertex"); }
         }
 
         public MFInt32 CoordIndex {
-            get { return GetField("coordIndex") as MFInt32; }
+            get { return GetExposedField<MFInt32>("coordIndex"); }
         }
 
         protected override BaseNode CreateInstance() {

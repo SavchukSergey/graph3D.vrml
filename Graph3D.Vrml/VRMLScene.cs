@@ -7,6 +7,6 @@ namespace Graph3D.Vrml {
             Root.Name = "SCENEGRAPH";
         }
 
-        public SceneGraphNode Root = new SceneGraphNode();
+        public SceneGraphNode Root = new();
     }
 }

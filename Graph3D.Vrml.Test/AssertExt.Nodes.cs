@@ -3,15 +3,12 @@ using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Nodes;
 using Graph3D.Vrml.Nodes.Appearance;
 using Graph3D.Vrml.Nodes.Appearance.Texture;
-using Graph3D.Vrml.Nodes.Grouping;
-using Graph3D.Vrml.Parser;
-using Graph3D.Vrml.Tokenizer;
 using NUnit.Framework;
 
 namespace Graph3D.Vrml.Test {
     public static partial class AssertExt {
 
-        public static void AreEqual(BaseNode expected, BaseNode actual, string path = null) {
+        public static void AreEqual(BaseNode expected, BaseNode actual, string? path = null) {
             path = path ?? "$";
             Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             if (expected != null && actual != null) {

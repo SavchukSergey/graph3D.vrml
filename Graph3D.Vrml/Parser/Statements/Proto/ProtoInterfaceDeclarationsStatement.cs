@@ -25,11 +25,11 @@ namespace Graph3D.Vrml.Parser.Statements.Proto {
 
             do {
                 var token = context.PeekNextToken();
-                if (token.Type == VRML97TokenType.CloseBracket) {
+                if (token.Value.Type == VRML97TokenType.CloseBracket) {
                     context.ReadCloseBracket();
                     break;
                 }
-                switch (token.Text) {
+                switch (token.Value.Text) {
                     case "eventIn":
                         var eventIn = ProtoEventInStatement.Parse(context);
                         res.EventsIn.Add(eventIn);

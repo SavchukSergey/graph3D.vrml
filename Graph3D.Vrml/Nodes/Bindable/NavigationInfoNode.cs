@@ -20,11 +20,11 @@ namespace Graph3D.Vrml.Nodes.Bindable {
         }
 
         public SFBool Headlight {
-            get { return GetExposedField("headlight") as SFBool; }
+            get { return GetExposedField<SFBool>("headlight"); }
         }
 
         public MFString Type {
-            get { return GetExposedField("type") as MFString; }
+            get { return GetExposedField<MFString>("type"); }
         }
 
         protected override BaseNode CreateInstance() {

@@ -10,23 +10,14 @@
         public string EventIn { get; set; }
 
         public static RouteStatement Parse(ParserContext context) {
-            var keyword = context.ReadNextToken();
-            if (keyword.Text != "ROUTE") {
-                throw new InvalidVRMLSyntaxException("ROUTE expected");
-            }
+            context.RequireNextToken("ROUTE");
 
             var nodeOut = context.ParseNodeNameId();
-            if (context.ReadNextToken().Text != ".") {
-                throw new InvalidVRMLSyntaxException();
-            }
+            context.RequireNextToken(".");
             var eventOut = context.ParseEventOutId();
-            if (context.ReadNextToken().Text != "TO") {
-                throw new InvalidVRMLSyntaxException();
-            }
+            context.RequireNextToken("TO");
             var nodeIn = context.ParseNodeNameId();
-            if (context.ReadNextToken().Text != ".") {
-                throw new InvalidVRMLSyntaxException();
-            }
+            context.RequireNextToken(".");
             var eventIn = context.ParseEventInId();
 
             return new RouteStatement {

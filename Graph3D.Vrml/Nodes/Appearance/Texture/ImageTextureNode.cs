@@ -1,7 +1,4 @@
 ﻿using Graph3D.Vrml.Fields;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Graph3D.Vrml.Nodes.Appearance.Texture {
     public class ImageTextureNode : TextureNode {
@@ -11,7 +8,7 @@ namespace Graph3D.Vrml.Nodes.Appearance.Texture {
         }
 
         public SFString Url {
-            get { return GetExposedField("url") as SFString; }
+            get { return GetExposedField< SFString>("url"); }
         }
 
         protected override BaseNode CreateInstance() {

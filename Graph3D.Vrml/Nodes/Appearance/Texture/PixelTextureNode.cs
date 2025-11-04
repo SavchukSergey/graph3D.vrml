@@ -17,18 +17,18 @@ namespace Graph3D.Vrml.Nodes.Appearance.Texture {
         }
 
         public SFImage Image {
-            get { return GetExposedField("image") as SFImage; }
+            get { return GetExposedField<SFImage>("image"); }
         }
 
 
         public SFBool RepeatS
         {
-            get { return GetField("repeatS") as SFBool; }
+            get { return GetExposedField<SFBool>("repeatS"); }
         }
 
         public SFBool RepeatT
         {
-            get { return GetField("repeatT") as SFBool; }
+            get { return GetExposedField<SFBool>("repeatT"); }
         }
 
         protected override BaseNode CreateInstance() {

@@ -14,9 +14,9 @@ namespace Graph3D.Vrml.Nodes {
 
         public BaseNode Parent { get; set; }
 
-        private readonly Dictionary<string, Field> _exposedFields = new Dictionary<string, Field>();
-        private readonly Dictionary<string, Field> _eventIns = new Dictionary<string, Field>();
-        private readonly Dictionary<string, Field> _eventOuts = new Dictionary<string, Field>();
+        private readonly Dictionary<string, Field> _exposedFields = [];
+        private readonly Dictionary<string, Field> _eventIns = [];
+        private readonly Dictionary<string, Field> _eventOuts = [];
 
         protected void AddField(string fieldName, Field field) {
             //TODO: another dictionary.
@@ -35,29 +35,29 @@ namespace Graph3D.Vrml.Nodes {
             _eventOuts[eventOutName] = field;
         }
 
-        public Field GetExposedField(string exposedFieldName) {
-            if (_exposedFields.TryGetValue(exposedFieldName, out Field field)) {
-                return field;
+        public TField GetExposedField<TField>(string exposedFieldName) where TField : Field {
+            if (_exposedFields.TryGetValue(exposedFieldName, out var field)) {
+                return (TField)field;
             }
             throw new InvalidExposedFieldException($"'{exposedFieldName}' exposed field doesn't exist in node of {GetType().Name} type");
         }
 
         public Field GetField(string fieldName) {
-            if (_exposedFields.TryGetValue(fieldName, out Field res)) {
+            if (_exposedFields.TryGetValue(fieldName, out var res)) {
                 return res;
             }
             throw new InvalidExposedFieldException($"'{fieldName}' field doesn't exist in node of {GetType().Name} type");
         }
 
         public Field GetEventIn(string eventInName) {
-            if (_eventIns.TryGetValue(eventInName, out Field res)) {
+            if (_eventIns.TryGetValue(eventInName, out var res)) {
                 return res;
             }
             throw new InvalidEventInException($"'{eventInName}' event in field doesn't exist in node of {GetType().Name} type");
         }
 
         public Field GetEventOut(string eventOutName) {
-            if (_eventOuts.TryGetValue(eventOutName, out Field res)) return res;
+            if (_eventOuts.TryGetValue(eventOutName, out var res)) return res;
             throw new InvalidEventOutException($"'{eventOutName}' event out field doesn't exist in node of {GetType().Name} type");
         }
 
@@ -68,15 +68,15 @@ namespace Graph3D.Vrml.Nodes {
         public virtual BaseNode Clone() {
             var clone = CreateInstance();
             foreach (var key in _exposedFields.Keys) {
-                Field field = _exposedFields[key];
+                var field = _exposedFields[key];
                 clone._exposedFields[key] = field.Clone();
             }
             foreach (var key in _eventIns.Keys) {
-                Field field = _eventIns[key];
+                var field = _eventIns[key];
                 clone._eventIns[key] = field.Clone();
             }
             foreach (var key in _eventOuts.Keys) {
-                Field field = _eventOuts[key];
+                var field = _eventOuts[key];
                 clone._eventOuts[key] = field.Clone();
             }
             clone.Name = Name;

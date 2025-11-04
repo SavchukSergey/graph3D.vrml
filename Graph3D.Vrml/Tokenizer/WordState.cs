@@ -24,7 +24,7 @@ namespace Graph3D.Vrml.Tokenizer {
                     return this;
                 } else {
                     context.Enqueue(new VRML97Token(text, VRML97TokenType.Word));
-                    if (tokenizer.IsMultipartIdentifierSeparator(ch)) {
+                    if (Vrml97Tokenizer.IsMultipartIdentifierSeparator(ch)) {
                         return new MultipartIdentifierState(context);
                     } else {
                         return new InitialState(context);

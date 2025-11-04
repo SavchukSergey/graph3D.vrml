@@ -31,15 +31,15 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public SFBool Collide {
-            get { return GetExposedField("collide") as SFBool; }
+            get { return GetExposedField<SFBool>("collide"); }
         }
 
         public SFNode Proxy {
-            get { return GetField("proxy") as SFNode; }
+            get { return GetExposedField<SFNode>("proxy"); }
         }
 
         public SFTime CollideTime {
-            get { return GetEventOut("collideTime") as SFTime; }
+            get { return GetExposedField<SFTime>("collideTime"); }
         }
 
     }

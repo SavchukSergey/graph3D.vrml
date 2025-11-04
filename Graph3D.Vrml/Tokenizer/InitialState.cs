@@ -28,7 +28,7 @@ namespace Graph3D.Vrml.Tokenizer {
             if (tokenizer.IsIdFirstChar(ch)) {
                 return new WordState(context);
             }
-            if (tokenizer.IsNumberFirstChar(ch)) {
+            if (Vrml97Tokenizer.IsNumberFirstChar(ch)) {
                 return new NumberState(context);
             }
             throw new Exception("Unexpected symbol");

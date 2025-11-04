@@ -9,7 +9,7 @@ namespace Graph3D.Vrml.Tokenizer {
 
         public override VrmlTokenizerState Tick() {
             char ch = context.PeekChar();
-            if (tokenizer.IsMultipartIdentifierSeparator(ch)) {
+            if (Vrml97Tokenizer.IsMultipartIdentifierSeparator(ch)) {
                 context.Enqueue(new VRML97Token(context.ReadChar().ToString(), VRML97TokenType.MutipartIdentifierSeparator));
                 return new WordState(context);
             } else {

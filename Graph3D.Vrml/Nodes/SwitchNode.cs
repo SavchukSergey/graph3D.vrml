@@ -15,11 +15,11 @@ namespace Graph3D.Vrml.Nodes {
         }
 
         public MFNode Choice {
-            get { return GetExposedField("choice") as MFNode; }
+            get { return GetExposedField<MFNode>("choice"); }
         }
 
         public SFInt32 WhichChoice {
-            get { return GetExposedField("whichChoice") as SFInt32; }
+            get { return GetExposedField<SFInt32>("whichChoice"); }
         }
 
         protected override BaseNode CreateInstance() {

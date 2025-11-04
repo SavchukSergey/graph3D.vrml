@@ -17,7 +17,7 @@ namespace Graph3D.Vrml.Nodes.LightSources {
         }
 
         public SFVec3f Direction {
-            get { return GetExposedField("direction") as SFVec3f ; }
+            get { return GetExposedField<SFVec3f>("direction") ; }
         }
 
         protected override BaseNode CreateInstance() {

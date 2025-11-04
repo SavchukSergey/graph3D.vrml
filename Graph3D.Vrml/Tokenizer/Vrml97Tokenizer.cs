@@ -82,7 +82,7 @@ namespace Graph3D.Vrml.Tokenizer {
             return true;
         }
 
-        public bool IsNumberFirstChar(char ch) {
+        public static bool IsNumberFirstChar(char ch) {
             if (ch >= 0x30 && ch <= 0x39) return true;
             if (ch == '-') return true;
             if (ch == '+') return true;
@@ -112,23 +112,23 @@ namespace Graph3D.Vrml.Tokenizer {
 
         #endregion
 
-        public bool IsOpenBrace(char ch) {
+        public static bool IsOpenBrace(char ch) {
             return ch == '{';
         }
 
-        public bool IsCloseBrace(char ch) {
+        public static bool IsCloseBrace(char ch) {
             return ch == '}';
         }
 
-        public bool IsOpenBracket(char ch) {
+        public static bool IsOpenBracket(char ch) {
             return ch == '[';
         }
 
-        public bool IsCloseBracket(char ch) {
+        public static bool IsCloseBracket(char ch) {
             return ch == ']';
         }
 
-        public bool IsMultipartIdentifierSeparator(char ch) {
+        public static bool IsMultipartIdentifierSeparator(char ch) {
             return ch == '.';
         }
     }

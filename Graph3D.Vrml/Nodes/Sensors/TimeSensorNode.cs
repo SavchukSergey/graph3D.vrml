@@ -9,11 +9,11 @@ namespace Graph3D.Vrml.Nodes.Sensors {
         }
 
         public SFTime CycleInterval {
-            get { return GetExposedField("cycleInterval") as SFTime; }
+            get { return GetExposedField<SFTime>("cycleInterval"); }
         }
 
         public SFBool Loop {
-            get { return GetExposedField("loop") as SFBool; }
+            get { return GetExposedField<SFBool>("loop"); }
         }
 
         protected override BaseNode CreateInstance() {
