@@ -10,7 +10,7 @@ namespace Graph3D.Vrml.Nodes {
         protected BaseNode() {
         }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public BaseNode Parent { get; set; }
 
@@ -42,9 +42,9 @@ namespace Graph3D.Vrml.Nodes {
             throw new InvalidExposedFieldException($"'{exposedFieldName}' exposed field doesn't exist in node of {GetType().Name} type");
         }
 
-        public Field GetField(string fieldName) {
+        public TField GetField<TField>(string fieldName) where TField : Field {
             if (_exposedFields.TryGetValue(fieldName, out var res)) {
-                return res;
+                return (TField)res;
             }
             throw new InvalidExposedFieldException($"'{fieldName}' field doesn't exist in node of {GetType().Name} type");
         }
@@ -85,15 +85,15 @@ namespace Graph3D.Vrml.Nodes {
 
         public override string ToString() {
             string fieldsStr = "";
-            foreach (string key in _eventIns.Keys) {
+            foreach (var key in _eventIns.Keys) {
                 if (!string.IsNullOrEmpty(fieldsStr)) fieldsStr += ", \r\n";
                 fieldsStr += key + ": " + _eventIns[key].ToString();
             }
-            foreach (string key in _eventOuts.Keys) {
+            foreach (var key in _eventOuts.Keys) {
                 if (!string.IsNullOrEmpty(fieldsStr)) fieldsStr += ", \r\n";
                 fieldsStr += key + ": " + _eventOuts[key].ToString();
             }
-            foreach (string key in _exposedFields.Keys) {
+            foreach (var key in _exposedFields.Keys) {
                 if (!string.IsNullOrEmpty(fieldsStr)) fieldsStr += ", \r\n";
                 fieldsStr += key + ": " + _exposedFields[key].ToString();
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Graph3D.Vrml.Fields;
@@ -19,12 +20,14 @@ namespace Graph3D.Vrml.Parser {
             _childAcceptor = new ChildAcceptor();
         }
 
-        private readonly Queue<VRML97Token> _queue = new Queue<VRML97Token>();
+        private readonly Queue<VRML97Token> _queue = new();
 
-        public void ReadKeyword(string keyword) {
+        public TokenizerPosition Position => _tokenizer.Position;
+
+        public void ReadKeyword(ReadOnlySpan<char> keyword) {
             var token = RequireNextToken();
-            if (token.Type != VRML97TokenType.Word || token.Text != keyword) {
-                throw new InvalidVRMLSyntaxException(keyword + " expected");
+            if (token.Type != VRML97TokenType.Word || !token.SequenceEqual(keyword)) {
+                throw new InvalidVRMLSyntaxException($"{keyword} is expected", Position);
             }
         }
 
@@ -85,19 +88,20 @@ namespace Graph3D.Vrml.Parser {
 
         public VRML97Token RequireNextToken() {
             var token = ReadNextToken();
-            return token == null ? throw new InvalidVRMLSyntaxException() : token.Value;
+            return token == null ? throw new InvalidVRMLSyntaxException("Token expected", Position) : token.Value;
         }
 
         public void RequireNextToken(VRML97TokenType type) {
             var token = RequireNextToken();
             if (token.Type != type) {
-                throw new InvalidVRMLSyntaxException($"{type} expected");
+                throw new InvalidVRMLSyntaxException($"{type} expected", Position);
             }
         }
 
         public void RequireNextToken(string value) {
-            if (RequireNextToken().Text != value) {
-                throw new InvalidVRMLSyntaxException($"{value} is expected");
+            var token = RequireNextToken();
+            if (!token.SequenceEqual(value)) {
+                throw new InvalidVRMLSyntaxException($"{value} is expected", Position);
             }
         }
 
@@ -121,47 +125,38 @@ namespace Graph3D.Vrml.Parser {
             return null;
         }
 
-
-        public int LineIndex {
-            get { return _tokenizer.LineIndex; }
-        }
-
-        public int ColumnIndex {
-            get { return _tokenizer.ColumnIndex; }
-        }
-
         public float ReadFloat() {
-            var value = RequireNextToken().Text;
-            return float.Parse(value, CultureInfo.InvariantCulture);
+            var token = RequireNextToken();
+            return float.Parse(token.Value.Span, CultureInfo.InvariantCulture);
         }
 
         public double ReadDouble() {
-            var value = RequireNextToken().Text;
-            return double.Parse(value, CultureInfo.InvariantCulture);
+            var token = RequireNextToken();
+            return double.Parse(token.Value.Span, CultureInfo.InvariantCulture);
         }
 
-        public virtual int ReadInt32() {
-            var value = RequireNextToken().Text;
-            return int.Parse(value);
+        public int ReadInt32() {
+            var token = RequireNextToken();
+            return int.Parse(token.Value.Span);
         }
 
-        public virtual string ReadString() {
+        public string ReadString() {
             return RequireNextToken().Text;
         }
 
         public uint ReadHexaDecimal() {
-            var text = RequireNextToken().Text;
-            if (text.StartsWith("0x")) {
-                return uint.Parse(text.Substring(2), NumberStyles.HexNumber);
+            var token = RequireNextToken();
+            if (token.StartsWith("0x")) {
+                return uint.Parse(token.Value.Span[2..], NumberStyles.HexNumber);
             } else {
-                return uint.Parse(text);
+                return uint.Parse(token.Value.Span);
             }
         }
 
-        public string NodeName { get; set; }
+        public string? NodeName { get; set; }
 
-        private readonly Stack<BaseNode> fieldContainers = new Stack<BaseNode>();
-        public BaseNode FieldContainer {
+        private readonly Stack<BaseNode> fieldContainers = new();
+        public BaseNode? FieldContainer {
             [DebuggerStepThrough]
             get {
                 if (fieldContainers.Count > 0) return fieldContainers.Peek();
@@ -179,8 +174,8 @@ namespace Graph3D.Vrml.Parser {
             fieldContainers.Pop();
         }
 
-        private readonly Stack<Field> nodeContainers = new Stack<Field>();
-        public Field NodeContainer {
+        private readonly Stack<Field> nodeContainers = new();
+        public Field? NodeContainer {
             [DebuggerStepThrough]
             get {
                 if (nodeContainers.Count > 0) return nodeContainers.Peek();
@@ -198,10 +193,10 @@ namespace Graph3D.Vrml.Parser {
             nodeContainers.Pop();
         }
 
-        private readonly Dictionary<string, BaseNode> namedNodes = new Dictionary<string, BaseNode>();
+        private readonly Dictionary<string, BaseNode> namedNodes = [];
 
-        public BaseNode CreateNode(string nodeTypeId, string nodeNameId) {
-            var node = _nodeFactory.CreateNode(nodeTypeId, nodeNameId);
+        public BaseNode CreateNode(string nodeTypeId, string? nodeNameId) {
+            var node = _nodeFactory.CreateNode(nodeTypeId, nodeNameId, Position);
             if (!string.IsNullOrEmpty(node.Name)) {
                 namedNodes[node.Name] = node;
             }
@@ -214,7 +209,7 @@ namespace Graph3D.Vrml.Parser {
 
 
         //todo: name lookup from bottom to top
-        public BaseNode FindNode(string nodeNameId) {
+        public BaseNode? FindNode(string nodeNameId) {
             if (namedNodes.ContainsKey(nodeNameId)) {
                 return namedNodes[nodeNameId];
             } else {
@@ -224,7 +219,7 @@ namespace Graph3D.Vrml.Parser {
 
         public void AcceptChild(BaseNode node) {
             _childAcceptor.child = node;
-            NodeContainer.AcceptVisitor(_childAcceptor);
+            NodeContainer?.AcceptVisitor(_childAcceptor);
         }
 
         public void RegisterPtototype(ProtoNode proto) {

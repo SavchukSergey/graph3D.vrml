@@ -80,8 +80,8 @@ Entry point is `VrmlScene` which contains a root `SceneGraphNode`. The parser po
 
 ## Target Frameworks
 
-- Main library: `net8.0` and `netstandard2.1`
-- Test project: `net8.0`
+- Main library: `net9.0`
+- Test project: `net9.0`
 
 ## Test Structure
 

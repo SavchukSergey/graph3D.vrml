@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 
 namespace Graph3D.Vrml.Tokenizer {
-    public class TokenizerContext : IDisposable {
+    public class TokenizerContext {
 
-        private readonly TextReader reader;
+        private readonly TokenizerSource _source;
+        private readonly Vrml97Tokenizer _tokenizer;
 
         [DebuggerStepThrough]
-        public TokenizerContext(TextReader reader, Vrml97Tokenizer tokenizer) {
-            this.reader = reader;
-            this.tokenizer = tokenizer;
+        public TokenizerContext(string content, Vrml97Tokenizer tokenizer) {
+            _source = new TokenizerSource(content);
+            _tokenizer = tokenizer;
         }
 
-        private readonly Vrml97Tokenizer tokenizer;
         public Vrml97Tokenizer Tokenizer {
             [DebuggerStepThrough]
-            get { return tokenizer; }
+            get { return _tokenizer; }
         }
 
-        private readonly Queue<VRML97Token> tokens = new Queue<VRML97Token>();
+        public TokenizerSource Source {
+            [DebuggerStepThrough]
+            get { return _source; }
+        }
+
+        private readonly TokenQueue tokens = new();
 
         [DebuggerStepThrough]
         public void Enqueue(VRML97Token token) {
@@ -39,30 +42,34 @@ namespace Graph3D.Vrml.Tokenizer {
 
         [DebuggerStepThrough]
         public char PeekChar() {
-            return (char)reader.Peek();
+            return _source.PeekChar();
+        }
+
+        [DebuggerStepThrough]
+        public char PeekChar(int distance) {
+            return _source.PeekChar(distance);
         }
 
         private string state = "";
+
+        private TokenizerPosition _position;
+        public TokenizerPosition Position => _position;
+
+        public void RequireChar(char ch) {
+            var actual = ReadChar();
+            if (actual != ch) {
+                throw new InvalidVRMLSyntaxException($"Expected {ch} character", Position);
+            }
+        }
+
+        public char ReadAndPeek() {
+            ReadChar();
+            return PeekChar();
+        }
         
-        private int lineIndex = 1;
-        public int LineIndex {
-            get { return lineIndex; }
-        }
-        private int columnIndex = 1;
-        public int ColumnIndex {
-            get { return columnIndex; }
-        }
-
-        public string ReadLine() {
-            string line = reader.ReadLine();
-            lineIndex++;
-            columnIndex = 1;
-            return line;
-        }
-
         //[DebuggerStepThrough]
         public char ReadChar() {
-            char ch = (char)reader.Read();
+            var ch = _source.ReadChar();
             switch (state) {
                 case "":
                     switch (ch) {
@@ -70,31 +77,23 @@ namespace Graph3D.Vrml.Tokenizer {
                             state = "r";
                             break;
                         case '\n':
-                            lineIndex++;
-                            columnIndex = 1;
+                            _position.LineIndex++;
+                            _position.ColumnIndex = 1;
                             break;
                         default:
-                            columnIndex++;
+                            _position.ColumnIndex++;
                             break;
                     }
                     break;
                 case "r":
                     if (ch == '\n') {
-                        lineIndex++;
-                        columnIndex = 1;
+                        _position.LineIndex++;
+                        _position.ColumnIndex = 1;
                     }
                     state = "";
                     break;
             }
             return ch;
         }
-
-        #region IDisposable Members
-
-        public void Dispose() {
-            reader.Dispose();
-        }
-
-        #endregion
     }
 }

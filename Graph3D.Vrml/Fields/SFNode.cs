@@ -6,11 +6,11 @@ namespace Graph3D.Vrml.Fields {
         public SFNode() {
         }
 
-        public SFNode(BaseNode value) {
+        public SFNode(BaseNode? value) {
             Node = value;
         }
 
-        public BaseNode Node { get; set; }
+        public BaseNode? Node { get; set; }
 
         public override void AcceptVisitor(IFieldVisitor visitor) {
             visitor.Visit(this);

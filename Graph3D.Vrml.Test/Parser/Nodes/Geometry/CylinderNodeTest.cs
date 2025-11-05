@@ -25,7 +25,7 @@ Shape {
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var cylinder = (scene.Root.Children[0] as ShapeNode).Geometry as CylinderNode;
+            var cylinder = (CylinderNode)((ShapeNode)scene.Root.Children[0]).Geometry;
             Assert.That(cylinder.Bottom.Value, Is.EqualTo(true));
             Assert.That(cylinder.Height.Value, Is.EqualTo(20f));
             Assert.That(cylinder.Radius.Value, Is.EqualTo(45.2f));

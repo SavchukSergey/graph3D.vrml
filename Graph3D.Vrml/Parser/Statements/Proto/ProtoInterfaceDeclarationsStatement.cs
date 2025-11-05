@@ -29,25 +29,20 @@ namespace Graph3D.Vrml.Parser.Statements.Proto {
                     context.ReadCloseBracket();
                     break;
                 }
-                switch (token.Value.Text) {
-                    case "eventIn":
-                        var eventIn = ProtoEventInStatement.Parse(context);
-                        res.EventsIn.Add(eventIn);
-                        break;
-                    case "eventOut":
-                        var eventOut = ProtoEventOutStatement.Parse(context);
-                        res.EventsOut.Add(eventOut);
-                        break;
-                    case "field":
-                        var field = ProtoFieldStatement.Parse(context, nodeStatementParser);
-                        res.Fields.Add(field);
-                        break;
-                    case "exposedField":
-                        var exposedField = ProtoExposedFieldStatement.Parse(context, nodeStatementParser);
-                        res.ExposedFields.Add(exposedField);
-                        break;
-                    default:
-                        throw new InvalidVRMLSyntaxException();
+                if (token.Value.SequenceEqual("eventIn")) {
+                    var eventIn = ProtoEventInStatement.Parse(context);
+                    res.EventsIn.Add(eventIn);
+                } else if (token.Value.SequenceEqual("eventOut")) {
+                    var eventOut = ProtoEventOutStatement.Parse(context);
+                    res.EventsOut.Add(eventOut);
+                } else if (token.Value.SequenceEqual("field")) {
+                    var field = ProtoFieldStatement.Parse(context, nodeStatementParser);
+                    res.Fields.Add(field);
+                } else if (token.Value.SequenceEqual("exposedField")) {
+                    var exposedField = ProtoExposedFieldStatement.Parse(context, nodeStatementParser);
+                    res.ExposedFields.Add(exposedField);
+                } else {
+                    throw new InvalidVRMLSyntaxException($"Unknown statement {token.Value.Text}", context.Position);
                 }
             } while (true);
 

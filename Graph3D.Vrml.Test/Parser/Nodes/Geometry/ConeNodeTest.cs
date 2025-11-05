@@ -24,7 +24,7 @@ Shape {
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var cone = (scene.Root.Children[0] as ShapeNode).Geometry as ConeNode;
+            var cone = (ConeNode)((ShapeNode)scene.Root.Children[0]).Geometry;
             Assert.That(cone.BottomRadius.Value, Is.EqualTo(10f));
             Assert.That(cone.Height.Value, Is.EqualTo(20f));
             Assert.That(cone.Side.Value, Is.EqualTo(true));

@@ -21,7 +21,7 @@ Shape {
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var box = (scene.Root.Children[0] as ShapeNode).Geometry as BoxNode;
+            var box = (BoxNode)((ShapeNode)scene.Root.Children[0]).Geometry;
             Assert.That(box.Size.X, Is.EqualTo(4f));
             Assert.That(box.Size.Y, Is.EqualTo(5f));
             Assert.That(box.Size.Z, Is.EqualTo(6f));

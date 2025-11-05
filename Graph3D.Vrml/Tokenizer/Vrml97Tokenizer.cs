@@ -2,14 +2,17 @@
 using System.IO;
 
 namespace Graph3D.Vrml.Tokenizer {
-    public class Vrml97Tokenizer : IDisposable {
+    public partial class Vrml97Tokenizer {
 
         private readonly TokenizerContext context;
-        private VrmlTokenizerState currentState;
+
+        public Vrml97Tokenizer(string content) {
+            context = new TokenizerContext(content, this);
+        }
 
         public Vrml97Tokenizer(TextReader reader) {
-            context = new TokenizerContext(reader, this);
-            currentState = new InitialState(context);
+            var content = reader.ReadToEnd();
+            context = new TokenizerContext(content, this);
         }
 
         public Vrml97Tokenizer(Stream stream)
@@ -18,20 +21,56 @@ namespace Graph3D.Vrml.Tokenizer {
 
         public VRML97Token ReadNextToken() {
             while (context.TokensCount == 0) {
-                currentState = currentState.Tick();
+                Tick();
             }
             return context.Dequeue();
         }
 
-        public int LineIndex {
-            get { return context.LineIndex; }
-        }
+        private void Tick() {
+            var ch = context.PeekChar();
+            if (IsWhiteSpace(ch)) {
+                context.ReadChar();
+                return;
+            }
+            if (IsEOF(ch)) {
+                context.Enqueue(new VRML97Token("".AsMemory(), VRML97TokenType.EOF));
+                return;
+            }
+            if (IsLineComment(ch)) {
+                ConsumeLineCommentToken();
+                return;
+            }
+            if (IsPunctuation(ch)) {
+                context.Enqueue(ConsumePunctuationToken());
+                return;
+            }
+            if (IsQuote(ch)) {
+                context.Enqueue(ConsumeStringConstantToken());
+                return;
+            }
+            if (IsIdFirstChar(ch)) {
+                context.Enqueue(ConsumeWordToken());
+                ch = context.PeekChar();
 
-        public int ColumnIndex {
-            get { return context.ColumnIndex; }
-        }
+                while (IsMultipartIdentifierSeparator(ch)) {
+                    context.ReadChar();
+                    context.Enqueue(new VRML97Token(".".AsMemory(), VRML97TokenType.MutipartIdentifierSeparator));
+                    context.Enqueue(ConsumeWordToken());
+                    ch = context.PeekChar();
+                }
 
-        public virtual bool IsEOF(char ch) {
+                return;
+            }
+            if (IsNumberFirstChar(ch)) {
+                context.Enqueue(ConsumeNumberToken());
+                return;
+            }
+            throw new InvalidVRMLSyntaxException("Unexpected symbol", Position);
+        }        
+
+        public TokenizerPosition Position => context.Position;
+
+        public static bool IsEOF(char ch) {
             if (ch == 0xffff) return true;
             return false;
         }
@@ -45,19 +84,19 @@ namespace Graph3D.Vrml.Tokenizer {
             return false;
         }
 
-        public virtual bool IsLineComment(char ch) {
+        public static bool IsLineComment(char ch) {
             return ch == '#';
         }
 
-        public virtual bool IsQuote(char ch) {
+        public static bool IsQuote(char ch) {
             return ch == '"';
         }
 
-        public virtual bool IsEscapeSymbol(char ch) {
+        public static bool IsEscapeSymbol(char ch) {
             return ch == '\\';
         }
 
-        public bool IsIdFirstChar(char ch) {
+        public static bool IsIdFirstChar(char ch) {
             if (ch >= 0x0 && ch <= 0x20) return false;
             if (ch == 0x27) return false;
             if (ch == 0x7f) return false;
@@ -70,7 +109,7 @@ namespace Graph3D.Vrml.Tokenizer {
             return true;
         }
 
-        public bool IsIdRestChar(char ch) {
+        public static bool IsIdRestChar(char ch) {
             if (ch >= 0x0 && ch <= 0x20) return false;
             if (ch == 0x27) return false;
             if (ch == 0x2b) return false;
@@ -91,7 +130,7 @@ namespace Graph3D.Vrml.Tokenizer {
         }
 
 
-        public virtual bool IsPunctuation(char ch) {
+        public static bool IsPunctuation(char ch) {
             if (IsOpenBrace(ch)) return true;
             if (IsCloseBrace(ch)) return true;
             if (IsOpenBracket(ch)) return true;
@@ -99,18 +138,6 @@ namespace Graph3D.Vrml.Tokenizer {
             if (ch == ',') return true;
             return false;
         }
-
-        #region IDisposable Members
-
-        public void Dispose() {
-            context.Dispose();
-        }
-
-        ~Vrml97Tokenizer() {
-            Dispose();
-        }
-
-        #endregion
 
         public static bool IsOpenBrace(char ch) {
             return ch == '{';

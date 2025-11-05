@@ -27,25 +27,20 @@ namespace Graph3D.Vrml.Parser.Statements.Extern {
                     context.ReadCloseBracket();
                     break;
                 }
-                switch (token.Value.Text) {
-                    case "eventIn":
-                        var eventIn = ExternEventInStatement.Parse(context);
-                        res.EventsIn.Add(eventIn);
-                        break;
-                    case "eventOut":
-                        var eventOut = ExternEventOutStatement.Parse(context);
-                        res.EventsOut.Add(eventOut);
-                        break;
-                    case "field":
-                        var field = ExternFieldStatement.Parse(context);
-                        res.Fields.Add(field);
-                        break;
-                    case "exposedField":
-                        var exposedField = ExternExposedFieldStatement.Parse(context);
-                        res.ExposedFields.Add(exposedField);
-                        break;
-                    default:
-                        throw new InvalidVRMLSyntaxException();
+                if (token.Value.SequenceEqual("eventIn")) {
+                    var eventIn = ExternEventInStatement.Parse(context);
+                    res.EventsIn.Add(eventIn);
+                } else if (token.Value.SequenceEqual("eventOut")) {
+                    var eventOut = ExternEventOutStatement.Parse(context);
+                    res.EventsOut.Add(eventOut);
+                } else if (token.Value.SequenceEqual("field")) {
+                    var field = ExternFieldStatement.Parse(context);
+                    res.Fields.Add(field);
+                } else if (token.Value.SequenceEqual("exposedField")) {
+                    var exposedField = ExternExposedFieldStatement.Parse(context);
+                    res.ExposedFields.Add(exposedField);
+                } else {
+                    throw new InvalidVRMLSyntaxException($"Unknown statement {token.Value.Text}", context.Position);
                 }
             } while (true);
 

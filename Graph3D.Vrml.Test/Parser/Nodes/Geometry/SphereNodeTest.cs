@@ -21,7 +21,7 @@ Shape {
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var sphere = (scene.Root.Children[0] as ShapeNode).Geometry as SphereNode;
+            var sphere = (SphereNode)((ShapeNode)scene.Root.Children[0]).Geometry;
             Assert.That(sphere.Radius.Value, Is.EqualTo(2f));
 
         }

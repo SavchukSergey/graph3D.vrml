@@ -32,27 +32,27 @@ namespace Graph3D.Vrml.Nodes.Geometry {
         }
 
         public SFBool Convex {
-            get { return GetField("convex") as SFBool; }
+            get { return GetField<SFBool>("convex"); }
         }
 
         public SFFloat CreaseAngle {
-            get { return GetField("creaseAngle") as SFFloat; }
+            get { return GetField<SFFloat>("creaseAngle"); }
         }
 
         public MFVec2f CrossSection {
-            get { return GetField("crossSection") as MFVec2f; }
+            get { return GetField<MFVec2f>("crossSection"); }
         }
 
         public SFBool EndCap {
-            get { return GetField("endCap") as SFBool; }
+            get { return GetField<SFBool>("endCap"); }
         }
 
         public MFVec2f Scale {
-            get { return GetField("scale") as MFVec2f; }
+            get { return GetField<MFVec2f>("scale"); }
         }
 
         public MFVec3f Spine {
-            get { return GetField("spine") as MFVec3f; }
+            get { return GetField<MFVec3f>("spine"); }
         }
 
         protected override BaseNode CreateInstance() {

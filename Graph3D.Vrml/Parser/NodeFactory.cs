@@ -9,13 +9,13 @@ using Graph3D.Vrml.Nodes.Grouping;
 using Graph3D.Vrml.Nodes.Interpolation;
 using Graph3D.Vrml.Nodes.LightSources;
 using Graph3D.Vrml.Nodes.Sensors;
+using Graph3D.Vrml.Tokenizer;
 
 namespace Graph3D.Vrml.Parser {
     public class NodeFactory {
 
         [DebuggerStepThrough]
-        public NodeFactory()
-        {
+        public NodeFactory() {
             builtin["Anchor"] = new AnchorNode();
             builtin["Appearance"] = new AppearanceNode();
             builtin["Background"] = new BackgroundNode();
@@ -51,25 +51,27 @@ namespace Graph3D.Vrml.Parser {
             builtin["WorldInfo"] = new WorldInfoNode();
         }
 
-        private readonly Dictionary<string, BaseNode> builtin = new Dictionary<string, BaseNode>();
-        private readonly Dictionary<string, BaseNode> userdefined = new Dictionary<string, BaseNode>();
+        private readonly Dictionary<string, BaseNode> builtin = [];
+        private readonly Dictionary<string, BaseNode> userdefined = [];
 
-        public virtual BaseNode CreateNode(string nodeTypeName, string nodeName) {
-            if (builtin.ContainsKey(nodeTypeName)) {
-                var node = builtin[nodeTypeName].Clone();
+        public virtual BaseNode CreateNode(string nodeTypeName, string? nodeName, TokenizerPosition position) {
+            if (builtin.TryGetValue(nodeTypeName, out BaseNode? builtinValue)) {
+                var node = builtinValue.Clone();
                 node.Name = nodeName;
                 return node;
             }
-            if (userdefined.ContainsKey(nodeTypeName)) {
-                BaseNode node = userdefined[nodeTypeName].Clone();
+            if (userdefined.TryGetValue(nodeTypeName, out BaseNode? userdefinedValue)) {
+                BaseNode node = userdefinedValue.Clone();
                 node.Name = nodeName;
                 return node;
             }
-            throw new InvalidVRMLSyntaxException("Couldn't create node: " + nodeTypeName);
+            throw new InvalidVRMLSyntaxException($"Couldn't create node: {nodeTypeName}", position);
         }
 
         public void AddPrototype(BaseNode proto) {
-            userdefined[proto.Name] = proto;
+            if (proto.Name != null) {
+                userdefined[proto.Name] = proto;
+            }
         }
 
     }

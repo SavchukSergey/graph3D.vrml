@@ -22,16 +22,13 @@
         public abstract Field Clone();
 
         public static Field CreateField(string fieldType) {
-            switch (fieldType) {
-                case "SFColor":
-                    return new SFColor();
-                case "SFFloat":
-                    return new SFFloat();
-                case "SFInt32":
-                    return new SFInt32();
-                default:
-                    throw new InvalidVRMLSyntaxException("Unknown fieldType: '" + fieldType + "'");
-            }
+            return fieldType switch {
+                "SFColor" => new SFColor(),
+                "SFFloat" => new SFFloat(),
+                "SFInt32" => new SFInt32(),
+                _ => throw new InvalidVRMLSyntaxException("Unknown fieldType: '" + fieldType + "'"),
+            };
+
         }
     }
 }

@@ -16,16 +16,12 @@ namespace Graph3D.Vrml.Parser {
 
 
         public void Visit(SFBool field) {
-            string value = _context.RequireNextToken().Text;
-            switch (value) {
-                case "TRUE":
-                    field.Value = true;
-                    break;
-                case "FALSE":
-                    field.Value = false;
-                    break;
+            var token = _context.RequireNextToken();
+            if (token.SequenceEqual("TRUE")) {
+                field.Value = true;
+            } else if (token.SequenceEqual("FALSE")) {
+                field.Value = false;
             }
-
         }
 
         public void Visit(SFInt32 field) {
@@ -68,17 +64,14 @@ namespace Graph3D.Vrml.Parser {
 
         public void Visit(SFNode field) {
             var token = _context.PeekNextToken();
-            switch (token.Value.Text) {
-                case "NULL":
-                    _context.ReadNextToken();
-                    field.Node = null;
-                    break;
-                default:
-                    _context.PushNodeContainer(field);
-                    _nodeStatementParser(_context);
-                    _context.PopNodeContainer();
-                    break;
+            if (token.Value.SequenceEqual("NULL")) {
+                _context.ReadNextToken();
+                field.Node = null;
+                return;
             }
+            _context.PushNodeContainer(field);
+            _nodeStatementParser(_context);
+            _context.PopNodeContainer();
         }
 
         public void Visit(MFNode field) {

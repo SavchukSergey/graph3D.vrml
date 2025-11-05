@@ -25,7 +25,7 @@ Shape {
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var shape = scene.Root.Children[0] as ShapeNode;
+            var shape = (ShapeNode)scene.Root.Children[0];
             Assert.That(shape.Geometry, Is.Not.Null);
             Assert.That(shape.Appearance, Is.Not.Null);
         }
