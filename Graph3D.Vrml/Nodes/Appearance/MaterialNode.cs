@@ -111,10 +111,7 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             set {
                 if (_transparencyNode.Value != value) {
                     _transparencyNode.Value = value;
-                    var handler = TransparencyChanged;
-                    if (handler != null) {
-                        handler(this);
-                    }
+                    TransparencyChanged?.Invoke(this);
                 }
             }
         }

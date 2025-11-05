@@ -141,7 +141,7 @@ namespace Graph3D.Vrml.Parser {
             };
             context.PushNodeContainer(proto.Children);
             context.PushFieldContainer(proto);
-            ParseInterfaceDeclarations(context);
+            ParseInterfaceDeclarations(context, proto);
 
             context.RequireNextToken(VRML97TokenType.OpenBrace);
             ParseProtoBody(context);
@@ -157,11 +157,9 @@ namespace Graph3D.Vrml.Parser {
             ParseStatements(context);
         }
 
-        private void ParseInterfaceDeclarations(ParserContext context) {
+        private void ParseInterfaceDeclarations(ParserContext context, ProtoNode node) {
             var statement = ProtoInterfaceDeclarationsStatement.Parse(context, ParseNodeStatement);
             //todo: process interface declarations
-
-            if (context.FieldContainer is not ProtoNode node) throw new InvalidVRMLSyntaxException("Unexpected context", context.Position);
 
             foreach (var expFld in statement.Fields) {
                 var field = expFld.Value;
@@ -187,9 +185,9 @@ namespace Graph3D.Vrml.Parser {
                 var eventOutId = ParseEventOutId(context);
                 //TODO: process interface eventOut declaration.
             } else if (token.SequenceEqual("field")) {
-                var fieldType = VrmlParser.ParseFieldType(context);
+                var fieldType = ParseFieldType(context);
                 var fieldId = ParseFieldId(context);
-                var field = context.CreateField(fieldType);
+                var field = Field.CreateField(fieldType);
                 node.AddField(fieldId, field);
                 field.AcceptVisitor(_fieldParser);
                 //TODO: process interface field declaration.
@@ -280,7 +278,7 @@ namespace Graph3D.Vrml.Parser {
         protected virtual void ParseScriptBodyElement(ParserContext context) {
             var token = context.PeekNextToken();
             VRML97Token? tokenIs = null;
-            string fieldType;
+            FieldType fieldType;
             if (token.Value.SequenceEqual("eventIn")) {
                 tokenIs = context.PeekNextToken(3);
                 if (tokenIs.Value.Text == "IS") {
@@ -297,7 +295,7 @@ namespace Graph3D.Vrml.Parser {
                 tokenIs = context.PeekNextToken(3);
                 if (tokenIs.Value.SequenceEqual("IS")) {
                     token = context.ReadNextToken();
-                    fieldType = VrmlParser.ParseFieldType(context);
+                    fieldType = ParseFieldType(context);
                     string eventOutId1 = ParseEventOutId(context);
                     tokenIs = context.ReadNextToken();
                     string eventOutId2 = ParseEventOutId(context);
@@ -309,7 +307,7 @@ namespace Graph3D.Vrml.Parser {
                 tokenIs = context.PeekNextToken(3);
                 if (tokenIs.Value.Text == "IS") {
                     token = context.ReadNextToken();
-                    fieldType = VrmlParser.ParseFieldType(context);
+                    fieldType = ParseFieldType(context);
                     string fieldId1 = ParseFieldId(context);
                     tokenIs = context.ReadNextToken();
                     string fieldId2 = ParseFieldId(context);
@@ -375,7 +373,7 @@ namespace Graph3D.Vrml.Parser {
             return context.RequireNextToken().Text;
         }
 
-        private static string ParseFieldType(ParserContext context) {
+        private static FieldType ParseFieldType(ParserContext context) {
             return context.ParseFieldType();
         }
 

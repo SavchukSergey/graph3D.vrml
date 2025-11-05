@@ -159,8 +159,6 @@ namespace Graph3D.Vrml.Parser {
             }
         }
 
-
-
         public void Visit(SFImage field) {
             int width = _context.ReadInt32();
             int height = _context.ReadInt32();
@@ -196,6 +194,15 @@ namespace Graph3D.Vrml.Parser {
 
         public void Visit(SFTime field) {
             field.Value = _context.ReadDouble();
+        }
+
+        public void Visit(MFTime field) {
+            field.ClearValues();
+            ParseMField((subcontext) => {
+                var child = new SFTime();
+                this.Visit(child);
+                field.AppendValue(child);
+            });
         }
 
     }

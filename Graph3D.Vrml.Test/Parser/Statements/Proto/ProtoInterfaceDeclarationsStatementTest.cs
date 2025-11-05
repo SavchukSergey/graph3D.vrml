@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using Graph3D.Vrml.Fields;
+﻿using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Parser;
 using Graph3D.Vrml.Parser.Statements.Extern;
 using Graph3D.Vrml.Parser.Statements.Proto;
@@ -13,7 +11,7 @@ namespace Graph3D.Vrml.Test.Parser.Statements.Proto {
 
         [Test]
         public void ParseTest() {
-            var context = new ParserContext(new Vrml97Tokenizer(new StringReader(@"
+            var context = new ParserContext(new Vrml97Tokenizer(@"
 [
     eventIn SFInt32 eventIn1
     eventOut SFInt32 eventOut1
@@ -24,56 +22,55 @@ namespace Graph3D.Vrml.Test.Parser.Statements.Proto {
     field SFInt32 field2 3
     exposedField SFInt32 exposedField2 4
 ]
-")));
+"));
             var statement = ProtoInterfaceDeclarationsStatement.Parse(context, c => { });
-            Assert.That(statement.EventsIn.Count, Is.EqualTo(2));
-            Assert.That(statement.EventsOut.Count, Is.EqualTo(2));
             Assert.That(statement.Fields.Count, Is.EqualTo(2));
             Assert.That(statement.ExposedFields.Count, Is.EqualTo(2));
 
-            var firstEventIn = statement.EventsIn.First();
-            Assert.That(firstEventIn.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(firstEventIn.EventId, Is.EqualTo("eventIn1"));
+            AssertExt.AreEqual([new ProtoEventInStatement {
+                FieldType = FieldType.SFInt32,
+                EventId = "eventIn1"
+            }, new ProtoEventInStatement {
+                FieldType = FieldType.SFInt32,
+                EventId = "eventIn2"
+            }], statement.EventsIn);
 
-            var secondEventIn = statement.EventsIn.Last();
-            Assert.That(secondEventIn.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(secondEventIn.EventId, Is.EqualTo("eventIn2"));
+            AssertExt.AreEqual([new ProtoEventOutStatement {
+                FieldType = FieldType.SFInt32,
+                EventId = "eventOut1"
+            }, new ProtoEventOutStatement {
+                FieldType = FieldType.SFInt32,
+                EventId = "eventOut2"
+            }], statement.EventsOut);
 
-            var firstEventOut = statement.EventsOut.First();
-            Assert.That(firstEventOut.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(firstEventOut.EventId, Is.EqualTo("eventOut1"));
+            AssertExt.AreEqual([new ProtoFieldStatement {
+                FieldType = FieldType.SFInt32,
+                FieldId = "field1",
+                Value = new SFInt32(1)
+            }, new ProtoFieldStatement {
+                FieldType = FieldType.SFInt32,
+                FieldId = "field2",
+                Value = new SFInt32(3)
+            }], statement.Fields);
 
-            var secondEventOut = statement.EventsOut.Last();
-            Assert.That(secondEventOut.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(secondEventOut.EventId, Is.EqualTo("eventOut2"));
+            AssertExt.AreEqual([new ProtoExposedFieldStatement {
+                FieldType = FieldType.SFInt32,
+                FieldId = "exposedField1",
+                Value = new SFInt32(2)
+            }, new ProtoExposedFieldStatement {
+                FieldType = FieldType.SFInt32,
+                FieldId = "exposedField2",
+                Value = new SFInt32(4)
+            }], statement.ExposedFields);
 
-            var firstField = statement.Fields.First();
-            Assert.That(firstField.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(firstField.FieldId, Is.EqualTo("field1"));
-            Assert.That(((SFInt32)firstField.Value).Value, Is.EqualTo(1));
-
-            var secondField = statement.Fields.Last();
-            Assert.That(secondField.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(secondField.FieldId, Is.EqualTo("field2"));
-            Assert.That(((SFInt32)secondField.Value).Value, Is.EqualTo(3));
-
-            var firstExposedField = statement.ExposedFields.First();
-            Assert.That(firstExposedField.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(firstExposedField.FieldId, Is.EqualTo("exposedField1"));
-            Assert.That(((SFInt32)firstExposedField.Value).Value, Is.EqualTo(2));
-
-            var secondExposedField = statement.ExposedFields.Last();
-            Assert.That(secondExposedField.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(secondExposedField.FieldId, Is.EqualTo("exposedField2"));
-            Assert.That(((SFInt32)secondExposedField.Value).Value, Is.EqualTo(4));
         }
 
         [Test]
         public void ParseEmptyTest() {
-            var context = new ParserContext(new Vrml97Tokenizer(new StringReader(@"
+            var context = new ParserContext(new Vrml97Tokenizer(@"
 [
 ]
-")));
+"));
             var statement = ExternInterfaceDeclarationsStatement.Parse(context);
             Assert.That(statement.EventsIn.Count, Is.EqualTo(0));
             Assert.That(statement.EventsOut.Count, Is.EqualTo(0));

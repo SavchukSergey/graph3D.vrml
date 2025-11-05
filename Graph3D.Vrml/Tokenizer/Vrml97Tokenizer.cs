@@ -45,7 +45,7 @@ namespace Graph3D.Vrml.Tokenizer {
                 return;
             }
             if (IsQuote(ch)) {
-                context.Enqueue(ConsumeStringConstantToken());
+                context.Enqueue(context.Source.ConsumeStringConstantToken());
                 return;
             }
             if (IsIdFirstChar(ch)) {
@@ -68,7 +68,7 @@ namespace Graph3D.Vrml.Tokenizer {
             throw new InvalidVRMLSyntaxException("Unexpected symbol", Position);
         }        
 
-        public TokenizerPosition Position => context.Position;
+        public TokenPosition Position => context.Position;
 
         public static bool IsEOF(char ch) {
             if (ch == 0xffff) return true;

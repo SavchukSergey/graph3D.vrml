@@ -89,6 +89,10 @@ namespace Graph3D.Vrml.Parser {
             throw new NotImplementedException();
         }
 
+        public void Visit(MFTime field) {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

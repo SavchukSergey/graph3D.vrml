@@ -22,7 +22,7 @@ namespace Graph3D.Vrml.Parser {
 
         private readonly Queue<VRML97Token> _queue = new();
 
-        public TokenizerPosition Position => _tokenizer.Position;
+        public TokenPosition Position => _tokenizer.Position;
 
         public void ReadKeyword(ReadOnlySpan<char> keyword) {
             var token = RequireNextToken();
@@ -61,9 +61,53 @@ namespace Graph3D.Vrml.Parser {
             return ParseId();
         }
 
-        public string ParseFieldType() {
-            return RequireNextToken().Text;
-            //TODO: validate fieldtype
+        public FieldType ParseFieldType() {
+            var token = RequireNextToken();
+            var value = token.Value.Span;
+            if (value[0] == 'M') {
+                if (value.SequenceEqual("MFColor")) {
+                    return FieldType.MFColor;
+                } else if (value.SequenceEqual("MFFloat")) {
+                    return FieldType.MFFloat;
+                } else if (value.SequenceEqual("MFInt32")) {
+                    return FieldType.MFInt32;
+                } else if (value.SequenceEqual("MFNode")) {
+                    return FieldType.MFNode;
+                } else if (value.SequenceEqual("MFRotation")) {
+                    return FieldType.MFRotation;
+                } else if (value.SequenceEqual("MFString")) {
+                    return FieldType.MFString;
+                } else if (value.SequenceEqual("MFTime")) {
+                    return FieldType.MFTime;
+                } else if (value.SequenceEqual("MFVec2f")) {
+                    return FieldType.MFVec2f;
+                } else if (value.SequenceEqual("MFVec3f")) {
+                    return FieldType.MFVec3f;
+                }
+            } else if (value[0] == 'S') {
+                if (value.SequenceEqual("SFBool")) {
+                    return FieldType.SFBool;
+                } else if (value.SequenceEqual("SFColor")) {
+                    return FieldType.SFColor;
+                } else if (value.SequenceEqual("SFFloat")) {
+                    return FieldType.SFFloat;
+                } else if (value.SequenceEqual("SFInt32")) {
+                    return FieldType.SFInt32;
+                } else if (value.SequenceEqual("SFNode")) {
+                    return FieldType.SFNode;
+                } else if (value.SequenceEqual("SFRotation")) {
+                    return FieldType.SFRotation;
+                } else if (value.SequenceEqual("SFString")) {
+                    return FieldType.SFString;
+                } else if (value.SequenceEqual("SFTime")) {
+                    return FieldType.SFTime;
+                } else if (value.SequenceEqual("SFVec2f")) {
+                    return FieldType.SFVec2f;
+                } else if (value.SequenceEqual("SFVec3f")) {
+                    return FieldType.SFVec3f;
+                }
+            }
+            throw new InvalidVRMLSyntaxException($"unknown field type {value}", Position);
         }
 
         public string ParseFieldId() {
@@ -203,15 +247,10 @@ namespace Graph3D.Vrml.Parser {
             return node;
         }
 
-        public Field CreateField(string fieldType) {
-            return Field.CreateField(fieldType);
-        }
-
-
         //todo: name lookup from bottom to top
         public BaseNode? FindNode(string nodeNameId) {
-            if (namedNodes.ContainsKey(nodeNameId)) {
-                return namedNodes[nodeNameId];
+            if (namedNodes.TryGetValue(nodeNameId, out BaseNode? value)) {
+                return value;
             } else {
                 return null;
             }

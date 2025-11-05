@@ -47,5 +47,7 @@
 
         void Visit(SFTime field);
 
+        void Visit(MFTime field);
+
     }
 }

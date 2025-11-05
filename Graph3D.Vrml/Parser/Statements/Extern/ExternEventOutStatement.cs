@@ -1,7 +1,9 @@
-﻿namespace Graph3D.Vrml.Parser.Statements.Extern {
+﻿using Graph3D.Vrml.Fields;
+
+namespace Graph3D.Vrml.Parser.Statements.Extern {
     public class ExternEventOutStatement {
 
-        public string FieldType { get; set; }
+        public FieldType FieldType { get; set; }
 
         public string EventId { get; set; }
 

@@ -20,7 +20,8 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             AddExposedField("texture", _textureNode);
             AddExposedField("textureTransform", _textureTransformNode);
         }
-        public MaterialNode Material {
+
+        public MaterialNode? Material {
             get {
                 return _materialNode.Node as MaterialNode;
             }
@@ -32,7 +33,7 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             }
         }
         
-        public TextureNode Texture {
+        public TextureNode? Texture {
             get {
                 return _textureNode.Node as TextureNode;
             }
@@ -44,7 +45,7 @@ namespace Graph3D.Vrml.Nodes.Appearance {
             }
         }
         
-        public TextureTransformNode TextureTransform {
+        public TextureTransformNode? TextureTransform {
             get {
                 return _textureTransformNode.Node as TextureTransformNode;
             }

@@ -1,4 +1,3 @@
-using System.IO;
 using Graph3D.Vrml.Nodes;
 using Graph3D.Vrml.Parser;
 using Graph3D.Vrml.Tokenizer;
@@ -10,7 +9,7 @@ namespace Graph3D.Vrml.Test.Parser.Nodes {
 
         [Test]
         public void ParseTest() {
-            var parser = new VrmlParser(new Vrml97Tokenizer(new StringReader(@"
+            var parser = new VrmlParser(new Vrml97Tokenizer(@"
 #VRML V2.0 utf8
 Shape {
     geometry Sphere {
@@ -21,7 +20,7 @@ Shape {
         texture NULL
         textureTransform NULL
     }
-}")));
+}"));
             var scene = new VrmlScene();
             parser.Parse(scene);
 

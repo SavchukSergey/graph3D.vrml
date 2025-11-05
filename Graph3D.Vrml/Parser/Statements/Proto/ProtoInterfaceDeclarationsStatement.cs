@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace Graph3D.Vrml.Parser.Statements.Proto {
     public class ProtoInterfaceDeclarationsStatement {
 
-        private readonly IList<ProtoEventInStatement> _eventIns = new List<ProtoEventInStatement>();
-        private readonly IList<ProtoEventOutStatement> _eventOuts = new List<ProtoEventOutStatement>();
-        private readonly IList<ProtoFieldStatement> _fields = new List<ProtoFieldStatement>();
-        private readonly IList<ProtoExposedFieldStatement> _exposedFields = new List<ProtoExposedFieldStatement>();
+        private readonly IList<ProtoEventInStatement> _eventIns = [];
+        private readonly IList<ProtoEventOutStatement> _eventOuts = [];
+        private readonly IList<ProtoFieldStatement> _fields = [];
+        private readonly IList<ProtoExposedFieldStatement> _exposedFields = [];
 
         public IList<ProtoEventInStatement> EventsIn { get { return _eventIns; } }
 

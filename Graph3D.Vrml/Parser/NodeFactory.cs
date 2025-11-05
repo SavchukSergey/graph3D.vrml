@@ -54,7 +54,7 @@ namespace Graph3D.Vrml.Parser {
         private readonly Dictionary<string, BaseNode> builtin = [];
         private readonly Dictionary<string, BaseNode> userdefined = [];
 
-        public virtual BaseNode CreateNode(string nodeTypeName, string? nodeName, TokenizerPosition position) {
+        public virtual BaseNode CreateNode(string nodeTypeName, string? nodeName, TokenPosition position) {
             if (builtin.TryGetValue(nodeTypeName, out BaseNode? builtinValue)) {
                 var node = builtinValue.Clone();
                 node.Name = nodeName;

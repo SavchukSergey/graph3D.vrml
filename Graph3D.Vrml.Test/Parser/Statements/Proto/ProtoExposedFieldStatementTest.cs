@@ -11,13 +11,15 @@ namespace Graph3D.Vrml.Test.Parser.Statements.Proto {
 
         [Test]
         public void ParseTest() {
-            var context = new ParserContext(new Vrml97Tokenizer(new StringReader(@"
+            var context = new ParserContext(new Vrml97Tokenizer(@"
 exposedField SFInt32 test 2
-")));
+"));
             var statement = ProtoExposedFieldStatement.Parse(context, c => { });
-            Assert.That(statement.FieldType, Is.EqualTo("SFInt32"));
-            Assert.That(statement.FieldId, Is.EqualTo("test"));
-            Assert.That(((SFInt32)statement.Value).Value, Is.EqualTo(2));
+            AssertExt.AreEqual(new ProtoExposedFieldStatement {
+                FieldId = "test",
+                FieldType = FieldType.SFInt32,
+                Value = new SFInt32(2)
+            }, statement);
         }
     }
 }

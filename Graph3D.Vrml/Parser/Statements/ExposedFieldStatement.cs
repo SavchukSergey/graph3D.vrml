@@ -4,7 +4,7 @@ using Graph3D.Vrml.Fields;
 namespace Graph3D.Vrml.Parser.Statements {
     public class ExposedFieldStatement {
 
-        public string FieldType { get; set; }
+        public FieldType FieldType { get; set; }
         
         public string FieldId { get; set; }
 
@@ -18,7 +18,7 @@ namespace Graph3D.Vrml.Parser.Statements {
             var fieldId = context.ParseFieldId();
 
 
-            var field = context.CreateField(fieldType);
+            var field = Field.CreateField(fieldType);
             var fieldParser = new FieldParser(context, nodeStatementParser);
             field.AcceptVisitor(fieldParser);
 

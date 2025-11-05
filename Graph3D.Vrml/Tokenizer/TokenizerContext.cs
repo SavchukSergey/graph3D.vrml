@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Graph3D.Vrml.Tokenizer {
     public class TokenizerContext {
 
-        private readonly TokenizerSource _source;
+        private readonly TokensSource _source;
         private readonly Vrml97Tokenizer _tokenizer;
 
         [DebuggerStepThrough]
         public TokenizerContext(string content, Vrml97Tokenizer tokenizer) {
-            _source = new TokenizerSource(content);
+            _source = new TokensSource(content);
             _tokenizer = tokenizer;
         }
 
@@ -18,7 +17,7 @@ namespace Graph3D.Vrml.Tokenizer {
             get { return _tokenizer; }
         }
 
-        public TokenizerSource Source {
+        public TokensSource Source {
             [DebuggerStepThrough]
             get { return _source; }
         }
@@ -50,10 +49,7 @@ namespace Graph3D.Vrml.Tokenizer {
             return _source.PeekChar(distance);
         }
 
-        private string state = "";
-
-        private TokenizerPosition _position;
-        public TokenizerPosition Position => _position;
+        public TokenPosition Position => _source.Position;
 
         public void RequireChar(char ch) {
             var actual = ReadChar();
@@ -69,31 +65,7 @@ namespace Graph3D.Vrml.Tokenizer {
         
         //[DebuggerStepThrough]
         public char ReadChar() {
-            var ch = _source.ReadChar();
-            switch (state) {
-                case "":
-                    switch (ch) {
-                        case '\r':
-                            state = "r";
-                            break;
-                        case '\n':
-                            _position.LineIndex++;
-                            _position.ColumnIndex = 1;
-                            break;
-                        default:
-                            _position.ColumnIndex++;
-                            break;
-                    }
-                    break;
-                case "r":
-                    if (ch == '\n') {
-                        _position.LineIndex++;
-                        _position.ColumnIndex = 1;
-                    }
-                    state = "";
-                    break;
-            }
-            return ch;
+            return _source.ReadChar();
         }
     }
 }

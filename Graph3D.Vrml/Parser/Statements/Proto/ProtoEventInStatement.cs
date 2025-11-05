@@ -1,7 +1,9 @@
-﻿namespace Graph3D.Vrml.Parser.Statements.Proto {
+﻿using Graph3D.Vrml.Fields;
+
+namespace Graph3D.Vrml.Parser.Statements.Proto {
     public class ProtoEventInStatement {
 
-        public string FieldType { get; set; }
+        public FieldType FieldType { get; set; }
 
         public string EventId { get; set; }
 

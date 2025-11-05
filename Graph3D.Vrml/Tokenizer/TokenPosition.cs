@@ -1,7 +1,7 @@
 namespace Graph3D.Vrml.Tokenizer {
-    public struct TokenizerPosition {
+    public struct TokenPosition {
 
-        public TokenizerPosition() {
+        public TokenPosition() {
             LineIndex = 1;
             ColumnIndex = 1;
         }

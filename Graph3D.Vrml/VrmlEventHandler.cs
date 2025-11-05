@@ -1,4 +1,3 @@
-using System;
 using Graph3D.Vrml.Nodes;
 
 namespace Graph3D.Vrml {

@@ -9,7 +9,7 @@ namespace Graph3D.Vrml.Test {
     public static partial class AssertExt {
 
         public static void AreEqual(BaseNode expected, BaseNode actual, string? path = null) {
-            path = path ?? "$";
+            path ??= "$";
             Assert.That(actual == null ? "NULL" : "NOT_NULL", Is.EqualTo(expected == null ? "NULL" : "NOT_NULL"), path);
             if (expected != null && actual != null) {
 
@@ -77,12 +77,6 @@ namespace Graph3D.Vrml.Test {
 
         private static void AreEqual(float expected, float actual, string path) {
             Assert.That(actual, Is.EqualTo(expected), path);
-        }
-
-        private static void AreEqual(SFColor expected, SFColor actual, string path) {
-            Assert.That(actual.Red, Is.EqualTo(expected.Red), $"{path}/Red");
-            Assert.That(actual.Green, Is.EqualTo(expected.Green), $"{path}/Green");
-            Assert.That(actual.Blue, Is.EqualTo(expected.Blue), $"{path}/Blue");
         }
 
     }
