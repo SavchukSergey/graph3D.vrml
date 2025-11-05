@@ -72,7 +72,7 @@ namespace Graph3D.Vrml.Parser {
             } else if (token.Value.SequenceEqual("PROTO") || token.Value.SequenceEqual("EXTERNPROTO")) {
                 ParseProtoStatement(context);
             } else if (token.Value.SequenceEqual("ROUTE")) {
-                ParseRouteStatement(context);
+                ParseRouteStatement(context); //todo:
             } else {
                 if (token.Value.Type == VRML97TokenType.Word) {
                     ParseNodeStatement(context);
@@ -173,22 +173,20 @@ namespace Graph3D.Vrml.Parser {
 
         }
 
-        private void ParseRestrictedInterfaceDeclaration(ParserContext context) {
-            if (context.FieldContainer is not ProtoNode node) throw new InvalidVRMLSyntaxException("Unexpected context", context.Position);
-            var token = context.RequireNextToken();
-            if (token.SequenceEqual("eventIn")) {
+        private void ParseRestrictedInterfaceDeclaration(ParserContext context, BaseNode container) {
+            if (context.TryConsumeKeyword("eventIn")) {
                 var fieldInType = ParseFieldType(context);
                 var eventInId = ParseEventInId(context);
                 //TODO: process interface eventIn declaration.
-            } else if (token.SequenceEqual("eventOut")) {
+            } else if (context.TryConsumeKeyword("eventOut")) {
                 var fieldOutType = ParseFieldType(context);
                 var eventOutId = ParseEventOutId(context);
                 //TODO: process interface eventOut declaration.
-            } else if (token.SequenceEqual("field")) {
+            } else if (context.TryConsumeKeyword("field")) {
                 var fieldType = ParseFieldType(context);
                 var fieldId = ParseFieldId(context);
                 var field = Field.CreateField(fieldType);
-                node.AddField(fieldId, field);
+                container.AddField(fieldId, field);
                 field.AcceptVisitor(_fieldParser);
                 //TODO: process interface field declaration.
             } else {
@@ -210,9 +208,8 @@ namespace Graph3D.Vrml.Parser {
             //TODO: process extern interface declarations.
         }
 
-        protected void ParseRouteStatement(ParserContext context) {
-            var statement = RouteStatement.Parse(context);
-            //TODO: Process route statement.
+        protected static RouteStatement ParseRouteStatement(ParserContext context) {
+            return RouteStatement.Parse(context);
         }
 
         protected void ParseURLList(ParserContext context) {
@@ -221,22 +218,22 @@ namespace Graph3D.Vrml.Parser {
             //TODO: Process Urls.
         }
 
-        protected void ParseScriptNode(ParserContext context) {
+        protected void ParseScriptNode(ParserContext context, BaseNode container) {
             var keyword = context.RequireNextToken();
             if (keyword.Text != "Script") {
                 throw new InvalidVRMLSyntaxException("Script expected", context.Position);
             }
             context.ReadOpenBrace();
-            ParseScriptBody(context);
+            ParseScriptBody(context, container);
             context.ReadCloseBrace();
         }
 
-        protected void ParseScriptBody(ParserContext context) {
+        protected void ParseScriptBody(ParserContext context, BaseNode container) {
             var validToken = true;
             do {
                 var token = context.PeekNextToken();
                 if (token.Value.Type == VRML97TokenType.Word) {
-                    ParseScriptBodyElement(context);
+                    ParseScriptBodyElement(context, container);
                 } else {
                     validToken = false;
                 }
@@ -248,26 +245,27 @@ namespace Graph3D.Vrml.Parser {
             var token = context.PeekNextToken();
             if (token.Value.Type == VRML97TokenType.EOF) return;
             if (token.Value.SequenceEqual("Script")) {
-                ParseScriptNode(context);
+                var scriptNode = new ScriptNode(); //todo: factory, append it to somewhere
+                ParseScriptNode(context, scriptNode);
             } else {
                 var nodeTypeId = ParseNodeTypeId(context);
                 var node = context.CreateNode(nodeTypeId, context.NodeName);
                 context.NodeName = null;
                 context.PushFieldContainer(node);
                 context.RequireNextToken(VRML97TokenType.OpenBrace);
-                ParseNodeBody(context);
+                ParseNodeBody(context, node);
                 context.RequireNextToken(VRML97TokenType.CloseBrace);
                 context.PopFieldContainer();
                 context.AcceptChild(node);
             }
         }
 
-        protected virtual void ParseNodeBody(ParserContext context) {
+        protected virtual void ParseNodeBody(ParserContext context, BaseNode container) {
             var validToken = true;
             do {
                 var token = context.PeekNextToken();
                 if (token.Value.Type == VRML97TokenType.Word) {
-                    ParseNodeBodyElement(context);
+                    ParseNodeBodyElement(context, container);
                 } else {
                     validToken = false;
                 }
@@ -275,7 +273,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
 
-        protected virtual void ParseScriptBodyElement(ParserContext context) {
+        protected virtual void ParseScriptBodyElement(ParserContext context, BaseNode container) {
             var token = context.PeekNextToken();
             VRML97Token? tokenIs = null;
             FieldType fieldType;
@@ -289,7 +287,7 @@ namespace Graph3D.Vrml.Parser {
                     string eventInId2 = ParseEventInId(context);
                     //TODO: process scipt eventIn element
                 } else {
-                    ParseRestrictedInterfaceDeclaration(context);
+                    ParseRestrictedInterfaceDeclaration(context, container);
                 }
             } else if (token.Value.SequenceEqual("eventOut")) {
                 tokenIs = context.PeekNextToken(3);
@@ -301,7 +299,7 @@ namespace Graph3D.Vrml.Parser {
                     string eventOutId2 = ParseEventOutId(context);
                     //TODO: process scipt eventOut element
                 } else {
-                    ParseRestrictedInterfaceDeclaration(context);
+                    ParseRestrictedInterfaceDeclaration(context, container);
                 }
             } else if (token.Value.SequenceEqual("field")) {
                 tokenIs = context.PeekNextToken(3);
@@ -313,25 +311,21 @@ namespace Graph3D.Vrml.Parser {
                     string fieldId2 = ParseFieldId(context);
                     //TODO: process scipt field element
                 } else {
-                    ParseRestrictedInterfaceDeclaration(context);
+                    ParseRestrictedInterfaceDeclaration(context, container);
                 }
             } else {
                 if (token.Value.Type == VRML97TokenType.Word) {
-                    ParseNodeBodyElement(context);
+                    ParseNodeBodyElement(context, container);
                 } else {
                     throw new Exception("Unexpected context");
                 }
             }
         }
 
-        protected virtual void ParseNodeBodyElement(ParserContext context) {
-            var node = context.FieldContainer;
-            if (node == null) {
-                throw new Exception("Invalid context");
-            }
+        protected virtual void ParseNodeBodyElement(ParserContext context, BaseNode container) {
             var token = context.PeekNextToken();
             if (token.Value.SequenceEqual("ROUTE")) {
-                ParseRouteStatement(context);
+                container.Routes.Add(ParseRouteStatement(context));
             } else if (token.Value.SequenceEqual("PROTO")) {
                 ParseProto(context);
             }
@@ -343,7 +337,7 @@ namespace Graph3D.Vrml.Parser {
                 string interfaceFieldId = ParseFieldId(context);
                 //TODO: Process inteface field linking
             } else {
-                var field = node.GetExposedField<Field>(fieldId);
+                var field = container.GetExposedField<Field>(fieldId);
                 field.AcceptVisitor(_fieldParser);
 
             }

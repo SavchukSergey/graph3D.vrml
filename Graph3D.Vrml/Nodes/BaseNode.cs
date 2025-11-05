@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Graph3D.Vrml.Fields;
 using Graph3D.Vrml.Parser;
+using Graph3D.Vrml.Parser.Statements;
 
 namespace Graph3D.Vrml.Nodes {
     public abstract class BaseNode {
@@ -18,7 +19,9 @@ namespace Graph3D.Vrml.Nodes {
         private readonly Dictionary<string, Field> _eventIns = [];
         private readonly Dictionary<string, Field> _eventOuts = [];
 
-        protected void AddField(string fieldName, Field field) {
+        public readonly IList<RouteStatement> Routes = [];
+
+        public void AddField(string fieldName, Field field) {
             //TODO: another dictionary.
             _exposedFields[fieldName] = field;
         }

@@ -119,6 +119,17 @@ namespace Graph3D.Vrml.Parser {
             return RequireNextToken().Text;
         }
 
+        public bool TryConsumeKeyword(ReadOnlySpan<char> keyword) {
+            //todo: optimize
+            var token = PeekNextToken();
+            if (token.HasValue && token.Value.SequenceEqual(keyword)) {
+                RequireNextToken();
+                return true;
+            }
+
+            return false;
+        }
+
         [DebuggerStepThrough]
         public VRML97Token? ReadNextToken() {
             VRML97Token? token;
@@ -145,6 +156,13 @@ namespace Graph3D.Vrml.Parser {
         public void RequireNextToken(string value) {
             var token = RequireNextToken();
             if (!token.SequenceEqual(value)) {
+                throw new InvalidVRMLSyntaxException($"{value} is expected", Position);
+            }
+        }
+
+        public void RequireNextToken(char value) {
+            var token = RequireNextToken();
+            if (token.Value.Length != 1 || token.Value.Span[0] != value) {
                 throw new InvalidVRMLSyntaxException($"{value} is expected", Position);
             }
         }

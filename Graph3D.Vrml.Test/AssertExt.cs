@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Graph3D.Vrml.Parser.Statements;
 using Graph3D.Vrml.Parser.Statements.Extern;
 using Graph3D.Vrml.Parser.Statements.Proto;
 using NUnit.Framework;
@@ -128,6 +129,14 @@ namespace Graph3D.Vrml.Test {
             path ??= "$";
             Assert.That(actual.FieldId, Is.EqualTo(expected.FieldId), $"{path}.FieldId");
             Assert.That(actual.FieldType, Is.EqualTo(expected.FieldType), $"{path}.FieldType");
+        }
+
+        public static void AreEqual(RouteStatement expected, RouteStatement actual, string? path = null) {
+            path ??= "$";
+            Assert.That(actual.NodeOut, Is.EqualTo(expected.NodeOut), $"{path}.NodeOut");
+            Assert.That(actual.EventOut, Is.EqualTo(expected.EventOut), $"{path}.EventOut");
+            Assert.That(actual.NodeIn, Is.EqualTo(expected.NodeIn), $"{path}.NodeIn");
+            Assert.That(actual.EventIn, Is.EqualTo(expected.EventIn), $"{path}.EventIn");
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.IO;
 using Graph3D.Vrml.Nodes;
 using Graph3D.Vrml.Nodes.Geometry;
 using Graph3D.Vrml.Parser;
@@ -11,7 +10,7 @@ namespace Graph3D.Vrml.Test.Parser.Nodes.Geometry {
 
         [Test]
         public void ParseTest() {
-            var parser = new VrmlParser(new Vrml97Tokenizer(new StringReader(@"
+            var parser = new VrmlParser(new Vrml97Tokenizer(@"
 #VRML V2.0 utf8
 Shape {
     geometry Cylinder {
@@ -21,16 +20,18 @@ Shape {
         side TRUE
         top FALSE
     }
-}")));
+}"));
             var scene = new VrmlScene();
             parser.Parse(scene);
 
-            var cylinder = (CylinderNode)((ShapeNode)scene.Root.Children[0]).Geometry;
-            Assert.That(cylinder.Bottom.Value, Is.EqualTo(true));
-            Assert.That(cylinder.Height.Value, Is.EqualTo(20f));
-            Assert.That(cylinder.Radius.Value, Is.EqualTo(45.2f));
-            Assert.That(cylinder.Side.Value, Is.EqualTo(true));
-            Assert.That(cylinder.Top.Value, Is.EqualTo(false));
+            AssertExt.AreEqual(new CylinderNode {
+                Bottom = { Value = true },
+                Height = { Value = 20 },
+                Radius = { Value = 45.2f },
+                Side = { Value = true },
+                Top = { Value = false }
+            }, ((ShapeNode)scene.Root.Children[0]).Geometry);
+
         }
     }
 }

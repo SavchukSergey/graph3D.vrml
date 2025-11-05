@@ -1,23 +1,23 @@
 ﻿namespace Graph3D.Vrml.Parser.Statements {
     public class RouteStatement {
 
-        public string NodeOut { get; set; }
+        public required string NodeOut { get; init; }
 
-        public string EventOut { get; set; }
+        public required string EventOut { get; init; }
 
-        public string NodeIn { get; set; }
+        public required string NodeIn { get; init; }
 
-        public string EventIn { get; set; }
+        public required string EventIn { get; init; }
 
         public static RouteStatement Parse(ParserContext context) {
             context.RequireNextToken("ROUTE");
 
             var nodeOut = context.ParseNodeNameId();
-            context.RequireNextToken(".");
+            context.RequireNextToken('.');
             var eventOut = context.ParseEventOutId();
             context.RequireNextToken("TO");
             var nodeIn = context.ParseNodeNameId();
-            context.RequireNextToken(".");
+            context.RequireNextToken('.');
             var eventIn = context.ParseEventInId();
 
             return new RouteStatement {

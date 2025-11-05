@@ -19,7 +19,7 @@ namespace Graph3D.Vrml.Nodes {
             AddExposedField("geometry", _geometryNode);
         }
 
-        public AppearanceNode Appearance {
+        public AppearanceNode? Appearance {
             get {
                 return _appearanceNode.Node as AppearanceNode;
             }
@@ -34,17 +34,14 @@ namespace Graph3D.Vrml.Nodes {
             }
         }
 
-        public GeometryNode Geometry {
+        public GeometryNode? Geometry {
             get {
                 return _geometryNode.Node as GeometryNode;
             }
             set {
                 if (_geometryNode.Node != value) {
                     _geometryNode.Node = value;
-                    var handler = GeometryChanged;
-                    if (handler != null) {
-                        handler(this);
-                    }
+                    GeometryChanged?.Invoke(this);
                 }
             }
         }

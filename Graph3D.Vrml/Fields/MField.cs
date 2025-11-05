@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Graph3D.Vrml.Parser;
+﻿using System.Collections.Generic;
 
 namespace Graph3D.Vrml.Fields {
 
@@ -17,10 +15,10 @@ namespace Graph3D.Vrml.Fields {
         }
 
         protected MField(params T[] items) {
-            _values = new List<T>(items);
+            _values = [.. items];
         }
 
-        private readonly List<T> _values = new List<T>();
+        private readonly List<T> _values = [];
         public virtual IEnumerable<T> Values {
             get { return _values; }
         }
@@ -44,41 +42,24 @@ namespace Graph3D.Vrml.Fields {
             return $"[{string.Join(", \n\r", Values)}]";
         }
 
-        protected static void ParseMField(ParserContext context, Action<ParserContext> itemParser) {
-            var next = context.PeekNextToken();
-            if (next.Value.Type == VRML97TokenType.OpenBracket) {
-                context.ReadOpenBracket();
-                while (true) {
-                    next = context.PeekNextToken();
-                    if (next.Value.Type == VRML97TokenType.CloseBracket) break;
-                    itemParser(context);
-                }
-                context.ReadCloseBracket();
-            } else {
-                itemParser(context);
-            }
-        }
-
-
         #region IEnumerable<T> Members
 
         public IEnumerator<T> GetEnumerator() {
             return (IEnumerator<T>)Values.GetEnumerator();
         }
 
-        public TTarget GetFirstOfType<TTarget>() where TTarget : class, T {
+        public TTarget? GetFirstOfType<TTarget>() where TTarget : class, T {
             foreach (var value in Values) {
-                if (value.GetType() == typeof(TTarget)) return value as TTarget;
+                if (value is TTarget target) return target;
             }
-            return null;
+            return default;
         }
 
 
         public IEnumerator<TTarget> GetAllOfType<TTarget>() where TTarget : class, T {
             foreach (var value in Values) {
-                if (value.GetType() == typeof(TTarget)) yield return value as TTarget;
+                if (value is TTarget target) yield return target;
             }
-            yield break;
         }
 
         #endregion

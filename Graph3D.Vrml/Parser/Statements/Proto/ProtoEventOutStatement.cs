@@ -3,9 +3,9 @@
 namespace Graph3D.Vrml.Parser.Statements.Proto {
     public class ProtoEventOutStatement {
 
-        public FieldType FieldType { get; set; }
+        public required FieldType FieldType { get; init; }
 
-        public string EventId { get; set; }
+        public required string EventId { get; init; }
 
         public static ProtoEventOutStatement Parse(ParserContext context) {
             context.ReadKeyword("eventOut");
