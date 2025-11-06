@@ -32,22 +32,26 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public void ReadOpenBracket() {
-            RequireNextToken(VRML97TokenType.OpenBracket);
+            ConsumeToken(VRML97TokenType.OpenBracket);
         }
 
         public void ReadCloseBracket() {
-            RequireNextToken(VRML97TokenType.CloseBracket);
+            ConsumeToken(VRML97TokenType.CloseBracket);
         }
 
 
-        public void ReadOpenBrace() {
-            RequireNextToken(VRML97TokenType.OpenBrace);
+        public void ConsumeOpenBrace() {
+            ConsumeToken(VRML97TokenType.OpenBrace);
         }
 
-        public void ReadCloseBrace() {
-            RequireNextToken(VRML97TokenType.CloseBrace);
+        public bool TryPeekCloseBrace() {
+            var token = PeekNextToken();
+            return token.HasValue && token.Value.Value.Length == 1 && token.Value.Value.Span[0] == '}';
         }
 
+        public void ConsumeCloseBrace() {
+            ConsumeToken(VRML97TokenType.CloseBrace);
+        }
 
         public string ParseEventInId() {
             return ParseId();
@@ -130,6 +134,29 @@ namespace Graph3D.Vrml.Parser {
             return false;
         }
 
+        public void ConsumeKeyword(ReadOnlySpan<char> keyword) {
+            if (!TryConsumeKeyword(keyword)) {
+                throw new InvalidVRMLSyntaxException($"{keyword} expected", Position);
+            }
+        }
+
+        public bool IsEOF {
+            get {
+                var token = PeekNextToken();
+                return token?.Type == VRML97TokenType.EOF;
+            }
+        }
+
+        public bool TryPeekKeyword(ReadOnlySpan<char> keyword) {
+            //todo: optimize
+            var token = PeekNextToken();
+            if (token.HasValue && token.Value.SequenceEqual(keyword)) {
+                return true;
+            }
+
+            return false;
+        }
+
         [DebuggerStepThrough]
         public VRML97Token? ReadNextToken() {
             VRML97Token? token;
@@ -146,7 +173,7 @@ namespace Graph3D.Vrml.Parser {
             return token == null ? throw new InvalidVRMLSyntaxException("Token expected", Position) : token.Value;
         }
 
-        public void RequireNextToken(VRML97TokenType type) {
+        public void ConsumeToken(VRML97TokenType type) {
             var token = RequireNextToken();
             if (token.Type != type) {
                 throw new InvalidVRMLSyntaxException($"{type} expected", Position);
@@ -165,6 +192,10 @@ namespace Graph3D.Vrml.Parser {
             if (token.Value.Length != 1 || token.Value.Span[0] != value) {
                 throw new InvalidVRMLSyntaxException($"{value} is expected", Position);
             }
+        }
+
+        public void SkipWhitespace() {
+            
         }
 
         [DebuggerStepThrough]
@@ -217,26 +248,8 @@ namespace Graph3D.Vrml.Parser {
 
         public string? NodeName { get; set; }
 
-        private readonly Stack<BaseNode> fieldContainers = new();
-        public BaseNode? FieldContainer {
-            [DebuggerStepThrough]
-            get {
-                if (fieldContainers.Count > 0) return fieldContainers.Peek();
-                return null;
-            }
-        }
-
-        [DebuggerStepThrough]
-        public void PushFieldContainer(BaseNode fieldContainer) {
-            fieldContainers.Push(fieldContainer);
-        }
-
-        [DebuggerStepThrough]
-        public void PopFieldContainer() {
-            fieldContainers.Pop();
-        }
-
         private readonly Stack<Field> nodeContainers = new();
+
         public Field? NodeContainer {
             [DebuggerStepThrough]
             get {
@@ -279,7 +292,7 @@ namespace Graph3D.Vrml.Parser {
             NodeContainer?.AcceptVisitor(_childAcceptor);
         }
 
-        public void RegisterPtototype(ProtoNode proto) {
+        public void RegisterPrototype(ProtoNode proto) {
             _nodeFactory.AddPrototype(proto);
         }
 

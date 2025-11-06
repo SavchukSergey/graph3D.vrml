@@ -112,7 +112,7 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseProtoStatement(ParserContext context) {
             var keyword = context.PeekNextToken();
-            if (keyword.Value.SequenceEqual("PROTO")) {
+            if (context.TryPeekKeyword("PROTO")) {
                 ParseProto(context);
             } else if (keyword.Value.SequenceEqual("EXTERNPROTO")) {
                 ParseExternProto(context);
@@ -133,22 +133,22 @@ namespace Graph3D.Vrml.Parser {
             } while (validToken);
         }
 
-        protected virtual void ParseProto(ParserContext context) {
-            context.ReadKeyword("PROTO");
+        protected ProtoNode ParseProto(ParserContext context) {
+            context.ConsumeKeyword("PROTO");
 
             var proto = new ProtoNode {
                 Name = ParseNodeNameId(context)
             };
             context.PushNodeContainer(proto.Children);
-            context.PushFieldContainer(proto);
             ParseInterfaceDeclarations(context, proto);
 
-            context.RequireNextToken(VRML97TokenType.OpenBrace);
+            context.ConsumeToken(VRML97TokenType.OpenBrace);
             ParseProtoBody(context);
-            context.RequireNextToken(VRML97TokenType.CloseBrace);
-            context.PopFieldContainer();
+            context.ConsumeToken(VRML97TokenType.CloseBrace);
             context.PopNodeContainer();
-            context.RegisterPtototype(proto);
+            context.RegisterPrototype(proto);
+
+            return proto;
         }
 
         protected virtual void ParseProtoBody(ParserContext context) {
@@ -218,14 +218,13 @@ namespace Graph3D.Vrml.Parser {
             //TODO: Process Urls.
         }
 
-        protected void ParseScriptNode(ParserContext context, BaseNode container) {
-            var keyword = context.RequireNextToken();
-            if (keyword.Text != "Script") {
-                throw new InvalidVRMLSyntaxException("Script expected", context.Position);
-            }
-            context.ReadOpenBrace();
-            ParseScriptBody(context, container);
-            context.ReadCloseBrace();
+        protected ScriptNode ParseScriptNode(ParserContext context) {
+            var scriptNode = new ScriptNode(); //todo: factory
+            context.ConsumeKeyword("Script");
+            context.ConsumeOpenBrace();
+            ParseScriptBody(context, scriptNode);
+            context.ConsumeCloseBrace();
+            return scriptNode;
         }
 
         protected void ParseScriptBody(ParserContext context, BaseNode container) {
@@ -242,36 +241,29 @@ namespace Graph3D.Vrml.Parser {
         }
 
         protected void ParseNode(ParserContext context) {
-            var token = context.PeekNextToken();
-            if (token.Value.Type == VRML97TokenType.EOF) return;
-            if (token.Value.SequenceEqual("Script")) {
-                var scriptNode = new ScriptNode(); //todo: factory, append it to somewhere
-                ParseScriptNode(context, scriptNode);
+            if (context.IsEOF) return;
+            if (context.TryPeekKeyword("Script")) {
+                ParseScriptNode(context); //todo: append it to somewhere
             } else {
                 var nodeTypeId = ParseNodeTypeId(context);
                 var node = context.CreateNode(nodeTypeId, context.NodeName);
                 context.NodeName = null;
-                context.PushFieldContainer(node);
-                context.RequireNextToken(VRML97TokenType.OpenBrace);
+                context.ConsumeOpenBrace();
                 ParseNodeBody(context, node);
-                context.RequireNextToken(VRML97TokenType.CloseBrace);
-                context.PopFieldContainer();
+                context.ConsumeCloseBrace();
                 context.AcceptChild(node);
             }
         }
 
         protected virtual void ParseNodeBody(ParserContext context, BaseNode container) {
-            var validToken = true;
             do {
-                var token = context.PeekNextToken();
-                if (token.Value.Type == VRML97TokenType.Word) {
-                    ParseNodeBodyElement(context, container);
-                } else {
-                    validToken = false;
+                context.SkipWhitespace();
+                if (context.TryPeekCloseBrace()) {
+                    break;
                 }
-            } while (validToken);
+                ParseNodeBodyElement(context, container);
+            } while (true);
         }
-
 
         protected virtual void ParseScriptBodyElement(ParserContext context, BaseNode container) {
             var token = context.PeekNextToken();
@@ -324,7 +316,7 @@ namespace Graph3D.Vrml.Parser {
 
         protected virtual void ParseNodeBodyElement(ParserContext context, BaseNode container) {
             var token = context.PeekNextToken();
-            if (token.Value.SequenceEqual("ROUTE")) {
+            if (context.TryPeekKeyword("ROUTE")) {
                 container.Routes.Add(ParseRouteStatement(context));
             } else if (token.Value.SequenceEqual("PROTO")) {
                 ParseProto(context);

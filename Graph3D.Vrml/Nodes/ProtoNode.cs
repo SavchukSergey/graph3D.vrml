@@ -2,6 +2,7 @@
 using Graph3D.Vrml.Nodes.Grouping;
 
 namespace Graph3D.Vrml.Nodes {
+    //todo: rename to ProtoStatement, remove baseclass
     public class ProtoNode : GroupingNode {
         
         public new void AddField(string fieldName, Field field) {

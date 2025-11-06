@@ -10,7 +10,7 @@
         public required string EventIn { get; init; }
 
         public static RouteStatement Parse(ParserContext context) {
-            context.RequireNextToken("ROUTE");
+            context.ConsumeKeyword("ROUTE");
 
             var nodeOut = context.ParseNodeNameId();
             context.RequireNextToken('.');
