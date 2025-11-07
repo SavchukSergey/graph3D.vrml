@@ -124,8 +124,7 @@ namespace Graph3D.Vrml.Parser {
         public virtual void ParseProtoStatements(ParserContext context) {
             var validToken = true;
             do {
-                var token = context.PeekNextToken();
-                if (token.Value.SequenceEqual("PROTO") || token.Value.SequenceEqual("EXTERNPROTO")) {
+                if (context.TryPeekKeyword("PROTO") || context.TryPeekKeyword("EXTERNPROTO")) {
                     ParseProtoStatement(context);
                 } else {
                     validToken = false;

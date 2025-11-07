@@ -21,28 +21,27 @@ namespace Graph3D.Vrml.Parser.Statements.Proto {
         public static ProtoInterfaceDeclarationsStatement Parse(ParserContext context, Action<ParserContext> nodeStatementParser) {
             var res = new ProtoInterfaceDeclarationsStatement();
 
-            context.ReadOpenBracket();
+            context.ConsumeOpenBracket();
 
             do {
-                var token = context.PeekNextToken();
-                if (token.Value.Type == VRML97TokenType.CloseBracket) {
-                    context.ReadCloseBracket();
+                if (context.TryPeekCloseBracket()) {
+                    context.ConsumeCloseBracket();
                     break;
                 }
-                if (token.Value.SequenceEqual("eventIn")) {
+                if (context.TryPeekKeyword("eventIn")) {
                     var eventIn = ProtoEventInStatement.Parse(context);
                     res.EventsIn.Add(eventIn);
-                } else if (token.Value.SequenceEqual("eventOut")) {
+                } else if (context.TryPeekKeyword("eventOut")) {
                     var eventOut = ProtoEventOutStatement.Parse(context);
                     res.EventsOut.Add(eventOut);
-                } else if (token.Value.SequenceEqual("field")) {
+                } else if (context.TryPeekKeyword("field")) {
                     var field = ProtoFieldStatement.Parse(context, nodeStatementParser);
                     res.Fields.Add(field);
-                } else if (token.Value.SequenceEqual("exposedField")) {
+                } else if (context.TryPeekKeyword("exposedField")) {
                     var exposedField = ProtoExposedFieldStatement.Parse(context, nodeStatementParser);
                     res.ExposedFields.Add(exposedField);
                 } else {
-                    throw new InvalidVRMLSyntaxException($"Unknown statement {token.Value.Text}", context.Position);
+                    throw new InvalidVRMLSyntaxException($"Unknown statement", context.Position);
                 }
             } while (true);
 

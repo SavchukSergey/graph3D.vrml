@@ -1,6 +1,5 @@
 ﻿using System;
 using Graph3D.Vrml.Fields;
-using Graph3D.Vrml.Tokenizer;
 
 namespace Graph3D.Vrml.Parser {
     public class FieldParser : IFieldVisitor {

@@ -8,7 +8,7 @@ namespace Graph3D.Vrml.Parser.Statements.Proto {
         public required string EventId { get; init; }
 
         public static ProtoEventInStatement Parse(ParserContext context) {
-           context.ReadKeyword("eventIn");
+           context.ConsumeKeyword("eventIn");
             
             var fieldType = context.ParseFieldType();
             var eventId = context.ParseEventInId();

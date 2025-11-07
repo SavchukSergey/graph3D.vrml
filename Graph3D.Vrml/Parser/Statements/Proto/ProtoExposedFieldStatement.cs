@@ -4,15 +4,15 @@ using Graph3D.Vrml.Fields;
 namespace Graph3D.Vrml.Parser.Statements.Proto {
     public class ProtoExposedFieldStatement {
 
-        public FieldType FieldType { get; set; }
-        
-        public string FieldId { get; set; }
+        public required FieldType FieldType { get; init; }
+
+        public required string FieldId { get; init; }
 
         public Field Value { get; set; }
 
         //todo: remove second argument
         public static ProtoExposedFieldStatement Parse(ParserContext context, Action<ParserContext> nodeStatementParser) {
-            context.ReadKeyword("exposedField");
+            context.ConsumeKeyword("exposedField");
 
             var fieldType = context.ParseFieldType();
             var fieldId = context.ParseFieldId();

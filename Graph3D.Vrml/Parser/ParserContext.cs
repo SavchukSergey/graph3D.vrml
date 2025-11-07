@@ -44,9 +44,22 @@ namespace Graph3D.Vrml.Parser {
             ConsumeToken(VRML97TokenType.OpenBrace);
         }
 
+        public void ConsumeOpenBracket() {
+            ConsumeToken(VRML97TokenType.OpenBracket);
+        }
+
+        public void ConsumeCloseBracket() {
+            ConsumeToken(VRML97TokenType.CloseBracket);
+        }
+
         public bool TryPeekCloseBrace() {
             var token = PeekNextToken();
             return token.HasValue && token.Value.Value.Length == 1 && token.Value.Value.Span[0] == '}';
+        }
+
+        public bool TryPeekCloseBracket() {
+            var token = PeekNextToken();
+            return token.HasValue && token.Value.Value.Length == 1 && token.Value.Value.Span[0] == ']';
         }
 
         public void ConsumeCloseBrace() {
@@ -195,7 +208,7 @@ namespace Graph3D.Vrml.Parser {
         }
 
         public void SkipWhitespace() {
-            
+
         }
 
         [DebuggerStepThrough]
